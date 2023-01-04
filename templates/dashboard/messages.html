@@ -1,0 +1,120 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="card mt-4">
+            <div class="card-header p-3">
+              <h5 class="mb-0">Rəhbərlik mesajları ({{ unread | length }} / {{ m_data | length }})</h5>
+              <hr>
+            </div>
+            
+            <div class="card-body p-3 pb-0">
+              {% include 'flash.html' %}
+              {% for message in messages.data %}
+                {% if message.readed == 0 %}
+                  <b><i class="fa fa-envelope" aria-hidden="true"></i> <a href="/admin/inbox/{{ message.id }}">{{ message.name }}</a></b><br/>
+                  <b>{{ message.message[0:60] }}...</b><br/>
+                  {% for time in messages_time %}
+                  {% if time.message_id == message.id %}
+                  <font color="black"><i class="fa fa-clock me-1"></i> {{ time.m_time }} </font>
+                  {% endif %}
+                  {% endfor %}
+                {% else %}
+                <a href="/admin/inbox/{{ message.id }}">{{ message.name }}</a><br/>
+                  {{ message.message[0:60] }}...<br/>
+                  {% for time in messages_time %}
+                  {% if time.message_id == message.id %}
+                  <font color="black"><i class="fa fa-clock me-1"></i> {{ time.m_time }} </font>
+                  {% endif %}
+                  {% endfor %}
+                {% endif %}
+                <hr>
+              {% endfor %}
+
+              <div class="align-middle text-center text-sm">{{ messages.data_length }}
+                {% if messages.pagination.previous  !=  None %}
+                  <a href="inbox{{ messages.pagination.previous }}"><< Previous</a>
+                {% endif %} |
+                {% if messages.pagination.next  !=  None %}
+                  <a href="inbox{{ messages.pagination.next }}">Next >></a>
+                  
+                {% endif %}
+                <br/>
+                <br/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="position-fixed bottom-1 end-1 z-index-2">
+        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+          <div class="toast-header border-0">
+            <i class="material-icons text-success me-2">
+        check
+      </i>
+            <span class="me-auto font-weight-bold">Material Dashboard </span>
+            <small class="text-body">11 mins ago</small>
+            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          </div>
+          <hr class="horizontal dark m-0">
+          <div class="toast-body">
+            Hello, world! This is a notification message.
+          </div>
+        </div>
+        <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast" aria-atomic="true">
+          <div class="toast-header bg-transparent border-0">
+            <i class="material-icons text-white me-2">
+        notifications
+      </i>
+            <span class="me-auto text-white font-weight-bold">Material Dashboard </span>
+            <small class="text-white">11 mins ago</small>
+            <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          </div>
+          <hr class="horizontal light m-0">
+          <div class="toast-body text-white">
+            Hello, world! This is a notification message.
+          </div>
+        </div>
+        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
+          <div class="toast-header border-0">
+            <i class="material-icons text-warning me-2">
+        travel_explore
+      </i>
+            <span class="me-auto font-weight-bold">Material Dashboard </span>
+            <small class="text-body">11 mins ago</small>
+            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          </div>
+          <hr class="horizontal dark m-0">
+          <div class="toast-body">
+            Hello, world! This is a notification message.
+          </div>
+        </div>
+        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="dangerToast" aria-atomic="true">
+          <div class="toast-header border-0">
+            <i class="material-icons text-danger me-2">
+        campaign
+      </i>
+            <span class="me-auto text-gradient text-danger font-weight-bold">Material Dashboard </span>
+            <small class="text-body">11 mins ago</small>
+            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          </div>
+          <hr class="horizontal dark m-0">
+          <div class="toast-body">
+            Hello, world! This is a notification message.
+          </div>
+        </div>
+      </div>
+
+      {% include 'dashboard/footer.html' %}

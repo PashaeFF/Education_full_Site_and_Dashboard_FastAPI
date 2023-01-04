@@ -1,0 +1,78 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+    {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+      <hr class>
+    </div>
+      <div class="row">
+          <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+            <div class="card" style="margin: 0 25px">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-6 col-7">
+                    <h6>Admin Users</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ad ve Soyad</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Elaqe</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dogum tarixi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for x in user_admin.data %}
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                              {{ loop.index }}.&nbsp;&nbsp;<img src="{{ url_for('static', path='dashboard/assets/img/small-logos/logo-xd.svg') }}" class="avatar avatar-sm me-3" alt="xd">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">{{ x.name_surname}}</h6> id: {{ x.id }}
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">Admin</span> 
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="text-xs font-weight-bold">{{x.phone}}</span>
+                        </td>
+                        <td class="align-center">
+                                <span class="text-xs font-weight-bold"><a href="/admin/user/{{ x.id }}">Infoya bax</a> / <a href="/admin/user/{{ x.id }}/edit">Duzelish et</a></span>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <hr>
+                  <div class="align-middle text-center text-sm">
+                                                                {% if user_admin.pagination.previous  !=  None %}
+                                                                  <a href="admin-users{{ user_admin.pagination.previous }}"><< Previous</a>
+                                                                {% endif %} |
+                                                                {% if user_admin.pagination.next  !=  None %}
+                                                                  <a href="admin-users{{ user_admin.pagination.next }}">Next >></a></div>
+                                                                {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% include 'dashboard/footer.html' %}
+
+      

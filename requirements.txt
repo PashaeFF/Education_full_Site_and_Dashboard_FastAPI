@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+starlette
+pydantic
+typing
+sqlalchemy
+jinja2
+email-validator
+python-multipart
+itsdangerous
+Pillow
+aiofiles
+fastapi-pagination
+python-jose
+passlib
+bcrypt

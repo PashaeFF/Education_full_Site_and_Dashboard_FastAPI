@@ -1,0 +1,77 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+
+      
+      <hr class>
+      
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+              <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                  <div class="row">
+                    {% include 'flash.html' %}<br/>
+                      <h5><b>Create education</b></h5>
+                      {% if education_category %}
+                      <form class="row g-3" method ="POST">
+                      <div class="col-md-5">
+                        <label for="name" class="form-label"><b>*Adi:</b></label>
+                        <input type="text" class="form-control is-valid" name="name" value="{{ edu.name }}" required><br/>
+                      </div>
+                        <div class="col-md-5">
+                          <label for="name" class="form-label"><b>*Haqqinda:</b></label>
+                          <textarea class="form-control is-valid" name="about_education" required>{{ edu.about_education }}</textarea><br/>
+                        </div>
+                        <div class="col-md-5">
+                          <label for="city" class="form-label"><b>*Olke, Sheher:</b></label>
+                          <input type="text" class="form-control is-valid" name="city" value="{{ edu.city }}" required><br/>
+                        </div>
+                        <div class="col-md-5">
+                          <select class="form-select" name="education_type">
+                            {% for i in education_category %}
+                              {% if i.name == edu.education_type %}
+                                <option value="{{ i.name }}" selected>&nbsp;&nbsp;{{ i.name }}</option>
+                              {% else %}
+                                <option value="{{ i.name }}">&nbsp;&nbsp;{{ i.name }}</option> 
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                          </br/>
+                          <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+                        
+                        
+                      </div>
+                      </form>
+                    {% else %}
+                    <b>Kategoriya yoxdur. Ilk once Kategoriya elave edin...</b><br/>
+                    <br/>
+                    {% endif %}
+                    <hr>
+          
+
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {% include 'dashboard/footer.html' %}
+
+      

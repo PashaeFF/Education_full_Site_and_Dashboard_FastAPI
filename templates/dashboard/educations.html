@@ -1,0 +1,140 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+
+      
+      <hr class>
+      
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+              <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                  <div class="row">
+                    {% include 'flash.html' %}<br/>
+                      <h5><b>Create education</b></h5>
+                      {% if education_category %}
+                      <form class="row g-3" method ="POST" enctype="multipart/form-data">
+                      <div class="col-md-5">
+                        <label for="name" class="form-label"><b>*Adi:</b></label>
+                        <input type="text" class="form-control is-valid" name="name" value="" required><br/>
+                        </div>
+                      <div class="col-md-5">
+                        <label for="city" class="form-label"><b>*Olke, Sheher:</b></label>
+                        <input type="text" class="form-control is-valid" name="city" value="" required><br/>
+                      </div>
+                        <div class="col-md-5">
+                        <label for="name" class="form-label"><b>*Haqqinda:</b></label>
+                        <textarea class="form-control is-valid" name="about_education" value="" required></textarea><br/>
+                        </div>
+                        <div class="col-md-5">
+                          <label for="file" class="form-label"><b>Tesvir:</b><br/></label>
+                          <input type="file" name="file">
+                        </div>
+                        <div class="col-md-5">
+                        <select class="form-select" name="education_type">
+                          {% for i in education_category %}
+                            <option value="{{ i.name }}">&nbsp;&nbsp;{{ i.name }}</option>
+                          {% endfor %}
+                        </select>
+                        </br/>
+                        <button class="btn btn-primary" type="submit">Update</button>
+                      </div>
+                      </form>
+                    {% else %}
+                    <b>Kategoriya yoxdur. Ilk once Kategoriya elave edin...</b><br/>
+                    <br/>
+                    {% endif %}
+                    <hr>
+                      
+            <h5><b>Categoriya elave et</b></h5>
+            <form class="row g-3" method="POST">
+              <div class="col-md-5">
+                <label for="text" class="form-label"><b>Edu categoriya:</b><br/></label>
+                <input type="text" class="form-control is-valid" name="edu_name">
+                </br/>
+                <button class="btn btn-primary" type="submit">Update</button>
+              </div>
+            </form>
+            <hr>
+          
+            <div class="col-lg-6 col-7">
+            <h6>Users</h6>
+            </div>
+
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                  <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                      <thead>
+                        
+
+                        <tr>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Education</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kategoriya</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telebeler</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        {% for x in response.data %}
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                {{ loop.index }}.&nbsp;&nbsp;</div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">{{ x.name }}</h6> id: {{ x.id }}
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                    
+                            <span class="text-xs font-weight-bold">{{ x.education_type }}</span>
+                            
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            
+                              <a class href="/admin/educations/{{ x.id }}"><span class="text-xs font-weight-bold">{{x.select_education|length}}</span></a>
+                          </td>
+                          <td class="align-center">
+                                  <span class="text-xs font-weight-bold"><a href="/admin/educations/{{ x.id }}/update">Edit</a> / <a href="/admin/educations/{{ x.id }}/delete">Delete</a></span>
+                          </td>
+                        </tr>
+                   
+                        {% endfor %}
+                      
+                        
+                      </tbody>
+                    </table>
+                    <div class="align-middle text-center text-sm"><hr>
+                                                                  {% if response.pagination.previous  !=  None %}
+                                                                    <a href="educations{{ response.pagination.previous }}"><< Previous</a>
+                                                                  {% endif %} |
+                                                                  {% if response.pagination.next  !=  None %}
+                                                                    <a href="educations{{ response.pagination.next }}">Next >></a></div>
+                                                                  {% endif %}
+                    <br/>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {% include 'dashboard/footer.html' %}
+
+      

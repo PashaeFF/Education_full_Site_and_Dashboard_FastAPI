@@ -1,0 +1,29 @@
+<div class="container welcome-section">
+    <div class="section-padding"></div>
+    <div class="section-header">
+        <h3>Son əlavə olunanlar</h3>
+    </div>
+    <div class="row">
+        {% include 'flash.html' %}
+        {% for edu in educations[-3:] %}
+        <div class="col-md-4 col-sm-6 col-xs-6">
+            <div class="welcome-box">
+                {% if edu.photos %}
+                    <img src="/static/education_images/{{ edu.photos }}" width="370" height="440"/>
+                {% else %}
+                    <img src="/static/site/images/education.jpeg" width="370" height="440"/>
+                {% endif %}
+                <div class="welcome-title">
+                    <h3>{{ edu.name }}</h3>
+                </div>	
+                <div class="welcome-content">
+                    <span>{{ edu.education_type }}</span>
+                    <p>{{ edu.about_education[0:40] }}...</p>
+                    <a href="/educations/{{ edu.education_type }}/{{ edu.id }}" title="Daxil ol">Daxil ol</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="section-padding"></div>
+</div>

@@ -1,0 +1,238 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<!-- PageBanner -->
+	<div class="container-fluid no-padding pagebanner">
+		<div class="container">
+			<div class="pagebanner-content">
+				<h3>Haqqımızda</h3>
+			</div>
+		</div>
+	</div><!-- PageBanner /- -->
+	<!-- WhyChooseUs Section -->
+	<div class="container whychooseus-section">
+		<div class="section-padding"></div>
+		<div class="section-header">
+			{% if site_settings.site_logo %}
+				<h3>Niyə <span> {{ site_settings.site_logo }}???</span></h3>
+			{% endif %}
+
+
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				{% if site_settings.youtube_video %}
+					<div class="video-block">
+						<a title="Paly Video" class="popup-youtube" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><i class="fa fa-play" aria-hidden="true"></i></a>
+						<img  src="/static/site/images/video-poster-2.jpg" width="570" height="400" alt="Video Poster"/>
+						<div class="video-content">
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			<div class="col-md-6 accordion-section">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="accordion_1">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion1" aria-expanded="true" aria-controls="accordion1">Haqqımızda</a>
+							</h4>
+						</div>
+						<div id="accordion1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="accordion_1">
+							<div class="panel-body">
+								{% if site_settings.site_about %}
+									<p>{{ site_settings.site_about }}</p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% if site_settings %}
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="accordion_2">
+							<h4 class="panel-title">
+								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion2" aria-expanded="false" aria-controls="accordion2">İş saatlarımız</a>
+							</h4>
+						</div>
+						<div id="accordion2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="accordion_2">
+							<div class="panel-body">
+								<table class="table table-striped table-dark">
+									<thead>
+									  <tr>
+										<th scope="col">Həftənin günləri</th>
+										
+									  </tr>
+									</thead>
+									<tbody>
+									{% if site_settings.monday %}
+									  <tr>
+										<th scope="row"><font color="green">B.e</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="green">{{ site_settings.monday }}</font></td>
+									  </tr>
+									{% endif %}
+									{% if site_settings.tuesday %}
+									  <tr>
+										<th scope="row"><font color="green">Ch.a</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="green">{{ site_settings.tuesday }}</font></td>
+									  </tr>
+									{% endif %}
+									{% if site_settings.wednesday %}
+									  <tr>
+										<th scope="row"><font color="green">Ch</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="green">{{ site_settings.wednesday }}</font></td>
+									  </tr>
+									{% endif %}
+									{% if site_settings.thursday %}
+									  <tr>
+										<th scope="row"><font color="green">C.a</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="green">{{ site_settings.thursday }}</font></td>
+									  </tr>
+									{% endif %}
+									{% if site_settings.friday %}
+									  <tr>
+										<th scope="row"><font color="green">C</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="green">{{ site_settings.friday }}</font></td>
+									  </tr>
+									{% endif %}
+									{% if site_settings.saturday %}
+									  <tr>
+										<th scope="row"><font color="red">Sh</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="red">{{ site_settings.saturday }}</font></td>
+									  </tr>
+									{% endif %}
+									{% if site_settings.sunday %}
+									  <tr>
+										<th scope="row"><font color="red">B</font></th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><font color="red">{{ site_settings.sunday }}</font></td>
+									  </tr>
+									{% endif %}
+									</tbody>
+								  </table>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="section-padding"></div>
+	</div><!-- WhyChooseUs Section /- -->
+	<!-- Team Section -->
+	{% if staff and site_settings.about_teams %}
+	<div class="container-fluid no-padding team-section">
+		<div class="section-padding"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 team-content-block">
+					<div class="section-header">
+						<h3>Bizim <span> Komanda</span></h3>
+					</div>
+					<div class="team-intro">
+						<p>{{ site_settings.about_teams }}</p>
+					</div>
+					<a class="left carousel-control" href="#team-carousel" role="button" data-slide="prev">Prev</a>
+					<a class="right carousel-control" href="#team-carousel" role="button" data-slide="next">Next</a>
+				</div>
+				<div class="col-md-6 col-sm-12 team-gallary">
+					<div id="team-carousel" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<div class="row">
+									{% for person in staff[:2] %}
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="team-box">
+												<ul>
+													{% if person.facebook %}
+													<li><a title="Facebook" href="{{ person.facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+													{% endif %}
+													{% if person.instagram %}
+														<li><a title="Instagram" href="{{ person.instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+													{% endif %}
+													{% if person.twitter %}
+														<li><a title="Twitter" href="{{ person.twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+													{% endif %}
+													{% if person.linkedin %}
+														<li><a title="Linkedin" href="{{ person.linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+													{% endif %}
+													{% if person.behance %}
+														<li><a title="Behance" href="{{ person.behance }}"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+													{% endif %}
+												</ul>
+												<img alt="team1" src="/static/staff_images/{{ person.photo }}" width="290" height="370"/>
+												<div class="team-content">
+													<h3>{{ person.name_surname }}</h3>
+													<span>{{ person.job_position }}</span>
+												</div>
+											</div>
+										</div>
+										{% endfor %}
+								</div>
+							</div>
+							{% if staff[2:4] %}
+							<div class="item">
+								<div class="row">
+									{% for person in staff[2:4] %}
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="team-box">
+											<ul>
+												{% if person.facebook %}
+													<li><a title="Facebook" href="{{ person.facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+												{% endif %}
+												{% if person.instagram %}
+													<li><a title="Instagram" href="{{ person.instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+												{% endif %}
+												{% if person.twitter %}
+													<li><a title="Twitter" href="{{ person.twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+												{% endif %}
+												{% if person.linkedin %}
+													<li><a title="Linkedin" href="{{ person.linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+												{% endif %}
+												{% if person.behance %}
+													<li><a title="Behance" href="{{ person.behance }}"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+												{% endif %}
+											</ul>
+											<img alt="team1" src="static/staff_images/{{ person.photo }}" width="290" height="370"/>
+											<div class="team-content">
+												<h3>{{ person.name_surname }}</h3>
+												<span>{{ person.job_position }}</span>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section-padding"></div>
+	</div>
+	{% endif %}<!-- Team Section /- -->	
+	<!-- Footer Main -->
+		<!-- Footer Main -->
+		{% include 'site/route/footer.html' %}
+	
+	</body>
+	</html>

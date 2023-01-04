@@ -1,0 +1,86 @@
+<!-- Header -->
+	<header class="header-main container-fluid no-padding">
+		<!-- Top Header -->
+		<div class="top-header container-fluid no-padding">
+			<div class="container">
+				{% if site_settings %}
+				<div class="topheader-left">
+					<a href="https://wa.me/{{ site_settings.wp_number }}?text={{ site_settings.wp_text }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>Whatsapp mesaj</a>
+					<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>Bizə zəng</a>
+					<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}"><i class="fa fa-envelope-o" aria-hidden="true"></i>Email: {{ site_settings.site_email }}</a>
+				</div>
+				{% endif %}
+				<div class="topheader-right">
+					<a href="/login" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Daxil ol</a>
+					<a href="/registration" title="Register">Qeydiyyat</a>
+				</div>
+			</div>
+		</div><!-- Top Header /- -->
+		
+		<!-- Menu Block -->
+		<div class="menu-block container-fluid no-padding">
+			<!-- Container -->
+			<div class="container">
+				<div class="row">
+					<!-- Navigation -->
+					<nav class="navbar ow-navigation">
+						<div class="col-md-3">
+							<div class="navbar-header">
+								<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								{% if site_settings %}
+								<a title="Logo" href="/" class="navbar-brand"><img src="{{ url_for('static', path='site/images/logo.png') }}" alt="logo"/>{{ site_settings.site_logo }}<span>{{ site_settings.site_slogan }}</span></a>
+								<a href="/" class="mobile-logo" title="Logo"><h3>{{ site_settings.site_logo }}</h3></a>
+								{% endif %}
+							</div>
+						</div>
+						<div class="col-md-9">
+							<div class="navbar-collapse collapse" id="navbar">
+								<ul class="nav navbar-nav menubar">
+									<li class="dropdown active">
+										<a aria-expanded="false" aria-haspopup="true" href="/" role="button" class="dropdown-toggle" title="Home">Əsas səhifə</a>
+									<li class="dropdown">
+										<a aria-expanded="false"  href="/educations" aria-haspopup="true" role="button" class="dropdown-toggle" title="Kateqoriyalar">Kategoriyalar</a>
+										<i class="ddl-switch fa fa-angle-down"></i>
+										<ul class="dropdown-menu">
+											{% if categories %}
+												{% for i in categories %}
+													<li><a title="Courses Detail" href="/educations/{{ i.name }}">{{ i.name }}</a></li>
+												{% endfor %}
+											{% endif %}
+										</ul>
+									</li>
+									<li class="dropdown">
+										<a aria-expanded="false"  href="/news" aria-haspopup="true" role="button" class="dropdown-toggle" title="Xeberler">Xəbərlər</a>
+										<i class="ddl-switch fa fa-angle-down"></i>
+										<ul class="dropdown-menu">
+											{% if news_category %}
+												{% for i in news_category %}
+													<li><a title="Courses Detail" href="/news/{{ i.name }}">{{ i.name }}</a></li>
+												{% endfor %}
+											{% endif %}
+										</ul>
+									</li>
+									<li><a title="Haqqimizda" href="/about">Haqqımızda</a></li>
+									<li><a title="Contact" href="/contact">Əlaqə</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav><!-- Navigation /- -->
+					<div class="menu-search">
+						<div id="sb-search" class="sb-search">
+							<form>
+								<input class="sb-search-input" placeholder="Axtarmaq istədiyin..." type="text" value="" name="search" id="search" />
+								<button class="sb-search-submit"><i class="fa fa-search"></i></button>
+								<span class="sb-icon-search"></span>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div><!-- Container /- -->
+		</div><!-- Menu Block /- -->
+	</header><!-- Header /- -->

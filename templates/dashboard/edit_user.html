@@ -1,0 +1,101 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+      <hr class>
+      
+        </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+            <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                  <div class="row">
+                    <h4><b>Edit Profile</b></h4>
+                        <font size="2" color ="red"><b>Qeyd: Ulduzlu saheleri mutleq doldurmalisiniz...</b></font><br/><br/>
+                        <form class="row g-3" method ="POST">
+                            <div class="col-md-5">
+                                <label for="email" class="form-label"><b>*Emaili:</b></label>
+                                <input type="text" class="form-control is-valid" name="email" value="{{ user.email }}" required>
+                                </div>
+                            <div class="col-md-5">
+                            <label for="name_surname" class="form-label"><b>*Ad ve Soyad:</b></label>
+                            <input type="text" class="form-control is-valid" name="name_surname" value="{{ user.name_surname }}" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="phone" class="form-label"><br/><b>*Phone:</b></label>
+                                <input type="text" class="form-control is-valid" name="phone" value="{{ user.phone }}" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="age" class="form-label"><br/><b>*Dogum tarixi:</b></label>
+                                <input type="text" class="form-control is-valid" name="age" value="{{ user.age }}" required>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="city" class="form-label"><br/><b>*Dogum yeri:</b></label>
+                                <input type="text" class="form-control is-valid" name="city" value="{{ user.city }}" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="education class="form-label"><br/><b>*Tehsili:</b></label>
+                                <input type="text" class="form-control is-valid" name="education" value="{{ user.education }}" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="certificate_points" class="form-label"><br/><b>*Attestat qiymetleri veya bitirdiyi universitet:</b></label>
+                                <input type="text" class="form-control is-valid" name="certificate_points" value="{{ user.certificate_points }}" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="about"><br/><b>Haqqinda:</b></label>
+                                <textarea name="about" class="form-label" rows="4" cols="50">{{ user.about }}</textarea>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="created_at"><br/><b>Qeydiyyat tarixi:</b></label>
+                                <textarea name="created_at" class="form-label" rows="4" cols="50">{{ user.created_at }}</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="select_university_id"><br/><b>*Sechdiyi:</b></label>
+                                
+                                <select name="select_university_id" id="plan">
+                                    {% for i in education %}
+                                        {% if user.select_university_id == i.id %}
+                                            <option value="{{ i.id }}" selected>{{ i.name }}</option>
+                                        {% else %}
+                                            <option value="{{ i.id }}" >{{ i.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                
+                            </div>
+                            <div class="form-check form-switch ps-0">
+                                <input class="form-check-input ms-auto" type="checkbox" name="admin_user" {{"checked" if user.admin_user == True else ""}}>
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="admin_user">Admin user</label>
+                            </div>
+                            <div class="form-check form-switch ps-0">
+                                <input class="form-check-input ms-auto" type="checkbox" name="is_active" {{"checked" if user.is_active == True else ""}}>
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Useri Aktiv/Deaktiv et</label>
+                            </div>
+                            <br/>
+                            <hr>
+                            <p align="center">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                            </p>
+                            </div>
+                            
+                        </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+      {% include 'dashboard/footer.html' %}
+
+      

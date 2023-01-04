@@ -1,0 +1,85 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+    {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg "> 
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+      <hr class>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+            <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                    {% include 'flash.html' %}
+                    {% if sliders|length > 6%}
+                    <font color="red"><div class="align-middle text-center text-l">Max. 7 slide elave etmek olar. Elave Slide uchun kohnelerden hansinisa silmek lazimdir</div></font>
+                    {% else %}
+                    <h4><b>Slider ayarlari</b></h4><hr>
+                    <div class="row">
+                        <h6><b>Slide</b></h6>
+                        <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-5">
+                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 1920 × 801 pixel</font></p>
+                                <label for="file2" class="form-label"><b>Post image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file2">
+                                <label for="description" class="form-label"><b>Slide Title:</b><br/></label>
+                                <input type="text" class="form-control is-valid" name="title" rows="4" cols="50">
+                                <label for="description" class="form-label"><b>Slide Description:</b><br/></label>
+                                <textarea class name="description" rows="4" cols="50"></textarea><br/>
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                    <hr>      
+                    
+                    <h4><b>Slidelar</b></h4><hr>
+                    <div class="row">
+                        
+                        {% for slide in sliders %}
+                            <div class="col-md-5">
+                                <h6><b>Slide</b></h6>
+                                <form class="row g-3" method="POST" enctype="multipart/form-data" action="slider/{{ slide.id }}">
+                                    <img src="/static/site/images/slider/{{ slide.photos }}" width="100%"><br/>
+                                <label for="file" class="form-label"><b>Slide Sheklini deyish:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 1920 × 801 pixel</font></p>
+                                <img src="/static/site/images/slider/news_photo/{{  slide.news_photo }}" width="100%"><br/>
+                                <label for="file2" class="form-label"><b>Post sheklini deyish:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file2">
+                                <label for="description" class="form-label"><b>Slide Title:</b><br/></label>
+                                <input type="text" class="form-control is-valid" name="title" rows="4" cols="50" value="{{ slide.title }}">
+                                <label for="description" class="form-label"><b>Slide Description:</b><br/></label>
+                                <textarea name="description" rows="4" cols="50">{{ slide.description }}</textarea><br/>
+                                <button class="btn btn-primary" type="submit">Update</button>
+                                </form>
+                                <a class="btn btn-primary" href="/admin/slider/{{ slide.id }}/delete">Delete</a></span>
+                                <hr>
+                                
+                            </div>
+                            
+                        {% endfor %}
+                        
+                        <hr>
+                        
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+      {% include 'dashboard/footer.html' %}
+
+      

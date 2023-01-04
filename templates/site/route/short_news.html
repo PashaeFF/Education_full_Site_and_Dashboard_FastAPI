@@ -1,0 +1,45 @@
+{% if news %}
+<div class="brd2">
+<div class="container event-section">
+    <div class="section-padding"></div>	
+    <div class="section-header-block">
+        <div class="section-header">
+            <h3>Son <span>sayt Xəbərləri</span></h3>
+        </div>
+        <a href="/news" title="View All">Hamısı</a>
+    </div>
+    
+    <div class="event-block">
+        {% for item in news[-3:] %}
+        <div class="event-box">
+            <div class="brd">
+            <div class="row">
+                
+                <div class="col-md-3 col-sm-4 col-xs-5">
+                    {% if item.news_image %}
+                        <img src="/static/news_images/{{ item.news_image }}" width="260" height="160"/>
+                    {% else %}
+                        <img src="/static/site/images/eduway_news.png" width="260" height="160"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-7 col-sm-6 col-xs-7">
+                    <h3><a href="/news/{{ item.select_category.name }}/{{ item.id }}" title="{{ item.news_title }}">{{ item.news_title }}</a></h3>
+                    <div class="event-meta">
+                        <span><i aria-hidden="true" class="fa fa-clock-o"></i>{{ item.created_at[0:16]}}</span>
+                        <span><i aria-hidden="true" class="fa fa-list-alt"></i>{{ item.select_category.name }}</span>
+                    </div>
+                    <p>{{ item.description[0:100] }}...</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <a href="/news/{{ item.select_category.name }}/{{ item.id }}" class="readmore" title="Ətrafli">Ətrafli</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+    
+    <div class="section-padding"></div>
+</div>
+</div>
+{% endif %}

@@ -1,0 +1,245 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid px-2 px-md-4">
+        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+            <span class="mask  bg-gradient-primary  opacity-6"></span>
+        </div>
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        {% include 'flash.html' %}<br/>
+                        <h4><b>Edit Site</b></h4>
+                        {% if site %}
+                            <form class="row g-3" method ="POST">
+                            <div class="col-md-5">
+                                <label for="site_title" class="form-label"><b>Site title:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_title" value="{{ site.site_title }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="site_logo" class="form-label"><b>Site logo:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_logo" value="{{ site.site_logo }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_slogan" class="form-label"><b>Site slogan:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_slogan" value="{{ site.site_slogan }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_email" class="form-label"><b>Site Email:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_email" value="{{ site.site_email }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="phone" class="form-label"><b>Site Phone:</b></label>
+                                <input type="text" class="form-control is-valid" name="phone" value="{{ site.phone }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="wp_number" class="form-label"><b>Whatsapp Number:</b></label>
+                                <input type="text" class="form-control is-valid" name="wp_number" value="{{ site.wp_number }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="wp_text" class="form-label"><b>Whatsapp text:</b></label>
+                                <input type="text" class="form-control is-valid" name="wp_text" value="{{ site.wp_text }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="address" class="form-label"><b>Adres:</b></label>
+                                <input type="text" class="form-control is-valid" name="address" value="{{ site.address }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="google_map" class="form-label"><b>Google Map:</b></label>
+                                <input type="text" class="form-control is-valid" name="google_map" value="{{ site.google_map }}">
+                            </div>  
+                            <div class="col-md-5">
+                                <label for="site_description" class="form-label"><b>Site Description:</b></label>
+                                <textarea name="site_description" class="form-label" rows="4" cols="50">{{ site.site_description }}</textarea>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_about" class="form-label"><b>Site About:</b></label>
+                                <textarea name="site_about" class="form-label" rows="4" cols="50">{{ site.site_about }}</textarea>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="about_teams" class="form-label"><b>About teams:</b></label>
+                                <textarea name="about_teams" class="form-label" rows="4" cols="50">{{ site.about_teams }}</textarea>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="youtube_video" class="form-label"><b>Youtube Video:</b></label>
+                                <input type="text" class="form-control is-valid" name="youtube_video" value="{{ site.youtube_video }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="facebook" class="form-label"><b>Facebook Page:</b></label>
+                                <input type="text" class="form-control is-valid" name="facebook" value="{{ site.facebook }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="instagram" class="form-label"><b>Instagram Page:</b></label>
+                                <input type="text" class="form-control is-valid" name="instagram" value="{{ site.instagram }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="linkedin" class="form-label"><b>Linkedin:</b></label>
+                                <input type="text" class="form-control is-valid" name="linkedin" value="{{ site.linkedin }}">
+                            </div>
+                            
+
+                            {# schedules #}
+                            <h5>Ish gunleri ve saatlari</h5>
+                            <div class="col-md-5">
+                                <label for="monday" class="form-label"><b>B.e:</b></label>
+                                <input type="text" class="form-control is-valid" name="monday" value="{{ site.monday }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="tuesday" class="form-label"><b>Ch.a:</b></label>
+                                <input type="text" class="form-control is-valid" name="tuesday" value="{{ site.tuesday }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="wednesday" class="form-label"><b>Ch:</b></label>
+                                <input type="text" class="form-control is-valid" name="wednesday" value="{{ site.wednesday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="thursday" class="form-label"><b>C.a:</b></label>
+                                <input type="text" class="form-control is-valid" name="thursday" value="{{ site.thursday }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="friday" class="form-label"><b>C:</b></label>
+                                <input type="text" class="form-control is-valid" name="friday" value="{{ site.friday }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="saturday" class="form-label"><b>Sh:</b></label>
+                                <input type="text" class="form-control is-valid" name="saturday" value="{{ site.saturday }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="sunday" class="form-label"><b>B:</b></label>
+                                <input type="text" class="form-control is-valid" name="sunday" value="{{ site.sunday }}">
+                            </div>
+                            {# schedules #}
+                            
+                                <div class="form-check form-switch ps-0">
+                                    <input class="form-check-input ms-auto" type="checkbox"  name="is_active" {{"checked" if site.is_active == True else ""}}>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Sayti Deaktiv et</label>
+                                </div>
+                           
+                            <br/>
+                            <p align="row">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </p>
+                            </form>
+                        {% else %}
+                            <form class="row g-3" method ="POST">
+                                <div class="col-md-5">
+                                    <label for="site_title" class="form-label"><b>Site title:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_title" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="site_title" class="form-label"><b>Site logo:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_logo" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_slogan" class="form-label"><b>Site slogan:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_slogan" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_email" class="form-label"><b>Site Email:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_email" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_email" class="form-label"><b>Site Phone:</b></label>
+                                    <input type="text" class="form-control is-valid" name="phone" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="wp_number" class="form-label"><b>Whatsapp Number:</b></label>
+                                    <input type="text" class="form-control is-valid" name="wp_number" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="wp_text" class="form-label"><b>Whatsapp text:</b></label>
+                                    <input type="text" class="form-control is-valid" name="wp_text" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="address" class="form-label"><b>Adres:</b></label>
+                                    <input type="text" class="form-control is-valid" name="address" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="google_map" class="form-label"><b>Google Map:</b></label>
+                                    <input type="text" class="form-control is-valid" name="google_map" value="">
+                                </div>  
+                                <div class="col-md-5">
+                                    <label for="site_description" class="form-label"><b>Site Description:</b></label>
+                                    <textarea name="site_description" class="form-label" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_about" class="form-label"><b>Site About:</b></label>
+                                    <textarea name="site_about" class="form-label" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="about_teams" class="form-label"><b>About teams:</b></label>
+                                    <textarea name="about_teams" class="form-label" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="youtube_video" class="form-label"><b>Youtube Video:</b></label>
+                                    <input type="text" class="form-control is-valid" name="youtube_video" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="facebook" class="form-label"><b>Facebook Page:</b></label>
+                                    <input type="text" class="form-control is-valid" name="facebook" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="instagram" class="form-label"><b>Instagram Page:</b></label>
+                                    <input type="text" class="form-control is-valid" name="instagram" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="linkedin" class="form-label"><b>Linkedin:</b></label>
+                                    <input type="text" class="form-control is-valid" name="linkedin" value="">
+                                </div>
+                                {# schedules #}
+                                <h5>Ish gunleri ve saatlari</h5>
+                                <div class="col-md-5">
+                                    <label for="monday" class="form-label"><b>B.e:</b></label>
+                                    <input type="text" class="form-control is-valid" name="monday" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="tuesday" class="form-label"><b>Ch.a:</b></label>
+                                    <input type="text" class="form-control is-valid" name="tuesday" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="wednesday" class="form-label"><b>Ch:</b></label>
+                                    <input type="text" class="form-control is-valid" name="wednesday" value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="thursday" class="form-label"><b>C.a:</b></label>
+                                    <input type="text" class="form-control is-valid" name="thursday" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="friday" class="form-label"><b>C:</b></label>
+                                    <input type="text" class="form-control is-valid" name="friday" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="saturday" class="form-label"><b>Sh:</b></label>
+                                    <input type="text" class="form-control is-valid" name="saturday" value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="sunday" class="form-label"><b>B:</b></label>
+                                    <input type="text" class="form-control is-valid" name="sunday" value="">
+                                </div>
+                                {# schedules #}
+                                
+                                <br/>
+                                <p align="row">
+                                    <button class="btn btn-primary" type="submit">Update</button>
+                                </p>
+
+                            </form>
+                        {% endif %}
+                    </div>     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% include 'dashboard/footer.html' %}

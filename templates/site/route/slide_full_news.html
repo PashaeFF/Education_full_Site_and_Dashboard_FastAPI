@@ -1,0 +1,48 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<div class="container blog blogpost">
+		<div class="section-padding"></div>
+		<div class="row">
+			<div class="col-md-9 col-sm-8 content-area">
+				<article class="type-post">
+					<div class="entry-cover">
+						<img width="860" height="470" alt="blogpost" src="/static/site/images/slider/news_photo/{{ slider.news_photo }}">
+					</div>
+					<div class="entry-block">
+						<div class="entry-contentblock">
+							<div class="entry-meta">
+								<span class="postdate">Date : {{ slider.created_at[0:16]}}</a></span>
+							</div>
+							<div class="entry-block">
+								<div class="entry-title">
+									<h3>{{ slider.title }}</h3>
+								</div>
+								<div class="entry-content">
+									{{ slider.description }}
+								</div>
+							</div>
+							 
+							 {#<ul>
+								<li><a title="Facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a title="Twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a></li> 
+								<li><a title="Behance" href="#"><i class="fa fa-behance"></i></a></li>
+								<li><a title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+							</ul>#}
+							
+						</div>
+						<div class="post-ic"></div>
+					</div>
+				</article>
+			
+			</div>
+
+		</div>
+		<div class="section-padding"></div>
+	</div>
+		<!-- Footer Main -->
+		{% include 'site/route/footer.html' %}
+	
+	</body>
+	</html>

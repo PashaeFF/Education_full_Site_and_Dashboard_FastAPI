@@ -1,0 +1,47 @@
+	<!-- PhotoSlider Section -->
+	<div class="photoslider-section container-fluid no-padding">
+		{% if slider %}
+		<div id="home-slider" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+		
+				<div class="item active">
+					<img src="/static/site/images/slider/{{ slider.0.photos }}"  width="1920" height="801"/>
+					
+					<div class="carousel-caption">
+						<div class="container">
+							<div class="col-md-6 col-sm-8 col-xs-8 ow-pull-right no-padding">
+								<h4 data-animation="animated bounceInLeft">{{ slider.0.title }}</h4>
+								<p data-animation="animated bounceInRight">{{ slider.0.description[0:50] }}....</p>
+								<a href="/slider/{{ slider.0.id }}" title="Learn More" data-animation="animated zoomInUp">Etrafli</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{% for slide in slider %}
+					{% if (slide.id != 1) %}
+						<div class="item">
+							<img src="/static/site/images/slider/{{ slide.photos }}" alt="photoslider2" width="1920" height="801"/>
+							<div class="carousel-caption">
+								<div class="container">
+									<div class="col-md-6 col-sm-8 col-xs-8 ow-pull-left no-padding">
+										<h4 data-animation="animated bounceInLeft">{{ slide.title }}</h4>
+										<p data-animation="animated bounceInRight">{{ slide.description[0:100] }}...</p>
+										<a href="/slider/{{ slide.id }}" title="Learn More" data-animation="animated zoomInUp">Ətraflı</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+		
+		{% endif %}
+	</div><!-- PhotoSlider Section /- -->

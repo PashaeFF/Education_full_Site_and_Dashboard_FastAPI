@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+      <div class="card" style="margin: 0 25px">
+        <div class="card-header pb-0">
+          <div class="row">
+            <h4><b>Create education</b></h4>
+            <form class="row g-3" method ="POST">
+            <div class="col-md-5">
+              <label for="name" class="form-label"><b>*Adi:</b></label>
+              <input type="text" class="form-control is-valid" name="name" value="" required><br/>
+              <select class="form-select" name="education_type">
+                <option value="1">Universitet</option>
+                <option value="2">Imtahan</option>
+              </select>
+              </br/>
+              <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+            </form>
+            <h6><b>Slide 2</b></h6>
+            <form class="row g-3" method="POST">
+              <div class="col-md-5">
+                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                <input type="file" class="form-control is-valid" name="file">
+                <p align ="center"><font color="red">Normal gorunush uchun 960 × 350 pixel</font></p>
+              </div>
+            </form>
+          </div>
+        
+  
+                {###########    alt panel    ###########}
+  
+  
+      </div>
+    </div>
+  </div>
+        <div class="card-header pb-0">
+          <div class="row">
+            <div class="col-lg-6 col-7">
+              <h6>Users</h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+              <thead>
+                
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tehsil novu ve adi</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telebeler</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telebe sayi</th>
+                </tr>
+              </thead>
+              <tbody>
+            
+                {% for x in education %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        {{ x.id }}
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    
+                    <span class="text-xs font-weight-bold">| {{ x.name }}</span>
+                    
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <span class="text-xs font-weight-bold"></span>
+                  </td>
+                  <td class="align-center">
+                          <span class="text-xs font-weight-bold"><a href="/admin/education/{{ x.id }}/edit">Edit</a> / <a href="/admin/education/{{ x.id }}/delete">Sil</a></span>
+                  </td>
+                </tr>
+                {% endfor %}
+                
+              </tbody>
+            </table>
+          </div>
+        </div>

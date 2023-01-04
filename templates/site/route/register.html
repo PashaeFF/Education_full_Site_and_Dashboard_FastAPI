@@ -1,0 +1,43 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<!-- PageBanner -->
+	<div class="container-fluid no-padding pagebanner">
+		<div class="container">
+			<div class="pagebanner-content">
+				<h3>{{ page_title }}</h3>
+			</div>
+		</div>
+	</div><!-- PageBanner /- -->
+	<!-- Event Section -->
+	<div class="container event-section">
+		<div class="section-padding"></div>			
+		<div class="event-block">
+		<!-- Body -->
+            {% include 'flash.html' %}
+            <main class="col-md-4"> 
+                <form method ="POST">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" required class="form-control" name="email" placeholder="email@gmail.com" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" required class="form-control" name="password" placeholder = "Parol">
+                    </div><br/>
+                    <button type="submit" class="btn btn-primary">Qeyd ol</button>
+                    </form>
+        
+                <div class="clear"></div>
+            </main>
+            </div>
+        <!-- end Body --> 
+		</div>
+			
+		<div class="section-padding"></div>
+	</div><!-- Event Section /- -->	
+	<!-- Footer Main -->
+	{% include 'site/route/footer.html' %}
+	
+</body>
+</html>

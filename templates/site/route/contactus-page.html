@@ -1,0 +1,82 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<!-- PageBanner -->
+	<div class="container-fluid no-padding pagebanner">
+		<div class="container">
+			<div class="pagebanner-content">
+				<h3>{{ page_title }}</h3>
+			</div>
+		</div>
+	</div><!-- PageBanner /- -->
+	<!-- ContactUs Section -->
+	<div class="container-fluid no-padding contactus-section">
+		<div class="container">
+			<div class="section-padding"></div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="map">
+						<iframe id="map-canvas-contact" class="map-canvas"  src="{{ site_settings.google_map }}" data-string="{{ site_settings.address }}" data-zoom="10"></iframe>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="getintouch">
+						{% include 'flash.html' %}<br/>
+						<h3>Sualınız var?? Bizə yazın, cavablayaq</h3>
+						<form class="contactus-form" id="contact-form" method="POST">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group">
+										<input type="text" required="" placeholder="Name" class="form-control" name="name">
+									</div>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group">
+										<input type="email" required="" placeholder="Email" class="form-control" name="email">
+									</div>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group">
+										<textarea placeholder="Message" class="form-control" name="message" rows="5"></textarea>
+									</div>
+								</div>	
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="form-group">
+										<input type="submit" name="post" title="Send" value="Göndər">
+									</div>
+								</div>
+								<div class="alert-msg" id="alert-msg"></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="section-padding"></div>
+		</div>
+		{% if site_settings %}
+		<div class="contactdetail-block" style="padding-left: 260px;">
+			<div class="container">
+				<div class="col-md-3 col-sm-3 col-xs-6 contactinfo-box">
+					<span class="icon icon-Pointer"></span>
+					<h3>Adres</h3>
+					<p>{{ site_settings.address }}</p>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6 contactinfo-box">
+					<span class="icon icon-Phone2"></span>
+					<h3>Əlaqə nömrəsi</h3>
+					<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}">{{ site_settings.phone }}</a>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6 contactinfo-box">
+					<span class="icon icon-Imbox"></span>
+					<h3>Email</h3>
+					<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}">{{ site_settings.site_email }}</a>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+	</div><!-- ContactUs Section /- -->	
+	<!-- Footer Main -->
+	{% include 'site/route/footer.html' %}
+
+</body>
+</html>

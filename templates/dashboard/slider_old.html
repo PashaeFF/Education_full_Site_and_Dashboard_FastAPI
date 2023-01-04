@@ -1,0 +1,113 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+    {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+      <hr class>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+            <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                    <h4><b>Slider ayarlari</b></h4><hr>
+                    <div class="row">
+                        <h6><b>Slide 1</b></h6>
+                        <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-5">
+                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 960 × 350 pixel</font></p>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="description" class="form-label"><b>Slide News:</b><br/></label>
+                                <textarea name="1" rows="4" cols="50">{{ slide_1.description }}</textarea>
+                            </div>
+                            <div class="col-md-3 mb-md-0 mb-2">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6><b>Slide 2</b></h6>
+                        <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-5">
+                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 960 × 350 pixel</font></p>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="description" class="form-label"><b>Slide News:</b><br/></label>
+                                <textarea name="2" rows="4" cols="50">{{ slide_2.description }}</textarea>
+                            </div>
+                            <div class="col-md-3 mb-md-0 mb-2">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6><b>Slide 3</b></h6>
+                        <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-5">
+                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 960 × 350 pixel</font></p>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="description" class="form-label"><b>Slide News:</b><br/></label>
+                                <textarea name="3" rows="4" cols="50">{{ slide_3.description }}</textarea>
+                            </div>
+                            <div class="col-md-3 mb-md-0 mb-2">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6><b>Slide 4</b></h6>
+                        <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-5">
+                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 960 × 350 pixel</font></p>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="description" class="form-label"><b>Slide News:</b><br/></label>
+                                <textarea name="4" rows="4" cols="50">{{ slide_4.description }}</textarea>
+                            </div>
+                            <div class="col-md-3 mb-md-0 mb-2">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6><b>Slide 5</b></h6>
+                        <form class="row g-3" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-5">
+                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <input type="file" class="form-control is-valid" name="file">
+                                <p align ="center"><font color="red">Normal gorunush uchun 960 × 350 pixel</font></p>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="description" class="form-label"><b>Slide News:</b><br/></label>
+                                <textarea name="5" rows="4" cols="50">{{ slide_5.description }}</textarea>
+                            </div>
+                            <div class="col-md-3 mb-md-0 mb-2">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                        <hr>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+      {% include 'dashboard/footer.html' %}
+
+      

@@ -1,0 +1,52 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<!-- PageBanner -->
+	<div class="container-fluid no-padding pagebanner">
+		<div class="container">
+			<div class="pagebanner-content">
+				<h3>Umumi</h3>
+			</div>
+		</div>
+	</div><!-- PageBanner /- -->
+	<!-- Welcome Section -->
+	<div class="container welcome-section welcome2">
+		<div class="section-padding"></div>	
+		<div class="row">
+			{% if response.data %}
+			<div class="row">
+				{% for edu in response.data %}
+				<div class="col-md-4 col-sm-6 col-xs-6">
+					<div class="welcome-box">
+						<img src="/static/education_images/{{ edu.photos }}" alt="welcome1" width="370" height="440"/>
+						<div class="welcome-title">
+							<h3>{{ edu.name }}</h3>
+						</div>	
+						<div class="welcome-content">
+							<span>{{ edu.education_type }}</span>
+							<p>{{ edu.about_education[0:40] }}...</p>
+							<a href="/educations/{{ edu.education_type }}/{ edu.id }}" title="Apply now">Apply now</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+		<nav class="ow-pagination">
+			<ul class="pagination">
+		{% if response.pagination.previous  !=  None %}
+			<li><a href="{{ category_name.name }}{{ response.pagination.previous }}"><< Previous</a></li>
+		{% endif %}
+		{% if response.pagination.next  !=  None %}
+			<li><a href="{{ category_name.name }}{{ response.pagination.next }}">Next >></a></li>
+		{% endif %}
+		</ul>
+		</nav>
+		<div class="section-padding"></div>
+	</div><!-- Welcome Section /- -->
+		<!-- Footer Main -->
+		{% include 'site/route/footer.html' %}
+	
+	</body>
+	</html>

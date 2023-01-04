@@ -1,0 +1,42 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<!-- PageBanner -->
+	<div class="container-fluid no-padding pagebanner">
+		<div class="container">
+			<div class="pagebanner-content">
+				<h3>{{ education.education_type }} | {{ education.name }}</h3>
+			</div>
+		</div>
+	</div><!-- PageBanner /- -->
+	<div class="container coursesdetail-section">
+		<div class="section-padding"></div>
+			<div class="row">
+				<div class="col-md-9 col-sm-8 event-contentarea">
+					<div class="coursesdetail-block">
+						{% if education.photos %}
+							<img src="/static/education_images/{{ education.photos }}" width="800" height="500"/>
+						{% else %}
+							<img src="/static/site/images/education.jpeg" width="800" height="500"/>
+						{% endif %}
+						<div class="course-description">
+							<h3 class="course-title">{{ education.name }}</h3>
+							<p>{{ education.about_education }}</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 event-sidebar">
+					<div class="courses-features">
+						<div class="featuresbox"><img src="/static/site/images/user-ic.png" alt="user-ic" width="22" height="22"/><h3>Tələbə : </h3><span> {{ select_education|length}}</span></div>
+						<div class="featuresbox"><img src="/static/site/images/cap-ic.png" alt="cap-ic" width="24" height="20"/><h3>Certificate of Completion</h3></div>
+					</div>
+				</div>
+			</div>
+		<div class="section-padding"></div>
+	</div>
+	<!-- Footer Main -->
+	{% include 'site/route/footer.html' %}
+	
+</body>
+</html>

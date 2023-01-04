@@ -1,0 +1,52 @@
+<footer class="footer-main container-fluid no-padding">	
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-6">
+                <aside class="ftr-widget about_widget">
+                    {% if site_settings %}
+                        <a class="footer-logo" href="/" title="Logo"><img alt="logo" src="{{ url_for('static', path='site/images/logo.png') }}">{{ site_settings.site_logo }}<span>{{ site_settings.site_slogan }}</span></a><br/>
+                    <ul>
+                    {% if site_settings.facebook %}
+                        <li><a href="{{ site_settings.facebook }}" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    {% endif %}
+                    {% if site_settings.instagram %}
+                        <li><a href="{{ site_settings.instagram }}" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                    {% endif %}
+                    {% if site_settings.linkedin %}
+                        <li><a href="{{ site_settings.linkedin }}" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    {% endif %}
+                    </ul>
+                    {% endif %}
+                   </aside>
+            </div>
+        <!-- Footer Bottom -->
+        <div class="footer-bottom col-md-12 col-sm-12 no-padding">
+            <div class="copyright no-padding">
+                <span>Copyright &copy; 2022. All Rights Reserved.</span>
+            </div>
+            <nav class="navbar ow-navigation">
+                <div id="navbar2" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/" title="Home">Əsas səhifə</a></li>
+                        <li><a href="/educations" title="Təhsil">Təhsil</a></li>
+                        <li><a href="/news" title="Xəbərlər">Xəbərlər</a></li>
+                        <li><a href="/about" title="Haqqımızda">Haqqımızda</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- Footer Bottom /- -->
+    </div><!-- Container /- -->
+</footer><!-- Footer /- -->
+
+<!-- JQuery v1.11.3 -->	
+<script src="{{ url_for('static', path='site/js/jquery.min.js') }}"></script>
+<!--script src="js/jquery.knob.js"></script-->
+
+<!-- Library - Js -->
+<script src="{{ url_for('static', path='site/libraries/lib.js') }}"></script><!-- Bootstrap JS File v3.3.5 -->
+<!-- Library - Google Map API -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp') }}"></script>
+
+<!-- Library - Theme JS -->
+<script src="{{ url_for('static', path='site/js/functions.js') }}"></script>

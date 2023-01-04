@@ -1,0 +1,56 @@
+<!-- Header -->
+{% include 'site/header.html' %}
+<!-- end Header -->
+
+<!-- Navbar --> 
+{% include 'site/navbar.html' %}
+<!-- end Navbar --> 
+
+<!-- Slider -->
+{% include 'site/slider.html' %}
+<!-- end Slider --> 
+
+<!-- Body -->
+<div class="wrapper row3">
+  <div class="rounded">
+    <main class="container clear"> 
+        <form method ="POST">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" required class="form-control" name="email" placeholder="email@gmail.com" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" required class="form-control" name="password" placeholder = "Parol">
+            </div>
+            <button type="submit" class="btn btn-primary">Qeyd ol</button>
+          </form>
+
+      <div class="clear"></div>
+    </main>
+  </div>
+</div>
+<!-- end Body --> 
+
+
+<!-- Footer -->
+{% include 'site/footer.html' %}
+
+<!-- end Footer --> 
+<!-- ################################################################################################ --> 
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2014 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <!-- ################################################################################################ --> 
+  </div>
+</div>
+<!-- JAVASCRIPTS --> 
+<script src="{{ url_for('static', path='site/layout/scripts/jquery.min.js') }}"></script> 
+<script src="{{ url_for('static', path='site/layout/scripts/jquery.fitvids.min.js') }}"></script> 
+<script src="{{ url_for('static', path='site/layout/scripts/jquery.mobilemenu.js') }}"></script> 
+<script src="{{ url_for('static', path='site/layout/scripts/tabslet/jquery.tabslet.min.js') }}"></script>
+</body>
+</html>
