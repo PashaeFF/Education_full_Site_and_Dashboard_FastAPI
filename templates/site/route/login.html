@@ -15,21 +15,27 @@
 		<div class="event-block">
 		<!-- Body -->
             {% include 'flash.html' %}
-            <main class="col-md-4"> 
-                <form method ="POST">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" required class="form-control" name="email" placeholder="email@gmail.com" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" required class="form-control" name="password" placeholder = "Parol">
-                    </div><br/>
-                    <button type="submit" class="btn btn-primary">Daxil ol</button>
-                    </form>
+            
+				{% if user_token %}
+					Daxil olmusunuz...
+				{% else %}
+				<main class="col-md-4"> 
+					<form method ="POST">
+						<div class="mb-3">
+							<label for="email" class="form-label">Email address</label>
+							<input type="email" required class="form-control" name="email" placeholder="email@gmail.com" aria-describedby="emailHelp">
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Password</label>
+							<input type="password" required class="form-control" name="password" placeholder = "Parol">
+						</div><br/>
+						<button type="submit" class="btn btn-primary">Daxil ol</button>
+					</form>
+					<div class="clear"></div>
+            	</main>
+				{% endif %}
         
-                <div class="clear"></div>
-            </main>
+                
             </div>
         <!-- end Body --> 
 		</div>

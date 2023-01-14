@@ -25,7 +25,7 @@
                 <div class="col-md-7 col-sm-6 col-xs-7">
                     <h3><a href="/news/{{ item.select_category.name }}/{{ item.id }}" title="{{ item.news_title }}">{{ item.news_title }}</a></h3>
                     <div class="event-meta">
-                        <span><i aria-hidden="true" class="fa fa-clock-o"></i>{{ item.created_at[0:16]}}</span>
+                        <span><i aria-hidden="true" class="fa fa-clock-o"></i>{{ item.created_at.strftime('%Y-%m-%d') }}</span>
                         <span><i aria-hidden="true" class="fa fa-list-alt"></i>{{ item.select_category.name }}</span>
                     </div>
                     <p>{{ item.description[0:100] }}...</p>

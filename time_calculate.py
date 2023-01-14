@@ -37,7 +37,7 @@ def messages_time(db: Session = database.get_db()):
     all_messages = db.query(models.AdminMessages).all()
     messages_time = []
     for i in all_messages:
-        message_time = datetime.now() - i.created_at_date
+        message_time = datetime.now() - i.created_at
         seconds = message_time.total_seconds()
         messages_time.append({"message_id": i.id, "m_time":time_calculate(seconds)})
     return messages_time

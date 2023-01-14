@@ -3,30 +3,36 @@ from sqlalchemy.orm import relationship
 from database import Base
 from datetime import datetime
 
+
 class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String(100), nullable=False, unique=True,index=True)
-    password = Column(String(50), nullable= False)
+    email = Column(String, nullable=False, unique=True,index=True)
+    password = Column(String, nullable= False)
     is_active = Column(Boolean, default=True)
     admin_user = Column(Boolean, default=False)
+    super_user = Column(Boolean, default=False)
     profile_picture = Column(String, nullable=True)
     education_files = Column(Text, nullable=True)
 
-    name_surname = Column(String(120), nullable=True)
-    age = Column(Integer, nullable=True)
-    city = Column(String(50), nullable=True)
-    phone = Column(String(20),nullable=True)
-    education = Column(String(50), nullable=True)
-    certificate_points = Column(String(200), nullable=True)
+    navbar_fixed = Column(String, nullable=True, default="")
+    site_mode = Column(String, nullable=True, default="")
+    sidebar_selected_color = Column(String, nullable=True, default="1")
+
+    name_surname = Column(String(150), nullable=True, default="")
+    age = Column(String, nullable=True)
+    city = Column(String(100), nullable=True, default="")
+    phone = Column(String(30),nullable=True, default="")
+    education = Column(String(150), nullable=True, default="")
+    certificate_points = Column(String, nullable=True, default="")
     about = Column(Text, nullable=True)
 
 
     select_university_id = Column(Integer, ForeignKey("education.id"), default=None)
     select_university = relationship("Education", back_populates="select_education", cascade="all, delete")
 
-    created_at = Column(String, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, onupdate=datetime.now())
 
 
@@ -67,7 +73,7 @@ class SiteNews(Base):
     select_category_id = Column(Integer, ForeignKey("newscategory.id"), default=1)
     select_category = relationship("NewsCategory", back_populates="category")
 
-    created_at = Column(String, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, onupdate=datetime.now())
 
 class NewsCategory(Base):
@@ -82,33 +88,35 @@ class SiteSettings(Base):
     __tablename__ = 'site_settings'
 
     id = Column(Integer, primary_key=True)
-    site_title = Column(String, nullable=True)
-    site_description = Column(Text, nullable=True)
-    site_logo = Column(Text, nullable=True)
-    site_slogan = Column(String, nullable=True)
-    phone = Column(String, nullable=True)
-    wp_number = Column(String, nullable=True)
-    wp_text = Column(String, nullable=True)
+    site_url = Column(Text, nullable=True, default="")
+    site_title = Column(String, nullable=True, default="")
+    site_description = Column(Text, nullable=True, default="")
+    site_logo = Column(Text, nullable=True, default="")
+    site_slogan = Column(String, nullable=True, default="")
+    phone = Column(String, nullable=True, default="")
+    wp_number = Column(String, nullable=True, default="")
+    wp_text = Column(String, nullable=True, default="")
     is_active = Column(Boolean, default=True)
-    site_about = Column(Text, nullable=True)
-    about_teams = Column(Text, nullable=True)
-    site_email = Column(String, nullable=True)
-    address = Column(String, nullable=True)
-    google_map = Column(String, nullable=True)
+    site_about = Column(Text, nullable=True, default="")
+    about_teams = Column(Text, nullable=True, default="")
+    site_email = Column(String, nullable=True, default="")
+    address = Column(String, nullable=True, default="")
+    google_map = Column(String, nullable=True, default="")
 
 
-    youtube_video = Column(String, nullable=True)
-    facebook = Column(Text, nullable=True)
-    instagram = Column(Text, nullable=True)
-    linkedin = Column(Text, nullable=True)
+    youtube_video = Column(String, nullable=True, default="")
+    facebook = Column(Text, nullable=True, default="")
+    instagram = Column(Text, nullable=True, default="")
+    linkedin = Column(Text, nullable=True, default="")
 
-    monday = Column(String, nullable=True)
-    tuesday = Column(String, nullable=True)
-    wednesday = Column(String, nullable=True)
-    thursday = Column(String, nullable=True)
-    friday = Column(String, nullable=True)
-    saturday = Column(String, nullable=True)
-    sunday = Column(String, nullable=True)
+    monday = Column(String, nullable=True, default="")
+    tuesday = Column(String, nullable=True, default="")
+    wednesday = Column(String, nullable=True, default="")
+    thursday = Column(String, nullable=True, default="")
+    friday = Column(String, nullable=True, default="")
+    saturday = Column(String, nullable=True, default="")
+    sunday = Column(String, nullable=True, default="")
+
 
 ###### messages #######
 class AdminMessages(Base):
@@ -121,8 +129,7 @@ class AdminMessages(Base):
     sender_id = Column(Integer, nullable=True)
     readed = Column(Integer, default=0)
 
-    created_at = Column(String, default=datetime.now())
-    created_at_date = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, onupdate=datetime.now())
 
 ###### staff ######
@@ -152,5 +159,5 @@ class SliderSettings(Base):
     photos = Column(String, nullable=True)
     views = Column(Integer, default=0)
 
-    created_at = Column(String, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime, onupdate=datetime.now())

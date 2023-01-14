@@ -4,6 +4,11 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+.centered-and-cropped {
+  object-fit: cover
+}
+
 :root {
   --bs-blue: #63B3ED;
   --bs-indigo: #596CFF;
@@ -1668,6 +1673,8 @@ progress {
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #e2bdca; }
+
+
 
 .table-secondary {
   --bs-table-bg: #e5e6eb;
@@ -4598,7 +4605,7 @@ textarea.form-control-lg {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: #35465c;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;

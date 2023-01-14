@@ -65,6 +65,18 @@ img {
 a {
     outline: 0 !important;
 }
+/* crop image */
+.crop {
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+}
+  
+.crop img {
+	width: 200px;
+	height: 200px;
+	margin: -75px 0 0 -100px;
+}
 
 /* - Padding/Margin */
 .no-padding {
@@ -1341,6 +1353,8 @@ a.footer-logo{
 }
 
 /* ## Page Banner */
+
+
 .pagebanner {
 	background: url("images/pagebanner-courses.jpg"); 
 	-webkit-background-size: cover;

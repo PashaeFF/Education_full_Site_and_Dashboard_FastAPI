@@ -23,50 +23,50 @@
                 <div class="card-header pb-0">
                   {% include 'flash.html' %}<br/>
                   <div class="row">
-                      <h5><b>Create News</b></h5>
+                      <h5><b>Xəbər əlavə et</b></h5>
                       {% if news_category %}
-                      <form class="row g-3" method ="POST" enctype="multipart/form-data">
-                      <div class="col-md-5">
-                        <label for="name" class="form-label"><b>*Title:</b></label>
-                        <input type="text" class="form-control is-valid" name="news_title" value="" required><br/>
-                        </div>
+                        <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/news/add/add-news"> 
                         <div class="col-md-5">
-                        <label for="name" class="form-label"><b>*Description:</b></label>
-                        <textarea class="form-control is-valid" name="description" value="" required></textarea><br/>
+                          <label for="name" class="form-label"><b>*Title:</b></label>
+                          <input type="text" class="form-control is-valid" name="news_title" required><br/>
+                          </div>
+                          <div class="col-md-5">
+                          <label for="name" class="form-label"><b>*Description:</b></label>
+                          <textarea class="form-control is-valid" name="description" required></textarea><br/>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="file" class="form-label"><b>Təsvir:</b><br/></label>
+                            <input type="file" name="file">
+                          </div>
+                          <div class="col-md-5">
+                          <select class="form-select" name="select_category_id">
+                            {% for i in news_category %}
+                              <option value="{{ i.id }}">&nbsp;&nbsp;{{ i.name }}</option>
+                            {% endfor %}
+                          </select>
+                          </br/>
+                          <button class="btn btn-primary" type="submit">Əlavə et</button>
                         </div>
-                        <div class="col-md-5">
-                          <label for="file" class="form-label"><b>Tesvir:</b><br/></label>
-                          <input type="file" name="file">
-                        </div>
-                        <div class="col-md-5">
-                        <select class="form-select" name="select_category_id">
-                          {% for i in news_category %}
-                            <option value="{{ i.id }}">&nbsp;&nbsp;{{ i.name }}</option>
-                          {% endfor %}
-                        </select>
-                        </br/>
-                        <button class="btn btn-primary" type="submit">Update</button>
-                      </div>
-                      </form>
-                    {% else %}
-                    <b>Kategoriya yoxdur. Ilk once Kategoriya elave edin...</b><br/>
-                    <br/>
-                    {% endif %}
-                    <hr>
+                        </form>
+                      {% else %}
+                        <b>Kateqoriya yoxdur. İlk oncə Kateqoriya əlavə edin...</b><br/>
+                        <br/>
+                      {% endif %}
+                      <hr>
                       
-            <h5><b>Kategoriya elave et</b></h5>
-            <form class="row g-3" method="POST">
+            <h5><b>Kateqoriya əlavə et</b></h5>
+            <form class="row g-3" method="POST" action="/admin/news/add/add-category">
               <div class="col-md-5">
-                <label for="text" class="form-label"><b>Xeber kategoriya:</b><br/></label>
-                <input type="text" class="form-control is-valid" name="category_name">
+                <label for="text" class="form-label"><b>Xəbər kateqoriya:</b><br/></label>
+                <input type="text" class="form-control is-valid" name="category_name" required>
                 </br/>
-                <button class="btn btn-primary" type="submit">Update</button>
+                <button class="btn btn-primary" type="submit">Əlavə et</button>
               </div>
             </form>
             <hr>
           
             <div class="col-lg-6 col-7">
-            <h6>Users</h6>
+            <h6>Xəbərlər</h6>
             </div>
 
                   </div>
@@ -78,9 +78,9 @@
                         
 
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / News title</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kategoriya</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Yaranma tarixi</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / Xəbər title</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kateqoriya</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dərc edilib</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -110,8 +110,7 @@
                                   <span class="text-xs font-weight-bold"><a href="/admin/news/{{ x.id }}">Edit</a> / <a href="/admin/news/{{ x.id }}/delete">Delete</a></span>
                           </td>
                         </tr>
-                   
-                        {% endfor %}
+                      {% endfor %}
  
                       </tbody>
                     </table>

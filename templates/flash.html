@@ -1,13 +1,11 @@
-{# Flashing message start here #}
-{% for message in get_flashed_messages(request) %}
-    {% if message.category == "error" %}
-        <div class="alert alert-danger" role="alert">
-            <font color ="black">{{ message.message }}</font>
-        </div>
-    {% elif message.category == "success" %}
-        <div class="alert alert-success" role="alert">
-            <font color ="black">{{ message.message }}</font>
-        </div>
-    {% endif %}
-{% endfor %}
-{# Flashing message ends here #}
+{% if flash %}
+{% if flash.0.category == "error" %}
+    <div class="alert alert-danger" role="alert">
+        {{ flash.0.message }}
+    </div>
+{% elif flash.0.category == "success" %}
+    <div class="alert alert-success" role="alert">
+        {{ flash.0.message }}
+    </div>
+{% endif %}
+{% endif %}

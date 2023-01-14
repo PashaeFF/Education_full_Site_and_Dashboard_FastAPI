@@ -15,14 +15,18 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="card mt-4">
             <div class="card-body p-3 pb-0">
-              <font color="black">Göndərən:</font> {{ message.name }}<br/>
+              {% if message.sender_id %}
+                <font color="black">Göndərən:</font> <a href="/admin/user/{{ message.sender_id }}">{{ message.name }}</a> <i class="fa fa-user" style="font-size:12px;color:green"></i><br/>
+              {% else %}
+                <font color="black">Göndərən:</font> {{ message.name }}<br/>
+              {% endif %}
               <font color="black">Email:</font> <a href="mailto:{{ message.email }}">{{ message.email }}</a><br/>
               <hr>
               <font color="black">Mesaj:</font><br/>
                {{ message.message }}...<br/>
                <hr>
                   <p align="right">
-                  <font color="black">Göndərilmə vaxtı: {{ message.created_at[0:11] }} | {{ message.created_at[11:16] }} </font><br/>
+                  <font color="black">Göndərilmə vaxtı: {{ message.created_at.strftime('%Y-%m-%d | %H:%M') }}</font><br/>
                   <a href="/admin/inbox/{{ message.id }}/delete">Mesajı sil</a><br/>
                 </p>
                   <br/>

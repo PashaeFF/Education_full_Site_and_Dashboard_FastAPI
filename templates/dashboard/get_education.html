@@ -12,27 +12,23 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       {% include 'dashboard/cards.html' %}
-
-      
       <hr class>
-      
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
-              <div class="card" style="margin: 0 25px">
-                <div class="card-header pb-0">
-                  <div class="row">
-                    <div class="col-lg-6 col-7">
-                      <h6>{{ edu.name }} - Telebeler</h6>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+          <div class="card" style="margin: 0 25px">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6>{{ edu.name }} - Telebeler</h6>
                       
 
-                    </div>
-
-                  </div>
                 </div>
-                <div class="card-body px-0 pb-2">
-                    <hr>
+
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+            <hr>
                 {% if user_in_edu %}
                   <div class="table-responsive">
                     <table class="table align-items-center mb-0">
@@ -46,25 +42,26 @@
                         </tr>
                       </thead>
                       <tbody>
-
-                        {% for x in user_in_edu %}
- 
-                        
-
+                        {% for x in response.data %}
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
                               <div>
-                                {{ x.id }}. <img src="{{ url_for('static', path='dashboard/assets/img/small-logos/logo-xd.svg') }}" class="avatar avatar-sm me-3" alt="xd">
-                              </div>
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{ x.name_surname}}</h6>
+                                {{ loop.index }}.&nbsp;&nbsp;
+                                {% if x.profile_picture %}
+                                <img src="/static/profile_pictures/{{ x.profile_picture }}" class="avatar avatar-sm me-3" alt="xd">
+                                {% else %}
+                                <img src="/static/site/images/default_profile_picture.jpeg" class="avatar avatar-sm me-3" alt="xd">
+                                {% endif %}
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                              <h6 class="mb-0 text-sm">{{ x.name_surname}}</h6> id: {{ x.id }}
                               </div>
                             </div>
                           </td>
                           <td>
                             
-                            <!-- <span class="text-xs font-weight-bold">{{x.select_university_id}}</span> -->
+                            <span class="text-xs font-weight-bold">{{x.education}}</span>
                             
                           </td>
                           <td class="align-middle text-center text-sm">
@@ -74,23 +71,22 @@
                                   <span class="text-xs font-weight-bold"><a href="/admin/user/{{ x.id }}">Infoya bax</a> / <a href="/admin/user/{{ x.id }}/edit">Duzelish et</a></span>
                           </td>
                         </tr>
-
                         {% endfor %}
                         
                       </tbody>
                     </table>
-                  </div>
-                </div>
-                {% else %}
-                <div class="d-flex flex-column justify-content-center">
-                    <h6 class="text-center text-secondary font-weight-bolder ps-2">Heleki hechkim yoxdur</h6>
+                    <div class="align-middle text-center text-sm"><hr>
+                                                                  {% if response.pagination.previous  !=  None %}
+                                                                    <a href=".{{ response.pagination.previous }}"><< Previous</a>
+                                                                  {% endif %} |
+                                                                  {% if response.pagination.next  !=  None %}
+                                                                    <a href=".{{ response.pagination.next }}">Next >></a></div>
+                                                                  {% endif %}
                   </div>
                 {% endif %}
-                <hr>
+                </div>
               </div>
             </div>
           </div>
 
       {% include 'dashboard/footer.html' %}
-
-      

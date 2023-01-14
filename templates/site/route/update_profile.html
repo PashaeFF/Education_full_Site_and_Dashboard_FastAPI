@@ -16,72 +16,78 @@
 		<!-- Body -->
             {% include 'flash.html' %}
             {# eger userin profil melumatlari varsa #}
-            {% if user %}
-            <div class="col-md-4">
-              <form method="POST" enctype="multipart/form-data">
-                  <div class="mb-4">
-                    <label for="name_surname" class="form-label">Ad və soyadınız</label>
-                    <input type="text" class="form-control" name="name_surname" value="{{ user.name_surname }}" required>
-                  </div><br/>
-                  <div class="mb-3">
-                    <label for="phone" class="form-label">Əlaqə nömrəniz</label>
-                    <input type="text" class="form-control" name="phone" value="{{ user.phone }}" required>
-                  </div>
-                  <div class="mb-3">
-                      <label for="age" class="form-label">Doğum tarixiniz</label>
-                      <input type="date" class="form-control" name="age" value="{{ user.age }}" aria-describedby="inputGroupPrepend">
-                  </div><br/>
-                  <div class="mb-3">
-                    <label for="city" class="form-label">Doğum yeriniz</label>
-                    <input type="text" class="form-control" name="city" value="{{ user.city }}" required>
-                  </div>
-                  <div class="mb-3"><br/>
-                      <label for="education" class="form-label"><br/><b>*Tehsiliniz:</b></label>
-                      <select class="form-select" name="education" aria-label="Default select example">
-                          <option value="Orta">Orta</option>
-                          <option value="Ali">Ali</option>
-                        </select>
-                  </div><br/>
-                  <div class="mb-3">
-                    <label for="certificate_points" class="form-label">Attestat qiymətləri vəya universitet</label>
-                    <input type="text" class="form-control" name="certificate_points" value="{{ user.certificate_points }}" required>
-                  </div>
-                  {% if edu %}
-                  <div class="mb-3"><br/>
-                      <label for="select_university_id"><br/><b>*Sechdiyiniz tehsil novu/Universitet:</b></label>
-                      <select class="form-select" name="select_university_id">
-                          {% for i in edu %}
-                            {% if user.select_university_id == i.id %}
-                              <option value="{{i.id}}" selected>{{ i.name }} - {{ i.education_type }}</option>
-                            {% else %}
-                              <option value="{{i.id}}">{{ i.name }} - {{ i.education_type }}</option>
-                            {% endif %}
-                          {% endfor %}
-                        </select>
-                  </div>
-                  {% endif %}<br/>
-                  {% if user.profile_picture %}
-                      <div class="col-md-5">
-                          <label for="name" class="form-label"><b>Profil fotosu:</b></label><br/>
-                          <img src="/static/profile_pictures/{{ user.profile_picture }}" width="100%"><br/>
+            {% if check_id %}
+              {% if check_id.name_surname %}
+                <div class="col-md-4">
+                  <form method="POST" enctype="multipart/form-data">
+                      <div class="mb-4">
+                        <label for="name_surname" class="form-label">Ad və soyadınız</label>
+                        <input type="text" class="form-control" name="name_surname" value="{{ check_id.name_surname }}" required>
+                      </div><br/>
+                      <div class="mb-3">
+                        <label for="phone" class="form-label">Əlaqə nömrəniz</label>
+                        <input type="text" class="form-control" name="phone" value="{{ check_id.phone }}" required>
                       </div>
-                      <div class="col-md-5">
-                          <label for="file" class="form-label"><b>Fotonu dəyiş:</b><br/></label>
-                          <input type="file" name="file">
-                        </div>
-                  {% else %}
-                      <div class="col-md-5">
-                          <label for="file" class="form-label"><b>Foto elave et:</b><br/></label>
-                          <input type="file" name="file">
+                      <div class="mb-3">
+                          <label for="age" class="form-label">Doğum tarixiniz</label>
+                          <input type="date" class="form-control" name="age" value="{{ check_id.age }}" aria-describedby="inputGroupPrepend" required>
+                      </div><br/>
+                      <div class="mb-3">
+                        <label for="city" class="form-label">Doğum yeriniz</label>
+                        <input type="text" class="form-control" name="city" value="{{ check_id.city }}" required>
                       </div>
-                  {% endif %}
-                  <div class="col-md-12">
-                      <br/>
-                    <hr>
-                    <button class="btn btn-primary" type="submit">Qeydiyyatı tamamla</button>
+                      <div class="mb-3"><br/>
+                          <label for="education" class="form-label"><br/><b>*Tehsiliniz:</b></label>
+                          <select class="form-select" name="education" aria-label="Default select example">
+                              <option value="Orta">Orta</option>
+                              <option value="Ali">Ali</option>
+                            </select>
+                      </div><br/>
+                      <div class="mb-3">
+                        <label for="certificate_points" class="form-label">Attestat qiymətləri vəya universitet</label>
+                        <input type="text" class="form-control" name="certificate_points" value="{{ check_id.certificate_points }}" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="about" class="form-label">Haqqında</label>
+                        <input type="text" class="form-control" name="about" value="{{ check_id.about }}" required>
+                      </div>
+                      {% if edu %}
+                      <div class="mb-3"><br/>
+                          <label for="select_university_id"><br/><b>*Sechdiyiniz tehsil novu/Universitet:</b></label>
+                          <select class="form-select" name="select_university_id">
+                              {% for i in edu %}
+                                {% if check_id.select_university_id == i.id %}
+                                  <option value="{{i.id}}" selected>{{ i.name }} - {{ i.education_type }}</option>
+                                {% else %}
+                                  <option value="{{i.id}}">{{ i.name }} - {{ i.education_type }}</option>
+                                {% endif %}
+                              {% endfor %}
+                            </select>
+                      </div>
+                      {% endif %}<br/>
+                      {% if check_id.profile_picture %}
+                          <div class="col-md-5">
+                              <label for="name" class="form-label"><b>Profil fotosu:</b></label><br/>
+                              <img src="/static/profile_pictures/{{ check_id.profile_picture }}" width="100%"><br/>
+                          </div>
+                          <div class="col-md-5">
+                              <label for="file" class="form-label"><b>Fotonu dəyiş:</b><br/></label>
+                              <input type="file" name="file">
+                            </div>
+                      {% else %}
+                          <div class="col-md-5">
+                              <label for="file" class="form-label"><b>Foto elave et:</b><br/></label>
+                              <input type="file" name="file">
+                          </div>
+                      {% endif %}
+                      <div class="col-md-12">
+                          <br/>
+                        <hr>
+                        <button class="btn btn-primary" type="submit">Yadda saxla</button>
+                      </div>
+                    </form>
                   </div>
-                </form>
-              </div>
+              
             {# eger userin profil melumatlari yoxdusa / yeni qeydiyyatdisa #}
             {% else %}
             <div class="col-md-4">
@@ -96,7 +102,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="age" class="form-label">Doğum tarixiniz</label>
-                    <input type="date" class="form-control" name="age" aria-describedby="inputGroupPrepend">
+                    <input type="date" class="form-control" name="age" aria-describedby="inputGroupPrepend" required>
                 </div><br/>
                 <div class="mb-3">
                   <label for="city" class="form-label">Doğum yeriniz</label>
@@ -113,6 +119,10 @@
                   <label for="certificate_points" class="form-label">Attestat qiymətləri vəya universitet</label>
                   <input type="text" class="form-control" name="certificate_points" required>
                 </div>
+                <div class="mb-3">
+                  <label for="about" class="form-label">Haqqında</label>
+                  <input type="text" class="form-control" name="about" required>
+                </div>
                 {% if edu %}
                 <div class="mb-3"><br/>
                     <label for="select_university_id"><br/><b>*Sechdiyiniz tehsil novu/Universitet:</b></label>
@@ -122,7 +132,8 @@
                         {% endfor %}
                       </select>
                 </div>
-                {% endif %}<br/>
+                {% endif %}
+                <br/>
                   <div class="col-md-5">
                       <label for="file" class="form-label"><b>Profil fotosu:</b><br/></label>
                       <input type="file" name="file">
@@ -131,10 +142,11 @@
                 <div class="col-md-12">
                     <br/>
                   <hr>
-                  <button class="btn btn-primary" type="submit">Qeydiyyatı tamamla</button>
+                  <button class="btn btn-primary" type="submit">Yadda Saxla</button>
                 </div>
               </form>
             </div>
+            {% endif %}
             {% endif %}
           </div>
         <!-- end Body --> 

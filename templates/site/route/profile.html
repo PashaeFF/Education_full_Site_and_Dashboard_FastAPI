@@ -1,0 +1,97 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+
+<div class="page-content page-container" id="page-content">
+
+<div class="col-xl-6 col-md-16">
+    <div class="card user-card-full">
+        <div class="row m-l-0 m-r-0">
+            <div class="col bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+                    <div class="m-b-25">
+                        {% if profile.profile_picture %}
+                            <img src="/static/profile_pictures/{{ profile.profile_picture }}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"  style="width: 240px; height: 240px;" alt="{{ profile.name_surname }}">
+                        {% else %}
+                            <img src="/static/site/images/default_profile_picture.jpeg" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"  style="width: 240px; height: 240px;" alt="{{ profile.name_surname }}">
+                        {% endif %}
+                    </div>
+                    <h3 class="f-w-600" style="color:rgb(249, 249, 249)">{{ profile.name_surname }}</h3>
+                    <a href="/update_profile/{{ profile.id }}" style="font-size:14px;color:rgb(96, 200, 232)"><i class='fa fa-edit' style="font-size:24px;color:rgb(96, 200, 232)"></i> Profili Düzəlt</a>
+                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600"></h6>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Şəhər</p>
+                            <h6 class="text-muted f-w-400">{{ profile.city }}</h6>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Phone</p>
+                            <h6 class="text-muted f-w-400">{{ profile.phone }}</h6>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Doğum tarixi</p>
+                            <h6 class="text-muted f-w-400">{{ profile.age }}</h6>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Email</p>
+                            <h6 class="text-muted f-w-400">{{ profile.email }}</h6>
+                        </div>
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Təhsili</p>
+                            <h6 class="text-muted f-w-400">{{ profile.education }}</h6>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Attestat qiymətləri vəya Universitet</p>
+                            <h6 class="text-muted f-w-400">{{ profile.certificate_points }}</h6>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Haqqında</p>
+                            <h6 class="text-muted f-w-400">{{ profile.about }}</h6>
+                        </div>
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Qeydiyyat tarixi</p>
+                            <h6 class="text-muted f-w-400">{{ profile.created_at.strftime('%Y-%m-%d') }}</h6>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Status</p>
+                            {% if profile.is_active == True %}
+                                <i class="fa fa-check" style="font-size:24px;color:green" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="fa fa-ban" style="font-size:24px;color:red" aria-hidden="true"></i>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="m-b-10 f-w-600">Seçdiyi Təhsil</p>
+                            <h6 class="text-muted f-w-400">{% for category in categories if profile.select_university.id == category.id %}{{ category.name }}{% endfor %} - {{ profile.select_university.name }}</h6>
+                        </div>
+                    </div>
+                    <ul class="social-link list-unstyled m-t-40 m-b-10">
+                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+
+<!-- Footer Main -->
+{% include 'site/route/footer.html' %}
+	
+</body>
+</html>

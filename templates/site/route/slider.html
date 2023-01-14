@@ -12,14 +12,14 @@
 							<div class="col-md-6 col-sm-8 col-xs-8 ow-pull-right no-padding">
 								<h4 data-animation="animated bounceInLeft">{{ slider.0.title }}</h4>
 								<p data-animation="animated bounceInRight">{{ slider.0.description[0:50] }}....</p>
-								<a href="/slider/{{ slider.0.id }}" title="Learn More" data-animation="animated zoomInUp">Etrafli</a>
+								<a href="/slider/{{ slider.0.id }}" title="Learn More" data-animation="animated zoomInUp"><b>Ətraflı</b></a>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				{% for slide in slider %}
-					{% if (slide.id != 1) %}
+					{% if loop.index != 1%}
 						<div class="item">
 							<img src="/static/site/images/slider/{{ slide.photos }}" alt="photoslider2" width="1920" height="801"/>
 							<div class="carousel-caption">
@@ -27,7 +27,7 @@
 									<div class="col-md-6 col-sm-8 col-xs-8 ow-pull-left no-padding">
 										<h4 data-animation="animated bounceInLeft">{{ slide.title }}</h4>
 										<p data-animation="animated bounceInRight">{{ slide.description[0:100] }}...</p>
-										<a href="/slider/{{ slide.id }}" title="Learn More" data-animation="animated zoomInUp">Ətraflı</a>
+										<a href="/slider/{{ slide.id }}" title="Learn More" data-animation="animated zoomInUp"><b>Ətraflı</b></a>
 									</div>
 								</div>
 							</div>

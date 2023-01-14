@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, EmailStr, Field
 from fastapi_pagination.bases import RawParams, AbstractParams
 
@@ -10,6 +10,10 @@ class Education(BaseModel):
 
 class CreateUser(BaseModel):
     email: EmailStr
+    password: str
+
+class User(BaseModel):
+    email: str
     password: str
 
 class Users(BaseModel):
@@ -24,6 +28,14 @@ class Users(BaseModel):
 
     class Config:
         orm_mode = True
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    email: Optional[str] = None
         
 from datetime import datetime
 class News(BaseModel):

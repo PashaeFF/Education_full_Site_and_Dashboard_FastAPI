@@ -122,7 +122,11 @@
                             
                                 <div class="form-check form-switch ps-0">
                                     <input class="form-check-input ms-auto" type="checkbox"  name="is_active" {{"checked" if site.is_active == True else ""}}>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Sayti Deaktiv et</label>
+                                    {% if site.is_active == True %}
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Sayti Deaktiv et</label>
+                                    {% else %}
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Sayti Aktiv et</label>
+                                    {% endif %}
                                 </div>
                            
                             <br/>

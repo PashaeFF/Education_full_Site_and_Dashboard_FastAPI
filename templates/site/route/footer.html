@@ -4,8 +4,9 @@
         <div class="row">
             <div class="col-md-12 col-sm-6">
                 <aside class="ftr-widget about_widget">
-                    {% if site_settings %}
-                        <a class="footer-logo" href="/" title="Logo"><img alt="logo" src="{{ url_for('static', path='site/images/logo.png') }}">{{ site_settings.site_logo }}<span>{{ site_settings.site_slogan }}</span></a><br/>
+                    {% if site_settings.site_logo and  site_settings.site_slogan %}
+                        <a class="footer-logo" href="/" title="Logo"><img alt="logo" src="{{ url_for('static', path='site/images/logo.png') }}">{{ site_settings.site_logo }}<span>{{ site_settings.site_slogan }}</span></a>
+                    {% endif %}<br/>
                     <ul>
                     {% if site_settings.facebook %}
                         <li><a href="{{ site_settings.facebook }}" title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -17,7 +18,7 @@
                         <li><a href="{{ site_settings.linkedin }}" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
                     {% endif %}
                     </ul>
-                    {% endif %}
+                    
                    </aside>
             </div>
         <!-- Footer Bottom -->
@@ -47,6 +48,7 @@
 <script src="{{ url_for('static', path='site/libraries/lib.js') }}"></script><!-- Bootstrap JS File v3.3.5 -->
 <!-- Library - Google Map API -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp') }}"></script>
+
 
 <!-- Library - Theme JS -->
 <script src="{{ url_for('static', path='site/js/functions.js') }}"></script>

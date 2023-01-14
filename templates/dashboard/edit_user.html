@@ -25,61 +25,63 @@
                         <form class="row g-3" method ="POST">
                             <div class="col-md-5">
                                 <label for="email" class="form-label"><b>*Emaili:</b></label>
-                                <input type="text" class="form-control is-valid" name="email" value="{{ user.email }}" required>
+                                <input type="text" class="form-control is-valid" name="email" value="{{ change_user.email }}" required>
                                 </div>
                             <div class="col-md-5">
                             <label for="name_surname" class="form-label"><b>*Ad ve Soyad:</b></label>
-                            <input type="text" class="form-control is-valid" name="name_surname" value="{{ user.name_surname }}" required>
+                            <input type="text" class="form-control is-valid" name="name_surname" value="{{ change_user.name_surname }}" required>
                             </div>
                             <div class="col-md-5">
                                 <label for="phone" class="form-label"><br/><b>*Phone:</b></label>
-                                <input type="text" class="form-control is-valid" name="phone" value="{{ user.phone }}" required>
+                                <input type="text" class="form-control is-valid" name="phone" value="{{ change_user.phone }}" required>
                             </div>
                             <div class="col-md-5">
                                 <label for="age" class="form-label"><br/><b>*Dogum tarixi:</b></label>
-                                <input type="text" class="form-control is-valid" name="age" value="{{ user.age }}" required>
+                                <input type="text" class="form-control is-valid" name="age" value="{{ change_user.age }}" required>
                             </div>
 
                             <div class="col-md-5">
                                 <label for="city" class="form-label"><br/><b>*Dogum yeri:</b></label>
-                                <input type="text" class="form-control is-valid" name="city" value="{{ user.city }}" required>
+                                <input type="text" class="form-control is-valid" name="city" value="{{ change_user.city }}" required>
                             </div>
                             <div class="col-md-5">
-                                <label for="education class="form-label"><br/><b>*Tehsili:</b></label>
-                                <input type="text" class="form-control is-valid" name="education" value="{{ user.education }}" required>
+                                <label for="education" class="form-label"><br/><b>*Tehsili:</b></label>
+                                <input type="text" class="form-control is-valid" name="education" value="{{ change_user.education }}" required>
                             </div>
                             <div class="col-md-5">
                                 <label for="certificate_points" class="form-label"><br/><b>*Attestat qiymetleri veya bitirdiyi universitet:</b></label>
-                                <input type="text" class="form-control is-valid" name="certificate_points" value="{{ user.certificate_points }}" required>
+                                <input type="text" class="form-control is-valid" name="certificate_points" value="{{ change_user.certificate_points }}" required>
                             </div>
                             <div class="col-md-5">
                                 <label for="about"><br/><b>Haqqinda:</b></label>
-                                <textarea name="about" class="form-label" rows="4" cols="50">{{ user.about }}</textarea>
+                                <textarea name="about" class="form-label" rows="4" cols="50">{{ change_user.about }}</textarea>
                             </div>
                             <div class="col-md-5">
                                 <label for="created_at"><br/><b>Qeydiyyat tarixi:</b></label>
-                                <textarea name="created_at" class="form-label" rows="4" cols="50">{{ user.created_at }}</textarea>
+                                <textarea name="created_at" class="form-label" rows="4" cols="50">{{ change_user.created_at }}</textarea>
                             </div>
                             <div class="col-12">
                                 <label for="select_university_id"><br/><b>*Sechdiyi:</b></label>
                                 
                                 <select name="select_university_id" id="plan">
-                                    {% for i in education %}
-                                        {% if user.select_university_id == i.id %}
-                                            <option value="{{ i.id }}" selected>{{ i.name }}</option>
+                                    {% if education %}
+                                    {% for edu in education %}
+                                        {% if change_user.select_university_id == edu.id %}
+                                            <option value="{{ edu.id }}" selected>{{ edu.name }}</option>
                                         {% else %}
-                                            <option value="{{ i.id }}" >{{ i.name }}</option>
+                                            <option value="{{ edu.id }}" >{{ edu.name }}</option>
                                         {% endif %}
                                     {% endfor %}
+                                    {% endif %}
                                 </select>
                                 
                             </div>
                             <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" name="admin_user" {{"checked" if user.admin_user == True else ""}}>
+                                <input class="form-check-input ms-auto" type="checkbox" name="admin_user" {{"checked" if change_user.admin_user == True else ""}}>
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="admin_user">Admin user</label>
                             </div>
                             <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" name="is_active" {{"checked" if user.is_active == True else ""}}>
+                                <input class="form-check-input ms-auto" type="checkbox" name="is_active" {{"checked" if change_user.is_active == True else ""}}>
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Useri Aktiv/Deaktiv et</label>
                             </div>
                             <br/>

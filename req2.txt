@@ -1,0 +1,8 @@
+npm audit fix --force
+npm install
+npm audit fix --force
+npm install socket.io
+npm audit fix --force
+npm install express@4
+npm audit fix --force
+python3 -m pip install git+http://github.com/kivy/pyobjus/

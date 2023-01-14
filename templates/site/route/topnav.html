@@ -3,17 +3,34 @@
 		<!-- Top Header -->
 		<div class="top-header container-fluid no-padding">
 			<div class="container">
-				{% if site_settings %}
+				
 				<div class="topheader-left">
-					<a href="https://wa.me/{{ site_settings.wp_number }}?text={{ site_settings.wp_text }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>Whatsapp mesaj</a>
-					<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>Bizə zəng</a>
-					<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}"><i class="fa fa-envelope-o" aria-hidden="true"></i>Email: {{ site_settings.site_email }}</a>
+					{% if site_settings.wp_number and site_settings.wp_text %}
+						<a href="https://wa.me/{{ site_settings.wp_number }}?text={{ site_settings.wp_text }}" title="{{ site_settings.wp_number }}"><i class="fa fa-mobile" aria-hidden="true"></i>Whatsapp mesaj</a>
+					{% endif %}
+					{% if site_settings.phone %}
+						<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>Bizə zəng</a>
+					{% endif %}
+					{% if site_settings.site_email %}
+						<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}"><i class="fa fa-envelope-o" aria-hidden="true"></i>Email: {{ site_settings.site_email }}</a>
+					{% endif %}
 				</div>
-				{% endif %}
+				
+				
+				{% if current_user %}
+				<div class="topheader-right">
+					{% if user.admin_user == True or user.super_user == True %}
+					<a href="/admin" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Idare paneli</a>
+					{% endif %}
+					<a href="/profile/{{ user.id }}" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Profil</a>
+					<a href="/logout" title="Register">Chixish</a>
+				</div>
+				{% else %}
 				<div class="topheader-right">
 					<a href="/login" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Daxil ol</a>
 					<a href="/registration" title="Register">Qeydiyyat</a>
 				</div>
+				{% endif %}
 			</div>
 		</div><!-- Top Header /- -->
 		
@@ -32,7 +49,7 @@
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-								{% if site_settings %}
+								{% if site_settings.site_logo %}
 								<a title="Logo" href="/" class="navbar-brand"><img src="{{ url_for('static', path='site/images/logo.png') }}" alt="logo"/>{{ site_settings.site_logo }}<span>{{ site_settings.site_slogan }}</span></a>
 								<a href="/" class="mobile-logo" title="Logo"><h3>{{ site_settings.site_logo }}</h3></a>
 								{% endif %}

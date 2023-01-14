@@ -17,10 +17,48 @@
             <div class="card-header p-3">
               <h5 class="mb-0">Rəhbərlik mesajları ({{ unread | length }} / {{ m_data | length }})</h5>
               <hr>
-            </div>
+              {% include 'flash.html' %}
+              {% if m_data | length > 0 %}
+                {% if user.sidebar_selected_color == "1" %}
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                {% elif user.sidebar_selected_color == "2" %}
+                  <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                {% elif user.sidebar_selected_color == "3" %}
+                  <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                {% elif user.sidebar_selected_color == "4" %}
+                  <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                {% elif user.sidebar_selected_color == "5" %}
+                  <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                {% elif user.sidebar_selected_color == "6" %}
+                  <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                {% endif %}
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Bütün Admin mesajlarını silmək</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Bütün Admin mesajlarını silməyə əminsiniz??
+                      </div>
+                      <div class="modal-footer">
+                        <a href="/admin/inbox/delete_all"><button type="button" class="btn bg-gradient-danger">Hamısını Sil</button></a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Xeyr</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+            Mesaj yoxdur...
+            {% endif %}
+
+              
+              <!-- end modal -->
             
             <div class="card-body p-3 pb-0">
-              {% include 'flash.html' %}
               {% for message in messages.data %}
                 {% if message.readed == 0 %}
                   <b><i class="fa fa-envelope" aria-hidden="true"></i> <a href="/admin/inbox/{{ message.id }}">{{ message.name }}</a></b><br/>
@@ -28,8 +66,8 @@
                   {% for time in messages_time %}
                   {% if time.message_id == message.id %}
                   <font color="black"><i class="fa fa-clock me-1"></i> {{ time.m_time }} </font>
-                  {% endif %}
-                  {% endfor %}
+                {% endif %}
+              {% endfor %}
                 {% else %}
                 <a href="/admin/inbox/{{ message.id }}">{{ message.name }}</a><br/>
                   {{ message.message[0:60] }}...<br/>
