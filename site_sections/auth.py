@@ -34,7 +34,6 @@ async def login_page(request: Request):
         return templates.TemplateResponse("site/route/login.html", {"request":request, "site_settings":check_site_user['site_settings'],
                                             "current_user":check_site_user['current_user'], "page_title":page_title, "categories":variables['categories'],
                                             "news_category":variables['news_category'], "user":check_site_user['user'], "flash":variables['_flash_message']})
-    
 
 
 @authorization.post("/login")
@@ -87,6 +86,7 @@ async def post_registration(request: Request, response: Response, db:Session = D
     email = form.get("email")
     password = form.get("password")
     name_surname = form.get("name_surname")
+    check_email = db.query(models.User).filter_by(email=email).first()
     request.session["flash_messsage"] = []
     if "@" not in email:
         request.session["flash_messsage"].append({"message": "Emaili düzgün qeyd edin", "category": "error"})
@@ -100,24 +100,23 @@ async def post_registration(request: Request, response: Response, db:Session = D
         request.session["flash_messsage"].append({"message": "Ad əlavə etməmisiniz", "category": "error"})
         request = RedirectResponse(url="/registration",status_code=HTTP_303_SEE_OTHER)
         return request
-    user = models.User(email=email, password=Hasher.get_hash_password(password), name_surname=name_surname)
-    try:
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-        change = db.query(models.User).filter_by(email=email).first()
-        data = {
-                "sub": email,
-                "id": user.id,
-            }
-        request.session["flash_messsage"].append({"message": "Daxil oldunuz", "category": "success"})
-        response = RedirectResponse(url=f"/update_profile/{change.id}", status_code=HTTP_303_SEE_OTHER)
-        response.set_cookie(key="access_token", value=f"Bearer {create_access_token(data=data)}", httponly=True)
-        return response
-    except IntegrityError:
+    if check_email:
         request.session["flash_messsage"].append({"message": "Email mövcuddur", "category": "error"})
         request = RedirectResponse(url="/registration",status_code=HTTP_303_SEE_OTHER)
         return request
+    user = models.User(email=email, password=Hasher.get_hash_password(password), name_surname=name_surname)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    change = db.query(models.User).filter_by(email=email).first()
+    data = {
+            "sub": email,
+            "id": user.id,
+        }
+    request.session["flash_messsage"].append({"message": "Daxil oldunuz", "category": "success"})
+    response = RedirectResponse(url=f"/update_profile/{change.id}", status_code=HTTP_303_SEE_OTHER)
+    response.set_cookie(key="access_token", value=f"Bearer {create_access_token(data=data)}", httponly=True)
+    return response
 
 
 
