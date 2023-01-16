@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, Depends, Response
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 from sqlalchemy.orm import Session
-import models, database
+import configurations.models as models, configurations.database as database
 from starlette.status import HTTP_303_SEE_OTHER, HTTP_201_CREATED
 from utils.helper import templates
 from utils.hashing import Hasher

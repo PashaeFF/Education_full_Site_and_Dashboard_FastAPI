@@ -25,7 +25,7 @@
                   <div class="row">
                       <h5><b>Xəbər əlavə et</b></h5>
                       {% if news_category %}
-                        <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/news/add/add-news"> 
+                        <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/add_news"> 
                         <div class="col-md-5">
                           <label for="name" class="form-label"><b>*Title:</b></label>
                           <input type="text" class="form-control is-valid" name="news_title" required><br/>
@@ -55,7 +55,7 @@
                       <hr>
                       
             <h5><b>Kateqoriya əlavə et</b></h5>
-            <form class="row g-3" method="POST" action="/admin/news/add/add-category">
+            <form class="row g-3" method="POST" action="/admin/add_news_category">
               <div class="col-md-5">
                 <label for="text" class="form-label"><b>Xəbər kateqoriya:</b><br/></label>
                 <input type="text" class="form-control is-valid" name="category_name" required>

@@ -1,12 +1,9 @@
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
-from sqlalchemy import and_
-import models, database, time_calculate
+import configurations.models as models, configurations.database as database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
-from utils.helper import templates
-from configurations.token import verify_token
-
+from utils.helper import templates, check_user, default_variables
 
 settings_panel = APIRouter(
     tags=['Dashboard / Settings'],
@@ -14,24 +11,12 @@ settings_panel = APIRouter(
 
 @settings_panel.get("/settings")
 def site_settings(request: Request, db:Session = Depends(database.get_db)):
-    ######## user_check #########
-    access_token = request.cookies.get("access_token")
-    current_user = verify_token(access_token)
-    user = db.query(models.User).filter_by(id=current_user).first()
-    #######     end    ##########
-    if user:
-        if user.admin_user == True or user.super_user == True:
-            unread = db.query(models.AdminMessages).filter_by(readed=0).all()
-            site = db.query(models.SiteSettings).first()
-            #mesajin gelme zamanini hesablayir
-            messages_time = time_calculate.messages_time()
-            ########## flash message
-            _flash_message = ""
-            if request.session.get("flash_messsage"):
-                _flash_message = request.session.get("flash_messsage")
-                request.session.pop("flash_messsage") if "flash_messsage" in request.session else []
-            return templates.TemplateResponse("dashboard/site_settings.html",{"request":request, "unread":unread, "site":site, "messages_time": messages_time
-                                                                            , "user":user, "flash":_flash_message})
+    check = check_user(request)
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
+            variables = default_variables(request)
+            return templates.TemplateResponse("dashboard/site_settings.html",{"request":request, "unread":variables['unread'], "site":variables['site'],
+                                                "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -40,13 +25,9 @@ def site_settings(request: Request, db:Session = Depends(database.get_db)):
 
 @settings_panel.post("/settings")
 async def post_site_settings(request: Request, db:Session = Depends(database.get_db)):
-    ######## user_check #########
-    access_token = request.cookies.get("access_token")
-    current_user = verify_token(access_token)
-    user = db.query(models.User).filter_by(id=current_user).first()
-    #######     end    ##########
-    if user:
-        if user.admin_user == True or user.super_user == True:
+    check = check_user(request)
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
             site = db.query(models.SiteSettings).filter_by(id=1)
             form = await request.form()
             site_title = form.get("site_title")

@@ -15,9 +15,7 @@ passlib
 bcrypt
 requests
 psycopg2-binary
-plyer
 antispam
 pipenv
 fastapi_sqlalchemy
-pyobjus
-git+http://github.com/kivy/pyobjus/
+python-dotenv

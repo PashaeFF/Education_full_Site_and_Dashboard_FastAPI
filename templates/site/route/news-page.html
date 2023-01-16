@@ -5,8 +5,8 @@
 	<div class="container-fluid no-padding pagebanner">
 		<div class="container">
 			<div class="pagebanner-content">
-				{% if category.name %}
-				<h3>{{ category.name }} - xəbərlər</h3>
+				{% if news_category.name %}
+				<h3>{{ news_category.name }} - xəbərlər</h3>
 				{% else %}
 				<h3>{{ page_title }}</h3>
 				{% endif %}
@@ -47,14 +47,14 @@
 		</div>
 		{% endif %}
 		</div>
-		{% if category.name %}
+		{% if news_category.name %}
 		<nav class="ow-pagination">
 			<ul class="pagination">
 		{% if response.pagination.previous  !=  None %}
-			<li><a href="/news/{{ category.name }}{{ response.pagination.previous }}"><< Previous</a></li>
+			<li><a href="/news/{{ news_category.name }}{{ response.pagination.previous }}"><< Previous</a></li>
 		{% endif %}
 		{% if response.pagination.next  !=  None %}
-			<li><a href="/news/{{ category.name }}{{ response.pagination.next }}">Next >></a></li>
+			<li><a href="/news/{{ news_category.name }}{{ response.pagination.next }}">Next >></a></li>
 		{% endif %}
 		</ul>
 		</nav>
@@ -66,7 +66,7 @@
 			<li><a href="/news{{ response.pagination.previous }}"><< Previous</a></li>
 		{% endif %}
 		{% if response.pagination.next  !=  None %}
-			<li><a href="/news{{ category.name }}{{ response.pagination.next }}">Next >></a></li>
+			<li><a href="/news{{ news_category.name }}{{ response.pagination.next }}">Next >></a></li>
 		{% endif %}
 		</ul>
 		</nav>

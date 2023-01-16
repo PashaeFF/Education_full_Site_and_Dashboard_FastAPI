@@ -77,10 +77,10 @@
                     </table>
                     <div class="align-middle text-center text-sm"><hr>
                                                                   {% if response.pagination.previous  !=  None %}
-                                                                    <a href=".{{ response.pagination.previous }}"><< Previous</a>
+                                                                    <a href="/admin/educations/{{ edu_id }}{{ response.pagination.previous }}"><< Previous</a>
                                                                   {% endif %} |
                                                                   {% if response.pagination.next  !=  None %}
-                                                                    <a href=".{{ response.pagination.next }}">Next >></a></div>
+                                                                    <a href="/admin/educations/{{ edu_id }}{{ response.pagination.next }}">Next >></a></div>
                                                                   {% endif %}
                   </div>
                 {% endif %}

@@ -138,11 +138,11 @@
 		<div class="section-padding"></div>
 	</div><!-- WhyChooseUs Section /- -->
 	<!-- Team Section -->
-	{% if staff and site_settings.about_teams %}
 	<div class="container-fluid no-padding team-section">
 		<div class="section-padding"></div>
 		<div class="container">
 			<div class="row">
+				{% if site_settings.about_teams %}
 				<div class="col-md-6 col-sm-12 team-content-block">
 					<div class="section-header">
 						<h3>Bizim <span> Komanda</span></h3>
@@ -153,6 +153,7 @@
 					<a class="left carousel-control" href="#team-carousel" role="button" data-slide="prev">Prev</a>
 					<a class="right carousel-control" href="#team-carousel" role="button" data-slide="next">Next</a>
 				</div>
+				{% endif %}
 				<div class="col-md-6 col-sm-12 team-gallary">
 					<div id="team-carousel" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner" role="listbox">
@@ -229,7 +230,7 @@
 		</div>
 		<div class="section-padding"></div>
 	</div>
-	{% endif %}<!-- Team Section /- -->	
+	<!-- Team Section /- -->	
 	<!-- Footer Main -->
 		<!-- Footer Main -->
 		{% include 'site/route/footer.html' %}

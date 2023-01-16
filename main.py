@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from routers import admin, site, register, user, install
-import models, database
-from fastapi_sqlalchemy import DBSessionMiddleware, db
+from routers import admin, site, install
+import configurations.models as models, configurations.database as database
+from fastapi_sqlalchemy import DBSessionMiddleware
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import RedirectResponse
@@ -28,6 +28,4 @@ async def custom_404_handler(_, __):
 
 app.include_router(install.installer)
 app.include_router(admin.dashboard)
-app.include_router(site.main)
-app.include_router(register.register)
-app.include_router(user.user)
+app.include_router(site.site_main)

@@ -14,7 +14,7 @@
 		<div class="section-padding"></div>			
 		<div class="event-block">
 		<!-- Body -->
-		{% if user_token %}
+		{% if current_user %}
 			Qeydiyyatlisiniz...
 		{% else %}
             {% include 'flash.html' %}

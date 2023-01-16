@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
-from sqlalchemy import and_
-import models, database, paginate, time_calculate
+import configurations.models as models, configurations.database as database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
-from routers import admin
-from utils.helper import templates
-from configurations.token import verify_token
+from utils.helper import templates, check_user, default_variables
+from utils import paginate
 
 users_panel = APIRouter(
     tags=['Dashboard / Users'],
@@ -14,49 +12,33 @@ users_panel = APIRouter(
 
 ########### Users ###########
 @users_panel.get("/admin-users")
-async def index(request: Request, db: Session = Depends(database.get_db), page: int = 1, page_size: int = 10):
-    ######## user_check #########
-    access_token = request.cookies.get("access_token")
-    current_user = verify_token(access_token)
-    user = db.query(models.User).filter_by(id=current_user).first()
-    #######     end    ##########
-    if user:
-        if user.admin_user == True or user.super_user == True:
-            unread = db.query(models.AdminMessages).filter_by(readed=0).all()
-            user_admin = db.query(models.User).filter_by(admin_user = True).all()
-            users = db.query(models.User).all()
-            counts = admin.return_count()
-            data_length = len(user_admin)
-            response = paginate.paginate(data=user_admin, data_length=data_length,page=page, page_size=page_size)
-            messages_time = time_calculate.messages_time()
-            return templates.TemplateResponse("dashboard/admin_users.html", {"request": request, "user_admin":response, "count":len(users), 
-                                                "messages_time":messages_time, "unread":unread, "counts":counts, "user":user} )
+async def index(request: Request, page: int = 1, page_size: int = 10):
+    check = check_user(request)
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
+            variables = default_variables(request)
+            response = paginate.paginate(data=variables['user_admin'], data_length=len(variables['user_admin']),page=page, page_size=page_size)
+            return templates.TemplateResponse("dashboard/admin_users.html", {"request": request, "user_admin":response, "count":len(variables['users']), 
+                                                "messages_time":variables['messages_time'], "unread":variables['unread'], "counts":variables['counts'], 
+                                                "user":check['user']} )
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
-        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/admin/login", status_code=HTTP_303_SEE_OTHER)
 
 
 @users_panel.get("/user/{id}")
 def user_profile(id: int, request: Request, db: Session = Depends(database.get_db)):
     ######## user_check #########
-    access_token = request.cookies.get("access_token")
-    current_user = verify_token(access_token)
-    user = db.query(models.User).filter_by(id=current_user).first()
-    #######     end    ##########
+    check = check_user(request)
     change_user = db.query(models.User).filter_by(id=id).first()
-    if user:
-        if user.admin_user == True or user.super_user == True:
+    request.session["flash_messsage"] = []
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
             if change_user:
-                unread = db.query(models.AdminMessages).filter_by(readed=0).all()
-                messages_time = time_calculate.messages_time()
-                ########## flash message
-                _flash_message = ""
-                if request.session.get("flash_messsage"):
-                    _flash_message = request.session.get("flash_messsage")
-                    request.session.pop("flash_messsage") if "flash_messsage" in request.session else []
-                return templates.TemplateResponse("dashboard/profile.html", {"request":request,"user":user, "messages_time":messages_time, 
-                                                                            "flash":_flash_message, "unread":unread, "change_user":change_user})
+                variables = default_variables(request)
+                return templates.TemplateResponse("dashboard/profile.html", {"request":request,"user":check['user'], "messages_time":variables['messages_time'], 
+                                                                            "flash":variables['_flash_message'], "unread":variables['unread'], "change_user":change_user})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)
@@ -64,29 +46,22 @@ def user_profile(id: int, request: Request, db: Session = Depends(database.get_d
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
-        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/admin/login", status_code=HTTP_303_SEE_OTHER)
 
 
 @users_panel.get("/user/{id}/edit")
 def user_update(id: int, request: Request, db:Session = Depends(database.get_db)):
     ######## user_check #########
-    access_token = request.cookies.get("access_token")
-    current_user = verify_token(access_token)
-    user = db.query(models.User).filter_by(id=current_user).first()
-    #######     end    ##########
+    check = check_user(request)
     change_user = db.query(models.User).filter_by(id=id).first()
     request.session["flash_messsage"] = []
-    if user:
-        if user.admin_user == True or user.super_user == True:
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
             if change_user:
-                unread = db.query(models.AdminMessages).filter_by(readed=0).all()
-                users = db.query(models.User).all()
-                education = db.query(models.Education).all()
                 selected_edu = db.query(models.Education).filter_by(id=id).first()
-                counts = admin.return_count()
-                messages_time = time_calculate.messages_time()
-                return templates.TemplateResponse("dashboard/edit_user.html", {"request":request, "user":user, "count": len(users), "messages_time":messages_time,
-                                                    "education":education, "selected_edu":selected_edu, "unread":unread, "counts":counts, "change_user":change_user})
+                variables = default_variables(request)
+                return templates.TemplateResponse("dashboard/edit_user.html", {"request":request, "user":check['user'], "count": len(variables['users']), "messages_time":variables['messages_time'],
+                                                    "education":variables['education'], "selected_edu":selected_edu, "unread":variables['unread'], "counts":variables['counts'], "change_user":change_user})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)
@@ -94,20 +69,17 @@ def user_update(id: int, request: Request, db:Session = Depends(database.get_db)
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
-        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/admin/login", status_code=HTTP_303_SEE_OTHER)
 
 
 @users_panel.post("/user/{id}/edit")
 async def update(id:int, request: Request, db:Session = Depends(database.get_db)):
     ######## user_check #########
-    access_token = request.cookies.get("access_token")
-    current_user = verify_token(access_token)
-    user = db.query(models.User).filter_by(id=current_user).first()
-    #######     end    ##########
+    check = check_user(request)
     change_user = db.query(models.User).filter_by(id=id)
     request.session["flash_messsage"] = []
-    if user:
-        if user.admin_user == True or user.super_user == True:
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
             if change_user.first():
                 form = await request.form()
                 name_surname = form.get("name_surname")

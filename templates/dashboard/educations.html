@@ -26,7 +26,7 @@
                     {% include 'flash.html' %}<br/>
                       <h5><b>Create education</b></h5>
                       {% if education_category %}
-                      <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/educations/add/add-education">
+                      <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/education/add/education">
                       <div class="col-md-5">
                         <label for="name" class="form-label"><b>*Adi:</b></label>
                         <input type="text" class="form-control is-valid" name="name" value="" required><br/>
@@ -60,7 +60,7 @@
                     <hr>
                       
             <h5><b>Categoriya elave et</b></h5>
-            <form class="row g-3" method="POST" action="/admin/educations/add/add-category">
+            <form class="row g-3" method="POST" action="/admin/education/add/category">
               <div class="col-md-5">
                 <label for="text" class="form-label"><b>Edu categoriya:</b><br/></label>
                 <input type="text" class="form-control is-valid" name="edu_name" required>
@@ -69,19 +69,15 @@
               </div>
             </form>
             <hr>
-          
             <div class="col-lg-6 col-7">
             <h6>Users</h6>
             </div>
-
                   </div>
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                       <thead>
-                        
-
                         <tr>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Education</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kategoriya</th>
@@ -89,7 +85,6 @@
                         </tr>
                       </thead>
                       <tbody>
-
                         {% for x in response.data %}
                         <tr>
                           <td>
