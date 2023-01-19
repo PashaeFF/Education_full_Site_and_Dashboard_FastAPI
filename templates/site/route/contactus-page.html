@@ -24,7 +24,7 @@
 				<div class="col-md-6">
 					<div class="getintouch">
 						{% include 'flash.html' %}<br/>
-						<h3>Sualınız var?? Bizə yazın, cavablayaq</h3>
+						<h3>{{ language.got_question_write_to_us_text }}</h3>
 						<form class="contactus-form" id="contact-form" method="POST">
 							<div class="row">
 								{% if user %}
@@ -52,7 +52,7 @@
 								{% endif %}
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<div class="form-group">
-										<input type="submit" name="post" title="Send" value="Göndər">
+										<input type="submit" name="post" title="Send" value="{{ language.send }}">
 									</div>
 								</div>
 								<div class="alert-msg" id="alert-msg"></div>
@@ -68,21 +68,21 @@
 				{% if site_settings.address %}
 					<div class="col-md-3 col-sm-3 col-xs-6 contactinfo-box">
 						<span class="icon icon-Pointer"></span>
-						<h3>Adres</h3>
+						<h3>{{ language.address }}</h3>
 						<p>{{ site_settings.address }}</p>
 					</div>
 				{% endif %}
 				{% if site_settings.phone %}
 					<div class="col-md-3 col-sm-3 col-xs-6 contactinfo-box">
 						<span class="icon icon-Phone2"></span>
-						<h3>Əlaqə nömrəsi</h3>
+						<h3>{{ language.your_contact_number }}</h3>
 						<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}">{{ site_settings.phone }}</a>
 					</div>
 				{% endif %}
 				{% if site_settings.site_email %}
 					<div class="col-md-3 col-sm-3 col-xs-6 contactinfo-box">
 						<span class="icon icon-Imbox"></span>
-						<h3>Email</h3>
+						<h3>{{ language.email }}</h3>
 						<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}">{{ site_settings.site_email }}</a>
 					</div>
 				{% endif %}

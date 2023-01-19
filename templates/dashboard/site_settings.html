@@ -23,6 +23,15 @@
                         {% if site %}
                             <form class="row g-3" method ="POST">
                             <div class="col-md-5">
+                                <label for="site_title" class="form-label"><b>Saytın əsas dili:</b></label>
+                                <select class="form-select" name="set_site_language">
+                                    {% for language in site_language %}
+                                    <option value="{{ language.id }}">&nbsp;&nbsp;{{ language.lang_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <hr/>
+                            <div class="col-md-5">
                                 <label for="site_title" class="form-label"><b>Site title:</b></label>
                                 <input type="text" class="form-control is-valid" name="site_title" value="{{ site.site_title }}">
                             </div> 

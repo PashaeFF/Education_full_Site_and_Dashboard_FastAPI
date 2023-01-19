@@ -15,25 +15,25 @@
 		<div class="event-block">
 		<!-- Body -->
 		{% if current_user %}
-			Qeydiyyatlisiniz...
+			{{ language.registered }}
 		{% else %}
             {% include 'flash.html' %}
 
             <main class="col-md-4"> 
                 <form method ="POST">
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
+                        <label for="email" class="form-label">{{ language.email }}</label>
                         <input type="email" required class="form-control" name="email" placeholder="email@gmail.com" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" required class="form-control" name="password" placeholder = "Parol">
+                        <label for="password" class="form-label">{{ language.password }}</label>
+                        <input type="password" required class="form-control" name="password" placeholder = "{{ language.password }}">
                     </div><br/>
 					<div class="mb-3">
-                        <label for="name_surname" class="form-label">Ad və Soyad</label>
-                        <input type="name_surname" required class="form-control" name="name_surname" placeholder = "Adınız və soyadınız">
+                        <label for="name_surname" class="form-label">{{ language.name_and_surname }}</label>
+                        <input type="name_surname" required class="form-control" name="name_surname" placeholder = "{{ language.name_and_surname }}">
                     </div><br/>
-                    <button type="submit" class="btn btn-primary">Qeyd ol</button>
+                    <button type="submit" class="btn btn-primary">{{ language.register }}</button>
                     </form>
         
                 <div class="clear"></div>

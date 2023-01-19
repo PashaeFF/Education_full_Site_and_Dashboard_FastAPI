@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, Depends, UploadFile
 from typing import Optional
 from PIL import Image
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 import secrets, pathlib
@@ -16,7 +16,7 @@ news_panel = APIRouter(
 
 
 @news_panel.get("/news")
-def news(request: Request, db:Session = Depends(database.get_db), page: int = 1, page_size: int = 10):
+def news(request: Request, page: int = 1, page_size: int = 10):
     check = check_user(request)
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:

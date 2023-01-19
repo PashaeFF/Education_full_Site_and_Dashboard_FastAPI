@@ -1,7 +1,7 @@
 <div class="container welcome-section">
     <div class="section-padding"></div>
     <div class="section-header">
-        <h3>Son əlavə olunanlar</h3>
+        <h3>{{ language.last_added }}</h3>
     </div>
     <div class="row">
         {% include 'flash.html' %}
@@ -19,7 +19,7 @@
                 <div class="welcome-content">
                     <span>{{ edu.education_type }}</span>
                     <p>{{ edu.about_education[0:40] }}...</p>
-                    <a href="/educations/{{ edu.education_type }}/{{ edu.id }}" title="Daxil ol">Daxil ol</a>
+                    <a href="/educations/{{ edu.education_type }}/{{ edu.id }}" title="{{ language.detail }}">{{ language.detail }}</a>
                 </div>
             </div>
         </div>

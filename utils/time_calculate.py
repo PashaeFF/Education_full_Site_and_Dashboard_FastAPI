@@ -1,7 +1,7 @@
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from datetime import datetime
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 
 def time_calculate(seconds):
     if seconds < 10:

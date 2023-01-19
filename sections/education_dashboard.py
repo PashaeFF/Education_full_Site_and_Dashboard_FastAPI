@@ -2,7 +2,8 @@ from fastapi import APIRouter, Request, Depends, UploadFile
 from typing import Optional
 from PIL import Image
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database, secrets
+from configurations import models, database
+import secrets, pathlib
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 from utils.helper import templates, check_user, default_variables

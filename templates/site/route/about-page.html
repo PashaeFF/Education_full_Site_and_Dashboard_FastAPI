@@ -5,7 +5,7 @@
 	<div class="container-fluid no-padding pagebanner">
 		<div class="container">
 			<div class="pagebanner-content">
-				<h3>Haqqımızda</h3>
+				<h3>{{ language.site_about }}</h3>
 			</div>
 		</div>
 	</div><!-- PageBanner /- -->
@@ -14,7 +14,7 @@
 		<div class="section-padding"></div>
 		<div class="section-header">
 			{% if site_settings.site_logo %}
-				<h3>Niyə <span> {{ site_settings.site_logo }}???</span></h3>
+				<h3>{{ language.why }} <span> {{ site_settings.site_logo }}???</span></h3>
 			{% endif %}
 
 
@@ -35,7 +35,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading" role="tab" id="accordion_1">
 							<h4 class="panel-title">
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion1" aria-expanded="true" aria-controls="accordion1">Haqqımızda</a>
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion1" aria-expanded="true" aria-controls="accordion1">{{ language.site_about }}</a>
 							</h4>
 						</div>
 						<div id="accordion1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="accordion_1">
@@ -50,7 +50,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading" role="tab" id="accordion_2">
 							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion2" aria-expanded="false" aria-controls="accordion2">İş saatlarımız</a>
+								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion2" aria-expanded="false" aria-controls="accordion2">{{ language.schedules }}</a>
 							</h4>
 						</div>
 						<div id="accordion2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="accordion_2">
@@ -58,14 +58,14 @@
 								<table class="table table-striped table-dark">
 									<thead>
 									  <tr>
-										<th scope="col">Həftənin günləri</th>
+										<th scope="col">{{ language.week_days }}</th>
 										
 									  </tr>
 									</thead>
 									<tbody>
 									{% if site_settings.monday %}
 									  <tr>
-										<th scope="row"><font color="green">B.e</font></th>
+										<th scope="row"><font color="green">{{ language.monday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -74,7 +74,7 @@
 									{% endif %}
 									{% if site_settings.tuesday %}
 									  <tr>
-										<th scope="row"><font color="green">Ch.a</font></th>
+										<th scope="row"><font color="green">{{ language.tuesday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -83,7 +83,7 @@
 									{% endif %}
 									{% if site_settings.wednesday %}
 									  <tr>
-										<th scope="row"><font color="green">Ch</font></th>
+										<th scope="row"><font color="green">{{ language.wednesday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -92,7 +92,7 @@
 									{% endif %}
 									{% if site_settings.thursday %}
 									  <tr>
-										<th scope="row"><font color="green">C.a</font></th>
+										<th scope="row"><font color="green">{{ language.thursday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -101,7 +101,7 @@
 									{% endif %}
 									{% if site_settings.friday %}
 									  <tr>
-										<th scope="row"><font color="green">C</font></th>
+										<th scope="row"><font color="green">{{ language.friday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -110,7 +110,7 @@
 									{% endif %}
 									{% if site_settings.saturday %}
 									  <tr>
-										<th scope="row"><font color="red">Sh</font></th>
+										<th scope="row"><font color="red">{{ language.saturday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -119,7 +119,7 @@
 									{% endif %}
 									{% if site_settings.sunday %}
 									  <tr>
-										<th scope="row"><font color="red">B</font></th>
+										<th scope="row"><font color="red">{{ language.sunday }}</font></th>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -145,13 +145,13 @@
 				{% if site_settings.about_teams %}
 				<div class="col-md-6 col-sm-12 team-content-block">
 					<div class="section-header">
-						<h3>Bizim <span> Komanda</span></h3>
+						<h3><span>{{ language.our_staff }}</span></h3>
 					</div>
 					<div class="team-intro">
 						<p>{{ site_settings.about_teams }}</p>
 					</div>
-					<a class="left carousel-control" href="#team-carousel" role="button" data-slide="prev">Prev</a>
-					<a class="right carousel-control" href="#team-carousel" role="button" data-slide="next">Next</a>
+					<a class="left carousel-control" href="#team-carousel" role="button" data-slide="prev">{{ language.previous }}</a>
+					<a class="right carousel-control" href="#team-carousel" role="button" data-slide="next">{{ language.next }}</a>
 				</div>
 				{% endif %}
 				<div class="col-md-6 col-sm-12 team-gallary">

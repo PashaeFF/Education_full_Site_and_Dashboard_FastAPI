@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         {% if site_settings %}
-        {{ site_settings.site_title }} - {% endif %}Sayt Bağlıdır
+        {{ site_settings.site_title }} - {{ language.site_closed }}{% endif %}
     </title>
     
 </head>
@@ -17,7 +17,11 @@
     <br/>
     <br/>
     <i class="fa fa-gear fa-spin" style="font-size:48px;color:red"></i>
+    {% if language %}
+    <h1><font color="white">{{ language.site_closed_text_reason }}</font> <font color="red">{{ language.site_closed_time }} {{ language.site_closed }}</font></h1>
+    {% else %}
     <h1><font color="white">Yenilənməyə görə</font> <font color="red">keçici olaraq sayt bağlıdır</font></h1>
+    {% endif %}
     <i class="fa fa-gear fa-spin" style="font-size:48px;color:red"></i>
 </body>
 </html>

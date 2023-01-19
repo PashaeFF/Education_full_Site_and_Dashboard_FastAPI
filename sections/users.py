@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 from utils.helper import templates, check_user, default_variables

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from routers import admin, site, install
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from fastapi_sqlalchemy import DBSessionMiddleware
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware

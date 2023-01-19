@@ -1,0 +1,434 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid px-2 px-md-4">
+        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+            <span class="mask  bg-gradient-primary  opacity-6"></span>
+        </div>
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        {% include 'flash.html' %}<br/>
+                        <h4><b>Add Site language</b></h4>
+                            <form class="row g-3" method ="POST">
+                            <div class="col-md-5">
+                                <label for="lang_name" class="form-label"><b>Language name:</b></label>
+                                <input type="text" class="form-control is-valid" name="lang_name" required value="">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="short_lang_name" class="form-label"><b>Short Language name('AZ','RU','EN'):</b></label>
+                                <input type="text" class="form-control is-valid" name="short_lang_name" required value="">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_about" class="form-label"><b>{{ default.site_about }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_about" required value="{{ default.site_about }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="login_page_title" class="form-label"><b>{{ default.login_page_title }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="login_page_title" required value="{{ default.login_page_title }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="user_logged_message" class="form-label"><b>{{ default.user_logged_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="user_logged_message" required value="{{ default.user_logged_message }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="login" class="form-label"><b>{{ default.login }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="login" required value="{{ default.login }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="wrong_password_message" class="form-label"><b>{{ default.wrong_password_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="wrong_password_message" required value="{{ default.wrong_password_message }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="user_does_not_exist_message" class="form-label"><b>{{ default.user_does_not_exist_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="user_does_not_exist_message" required value="{{ default.user_does_not_exist_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="registration_page_title" class="form-label"><b>{{ default.registration_page_title }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="registration_page_title" required value="{{ default.registration_page_title }}">
+                            </div> 
+                            <div class="col-md-5">
+                                <label for="correct_email_message" class="form-label"><b>{{ default.correct_email_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="correct_email_message" required value="{{ default.correct_email_message }}">
+                            </div>  
+                            <div class="col-md-5">
+                                <label for="password_minimum_8_character_message" class="form-label"><b>{{ default.password_minimum_8_character_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="password_minimum_8_character_message" required value="{{ default.password_minimum_8_character_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="name_not_added_message" class="form-label"><b>{{ default.name_not_added_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="name_not_added_message" required value="{{ default.name_not_added_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="email_is_available_message" class="form-label"><b>{{ default.email_is_available_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="email_is_available_message" required value="{{ default.email_is_available_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="registration_success" class="form-label"><b>{{ default.registration_success }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="registration_success" required value="{{ default.registration_success }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="contact_page_title" class="form-label"><b>{{ default.contact_page_title }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="contact_page_title" required value="{{ default.contact_page_title }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="message_spam_message" class="form-label"><b>{{ default.message_spam_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="message_spam_message" required value="{{ default.message_spam_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="the_message_cannot_empty_message" class="form-label"><b>{{ default.the_message_cannot_empty_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="the_message_cannot_empty_message" required value="{{ default.the_message_cannot_empty_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="boxes_are_cannot_empty" class="form-label"><b>{{ default.boxes_are_cannot_empty }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="boxes_are_cannot_empty" required value="{{ default.boxes_are_cannot_empty }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="message_has_been_sent_to_management" class="form-label"><b>{{ default.message_has_been_sent_to_management }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="message_has_been_sent_to_management" required value="{{ default.message_has_been_sent_to_management }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="educations_page_title" class="form-label"><b>{{ default.educations_page_title }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="educations_page_title" required value="{{ default.educations_page_title }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="news_page_title" class="form-label"><b>{{ default.news_page_title }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="news_page_title" required value="{{ default.news_page_title }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="user_profile_info_page_title" class="form-label"><b>{{ default.user_profile_info_page_title }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="user_profile_info_page_title" required value="{{ default.user_profile_info_page_title }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="image_extension_error_message" class="form-label"><b>{{ default.image_extension_error_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="image_extension_error_message" required value="{{ default.image_extension_error_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="profile_success_message" class="form-label"><b>{{ default.profile_success_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="profile_success_message" required value="{{ default.profile_success_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="why" class="form-label"><b>{{ default.why }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="why" required value="{{ default.why }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="schedules" class="form-label"><b>{{ default.schedules }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="schedules" required value="{{ default.schedules }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="week_days" class="form-label"><b>{{ default.week_days }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="week_days" required value="{{ default.week_days }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="monday" class="form-label"><b>{{ default.monday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="monday" required value="{{ default.monday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="tuesday" class="form-label"><b>{{ default.tuesday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="tuesday" required value="{{ default.tuesday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="wednesday" class="form-label"><b>{{ default.wednesday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="wednesday" required value="{{ default.wednesday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="thursday" class="form-label"><b>{{ default.thursday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="thursday" required value="{{ default.thursday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="friday" class="form-label"><b>{{ default.friday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="friday" required value="{{ default.friday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="saturday" class="form-label"><b>{{ default.saturday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="saturday" required value="{{ default.saturday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="sunday" class="form-label"><b>{{ default.sunday }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="sunday" required value="{{ default.sunday }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="our_staff" class="form-label"><b>{{ default.our_staff}}:</b></label>
+                                <input type="text" class="form-control is-valid" name="our_staff" required value="{{ default.our_staff }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="previous" class="form-label"><b>{{ default.previous }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="previous" required value="{{ default.previous }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="next" class="form-label"><b>{{ default.next }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="next" required value="{{ default.next }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="educations_all" class="form-label"><b>{{ default.educations_all }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="educations_all" required value="{{ default.educations_all }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="detail" class="form-label"><b>{{ default.detail }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="detail" required value="{{ default.detail }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="got_question_write_to_us_text" class="form-label"><b>{{ default.got_question_write_to_us_text }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="got_question_write_to_us_text" required value="{{ default.got_question_write_to_us_text }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="address" class="form-label"><b>{{ default.address }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="address" required value="{{ default.address }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="your_contact_number" class="form-label"><b>{{ default.your_contact_number }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="your_contact_number" required value="{{ default.your_contact_number }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="email" class="form-label"><b>{{ default.email }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="email" required value="{{ default.email }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="number_of_joined_students" class="form-label"><b>{{ default.number_of_joined_students }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="number_of_joined_students" required value="{{ default.number_of_joined_students }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="view" class="form-label"><b>{{ default.view }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="view" required value="{{ default.view }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="home" class="form-label"><b>{{ default.home }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="home" required value="{{ default.home }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="education" class="form-label"><b>{{ default.education }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="education" required value="{{ default.education }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="news" class="form-label"><b>{{ default.news }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="news" required value="{{ default.news }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="about" class="form-label"><b>{{ default.about }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="about" required value="{{ default.about }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="whatsapp_message" class="form-label"><b>{{ default.whatsapp_message }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="whatsapp_message" required value="{{ default.whatsapp_message }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="call_us" class="form-label"><b>{{ default.call_us }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="call_us" required value="{{ default.call_us }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="dashboard" class="form-label"><b>{{ default.dashboard }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="dashboard" required value="{{ default.dashboard }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="profile" class="form-label"><b>{{ default.profile }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="profile" required value="{{ default.profile }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="logout" class="form-label"><b>{{ default.logout }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="logout" required value="{{ default.logout }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="categories" class="form-label"><b>{{ default.categories }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="categories" required value="{{ default.categories }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="contact" class="form-label"><b>{{ default.contact }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="contact" required value="{{ default.contact }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="created_at" class="form-label"><b>{{ default.created_at }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="created_at" required value="{{ default.created_at }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="category" class="form-label"><b>{{ default.category }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="category" required value="{{ default.category }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="password" class="form-label"><b>{{ default.password }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="password" required value="{{ default.password }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="sign_in" class="form-label"><b>{{ default.sign_in }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="sign_in" required value="{{ default.sign_in }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="register" class="form-label"><b>{{ default.register }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="register" required value="{{ default.register }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_register" class="form-label"><b>{{ default.site_register }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_register" required value="{{ default.site_register }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="logged_in" class="form-label"><b>{{ default.logged_in }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="logged_in" required value="{{ default.logged_in }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="registered" class="form-label"><b>{{ default.registered }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="registered" required value="{{ default.registered }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="name_and_surname" class="form-label"><b>{{ default.name_and_surname }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="name_and_surname" required value="{{ default.name_and_surname }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="update_profile" class="form-label"><b>{{ default.update_profile }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="update_profile" required value="{{ default.update_profile }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="city" class="form-label"><b>{{ default.city }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="city" required value="{{ default.city }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="phone" class="form-label"><b>{{ default.phone }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="phone" required value="{{ default.phone }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="date_of_birth" class="form-label"><b>{{ default.date_of_birth }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="date_of_birth" required value="{{ default.date_of_birth }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="user_education" class="form-label"><b>{{ default.user_education }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="user_education" required value="{{ default.user_education }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="certificate_grades_or_university" class="form-label"><b>{{ default.certificate_grades_or_university }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="certificate_grades_or_university" required value="{{ default.certificate_grades_or_university }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="user_about" class="form-label"><b>{{ default.user_about }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="user_about" required value="{{ default.user_about }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="registration_date" class="form-label"><b>{{ default.registration_date }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="registration_date" required value="{{ default.registration_date }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="user_status" class="form-label"><b>{{ default.user_status }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="user_status" required value="{{ default.user_status }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="education_of_choice" class="form-label"><b>{{ default.education_of_choice }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="education_of_choice" required value="{{ default.education_of_choice }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="high_education" class="form-label"><b>{{ default.high_education }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="high_education" required value="{{ default.high_education }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="secondary_education" class="form-label"><b>{{ default.secondary_education }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="secondary_education" required value="{{ default.secondary_education }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="profile_picture" class="form-label"><b>{{ default.profile_picture }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="profile_picture" required value="{{ default.profile_picture }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="change_photo" class="form-label"><b>{{ default.change_photo }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="change_photo" required value="{{ default.change_photo }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="add_profile_picture" class="form-label"><b>{{ default.add_profile_picture }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="add_profile_picture" required value="{{ default.add_profile_picture }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="save" class="form-label"><b>{{ default.save }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="save" required value="{{ default.save }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="news_all" class="form-label"><b>{{ default.news_all }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="news_all" required value="{{ default.news_all }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="last" class="form-label"><b>{{ default.last }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="last" required value="{{ default.last }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="last_added" class="form-label"><b>{{ default.last_added }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="last_added" required value="{{ default.last_added }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="video_tutorial" class="form-label"><b>{{ default.video_tutorial }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="video_tutorial" required value="{{ default.video_tutorial }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_closed" class="form-label"><b>{{ default.site_closed }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_closed" required value="{{ default.site_closed }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_closed_time" class="form-label"><b>{{ default.site_closed_time }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_closed_time" required value="{{ default.site_closed_time }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="site_closed_text_reason" class="form-label"><b>{{ default.site_closed_text_reason }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="site_closed_text_reason" required value="{{ default.site_closed_text_reason }}">
+                            </div>
+
+
+                            <div class="col-md-5">
+                                <label for="forgot_password" class="form-label"><b>{{ default.forgot_password }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="forgot_password" required value="{{ default.forgot_password }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="email_sent" class="form-label"><b>{{ default.email_sent }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="email_sent" required value="{{ default.email_sent }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="email_is_not_registere" class="form-label"><b>{{ default.email_is_not_registere }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="email_is_not_registere" required value="{{ default.email_is_not_registere }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="password_changed" class="form-label"><b>{{ default.password_changed }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="password_changed" required value="{{ default.password_changed }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="forgot_password_question" class="form-label"><b>{{ default.forgot_password_question }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="forgot_password_question" required value="{{ default.forgot_password_question }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="confirm_password" class="form-label"><b>{{ default.confirm_password }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="confirm_password" required value="{{ default.confirm_password }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="send" class="form-label"><b>{{ default.send }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="send" required value="{{ default.send }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="change_password" class="form-label"><b>{{ default.change_password }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="change_password" required value="{{ default.change_password }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="password_not_same_confirm_password" class="form-label"><b>{{ default.password_not_same_confirm_password }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="password_not_same_confirm_password" required value="{{ default.password_not_same_confirm_password }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="link_timed_out" class="form-label"><b>{{ default.link_timed_out }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="link_timed_out" required value="{{ default.link_timed_out }}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="visit_the_link_reset_password" class="form-label"><b>{{ default.visit_the_link_reset_password }}:</b></label>
+                                <input type="text" class="form-control is-valid" name="visit_the_link_reset_password" required value="{{ default.visit_the_link_reset_password }}">
+                            </div>
+                            <br/>
+                            <p align="row">
+                                <button class="btn btn-primary" type="submit">Add language</button>
+                            </p>
+                            </form>
+                    </div>     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% include 'dashboard/footer.html' %}

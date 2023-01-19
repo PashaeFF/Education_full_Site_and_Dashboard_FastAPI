@@ -19,3 +19,4 @@ antispam
 pipenv
 fastapi_sqlalchemy
 python-dotenv
+fastapi-mail

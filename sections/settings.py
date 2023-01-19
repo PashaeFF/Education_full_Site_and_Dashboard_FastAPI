@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 from utils.helper import templates, check_user, default_variables
@@ -16,7 +16,8 @@ def site_settings(request: Request, db:Session = Depends(database.get_db)):
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
             return templates.TemplateResponse("dashboard/site_settings.html",{"request":request, "unread":variables['unread'], "site":variables['site'],
-                                                "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message']})
+                                                "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message'],
+                                                "site_language":variables['languages_all']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -30,6 +31,7 @@ async def post_site_settings(request: Request, db:Session = Depends(database.get
         if check['user'].admin_user == True or check['user'].super_user == True:
             site = db.query(models.SiteSettings).filter_by(id=1)
             form = await request.form()
+            set_site_language = form.get("set_site_language")
             site_title = form.get("site_title")
             site_logo = form.get("site_logo")
             site_slogan = form.get("site_slogan")
@@ -62,10 +64,10 @@ async def post_site_settings(request: Request, db:Session = Depends(database.get
                     is_active = True
                 elif is_active is None:
                     is_active = False
-            site.update({"site_title":site_title, "site_logo":site_logo, "site_slogan":site_slogan, "site_description":site_description, "site_about":site_about, 
+            site.update({"set_site_language":set_site_language, "site_title":site_title, "site_logo":site_logo, "site_slogan":site_slogan, "site_description":site_description, "site_about":site_about, 
                         "wp_number":wp_number, "site_email":site_email, "about_teams":about_teams, "phone":phone, "wp_text":wp_text, "google_map":google_map,
                         "youtube_video":youtube_video, "facebook":facebook, "instagram":instagram, "linkedin":linkedin, "is_active":is_active,
-                        "address":address, "monday":monday, "thursday":thursday, "wednesday":wednesday, "thursday":thursday, "friday":friday,
+                        "address":address, "monday":monday, "tuesday":tuesday, "wednesday":wednesday, "thursday":thursday, "friday":friday,
                         "saturday":saturday, "sunday":sunday },synchronize_session=False)
             db.commit()
             request.session["flash_messsage"] = []

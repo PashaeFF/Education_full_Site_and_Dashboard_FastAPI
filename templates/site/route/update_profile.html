@@ -21,39 +21,39 @@
                 <div class="col-md-4">
                   <form method="POST" enctype="multipart/form-data">
                       <div class="mb-4">
-                        <label for="name_surname" class="form-label">Ad və soyadınız</label>
+                        <label for="name_surname" class="form-label">{{ language.name_and_surname }}</label>
                         <input type="text" class="form-control" name="name_surname" value="{{ check_id.name_surname }}" required>
                       </div><br/>
                       <div class="mb-3">
-                        <label for="phone" class="form-label">Əlaqə nömrəniz</label>
+                        <label for="phone" class="form-label">{{ language.phone }}</label>
                         <input type="text" class="form-control" name="phone" value="{{ check_id.phone }}" required>
                       </div>
                       <div class="mb-3">
-                          <label for="age" class="form-label">Doğum tarixiniz</label>
+                          <label for="age" class="form-label">{{ language.date_of_birth }}</label>
                           <input type="date" class="form-control" name="age" value="{{ check_id.age }}" aria-describedby="inputGroupPrepend" required>
                       </div><br/>
                       <div class="mb-3">
-                        <label for="city" class="form-label">Doğum yeriniz</label>
+                        <label for="city" class="form-label">{{ language.city }}</label>
                         <input type="text" class="form-control" name="city" value="{{ check_id.city }}" required>
                       </div>
                       <div class="mb-3"><br/>
-                          <label for="education" class="form-label"><br/><b>*Tehsiliniz:</b></label>
+                          <label for="education" class="form-label"><br/><b>*{{ language.user_education }}:</b></label>
                           <select class="form-select" name="education" aria-label="Default select example">
-                              <option value="Orta">Orta</option>
-                              <option value="Ali">Ali</option>
+                              <option value="{{ language.high_education }}">{{ language.high_education }}</option>
+                              <option value="{{ language.secondary_education }}">{{ language.secondary_education }}</option>
                             </select>
                       </div><br/>
                       <div class="mb-3">
-                        <label for="certificate_points" class="form-label">Attestat qiymətləri vəya universitet</label>
+                        <label for="certificate_points" class="form-label">{{ language.certificate_grades_or_university }}</label>
                         <input type="text" class="form-control" name="certificate_points" value="{{ check_id.certificate_points }}" required>
                       </div>
                       <div class="mb-3">
-                        <label for="about" class="form-label">Haqqında</label>
+                        <label for="about" class="form-label">{{ language.user_about }}</label>
                         <input type="text" class="form-control" name="about" value="{{ check_id.about }}" required>
                       </div>
                       {% if edu %}
                       <div class="mb-3"><br/>
-                          <label for="select_university_id"><br/><b>*Sechdiyiniz tehsil novu/Universitet:</b></label>
+                          <label for="select_university_id"><br/><b>*{{ language.education_of_choice }}:</b></label>
                           <select class="form-select" name="select_university_id">
                               {% for i in edu %}
                                 {% if check_id.select_university_id == i.id %}
@@ -67,23 +67,23 @@
                       {% endif %}<br/>
                       {% if check_id.profile_picture %}
                           <div class="col-md-5">
-                              <label for="name" class="form-label"><b>Profil fotosu:</b></label><br/>
+                              <label for="name" class="form-label"><b>{{ language.profile_picture }}:</b></label><br/>
                               <img src="/static/profile_pictures/{{ check_id.profile_picture }}" width="100%"><br/>
                           </div>
                           <div class="col-md-5">
-                              <label for="file" class="form-label"><b>Fotonu dəyiş:</b><br/></label>
+                              <label for="file" class="form-label"><b>{{ language.change_photo }}:</b><br/></label>
                               <input type="file" name="file">
                             </div>
                       {% else %}
                           <div class="col-md-5">
-                              <label for="file" class="form-label"><b>Foto elave et:</b><br/></label>
+                              <label for="file" class="form-label"><b>{{ language.add_profile_picture }}:</b><br/></label>
                               <input type="file" name="file">
                           </div>
                       {% endif %}
                       <div class="col-md-12">
                           <br/>
                         <hr>
-                        <button class="btn btn-primary" type="submit">Yadda saxla</button>
+                        <button class="btn btn-primary" type="submit">{{ language.save }}</button>
                       </div>
                     </form>
                   </div>
@@ -92,40 +92,40 @@
             {% else %}
             <div class="col-md-4">
             <form method="POST" enctype="multipart/form-data">
-                <div class="mb-4">
-                  <label for="name_surname" class="form-label">Ad və soyadınız</label>
-                  <input type="text" class="form-control" name="name_surname" placeholder="Ad və soyadınız" required>
-                </div><br/>
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Əlaqə nömrəniz</label>
-                  <input type="text" class="form-control" name="phone" placeholder="+99455xxxxxxx" required>
-                </div>
-                <div class="mb-3">
-                    <label for="age" class="form-label">Doğum tarixiniz</label>
-                    <input type="date" class="form-control" name="age" aria-describedby="inputGroupPrepend" required>
-                </div><br/>
-                <div class="mb-3">
-                  <label for="city" class="form-label">Doğum yeriniz</label>
-                  <input type="text" class="form-control" name="city" required>
-                </div>
+              <div class="mb-4">
+                <label for="name_surname" class="form-label">{{ language.name_and_surname }}</label>
+                <input type="text" class="form-control" name="name_surname" value="" required>
+              </div><br/>
+              <div class="mb-3">
+                <label for="phone" class="form-label">{{ language.phone }}</label>
+                <input type="text" class="form-control" name="phone" value="" required>
+              </div>
+              <div class="mb-3">
+                  <label for="age" class="form-label">{{ language.date_of_birth }}</label>
+                  <input type="date" class="form-control" name="age" value="" aria-describedby="inputGroupPrepend" required>
+              </div><br/>
+              <div class="mb-3">
+                <label for="city" class="form-label">{{ language.city }}</label>
+                <input type="text" class="form-control" name="city" value="" required>
+              </div>
                 <div class="mb-3"><br/>
                     <label for="education" class="form-label"><br/><b>*Tehsiliniz:</b></label>
                     <select class="form-select" name="education" aria-label="Default select example">
-                        <option value="Orta">Orta</option>
-                        <option value="Ali">Ali</option>
+                        <option value="{{ language.secondary_education }}">{{ language.secondary_education }}</option>
+                        <option value="{{ language.high_education }}">{{ language.high_education }}</option>
                       </select>
                 </div><br/>
                 <div class="mb-3">
-                  <label for="certificate_points" class="form-label">Attestat qiymətləri vəya universitet</label>
-                  <input type="text" class="form-control" name="certificate_points" required>
+                  <label for="certificate_points" class="form-label">{{ language.certificate_grades_or_university }}</label>
+                  <input type="text" class="form-control" name="certificate_points" value="" required>
                 </div>
                 <div class="mb-3">
-                  <label for="about" class="form-label">Haqqında</label>
-                  <input type="text" class="form-control" name="about" required>
+                  <label for="about" class="form-label">{{ language.user_about }}</label>
+                  <input type="text" class="form-control" name="about" value="" required>
                 </div>
                 {% if edu %}
                 <div class="mb-3"><br/>
-                    <label for="select_university_id"><br/><b>*Sechdiyiniz tehsil novu/Universitet:</b></label>
+                    <label for="select_university_id"><br/><b>*{{ language.education_of_choice }}:</b></label>
                     <select class="form-select" name="select_university_id">
                         {% for i in edu %}
                         <option value="{{i.id}}">{{ i.name }} - {{ i.education_type }}</option>
@@ -135,14 +135,14 @@
                 {% endif %}
                 <br/>
                   <div class="col-md-5">
-                      <label for="file" class="form-label"><b>Profil fotosu:</b><br/></label>
+                      <label for="file" class="form-label"><b>{{ language.profile_picture }}:</b><br/></label>
                       <input type="file" name="file">
                   </div>
                 
                 <div class="col-md-12">
                     <br/>
                   <hr>
-                  <button class="btn btn-primary" type="submit">Yadda Saxla</button>
+                  <button class="btn btn-primary" type="submit">{{ language.save }}</button>
                 </div>
               </form>
             </div>

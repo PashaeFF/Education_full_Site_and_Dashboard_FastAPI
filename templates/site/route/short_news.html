@@ -4,9 +4,9 @@
     <div class="section-padding"></div>	
     <div class="section-header-block">
         <div class="section-header">
-            <h3>Son <span>sayt Xəbərləri</span></h3>
+            <h3>{{ language.last }} <span>{{ language.news }}</span></h3>
         </div>
-        <a href="/news" title="View All">Hamısı</a>
+        <a href="/news" title="{{ language.news_all }}">{{ language.news_all }}</a>
     </div>
     
     <div class="event-block">
@@ -31,7 +31,7 @@
                     <p>{{ item.description[0:100] }}...</p>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12">
-                    <a href="/news/{{ item.select_category.name }}/{{ item.id }}" class="readmore" title="Ətrafli">Ətrafli</a>
+                    <a href="/news/{{ item.select_category.name }}/{{ item.id }}" class="readmore" title="{{ language.detail }}">{{ language.detail }}</a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 from fastapi import APIRouter, Request, Depends, UploadFile, File
@@ -92,6 +92,7 @@ async def post_slider_settings(request: Request, db:Session = Depends(database.g
     else:
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
 
+
 @slider_panel.post('/slider/{id}')
 async def post_update_slider_settings(id: int, request: Request, db:Session = Depends(database.get_db),
                                         file: UploadFile = File(None), file2: UploadFile = File(None)):
@@ -106,7 +107,6 @@ async def post_update_slider_settings(id: int, request: Request, db:Session = De
             form = await request.form()
             title = form.get("title")
             description = form.get("description")
-            errors = []
             #files
             filename = file.filename
             filename2 = file2.filename

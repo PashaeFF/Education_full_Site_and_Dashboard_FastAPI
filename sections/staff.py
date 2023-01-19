@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, Depends, UploadFile
 from typing import Optional
 from PIL import Image
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 import secrets, pathlib

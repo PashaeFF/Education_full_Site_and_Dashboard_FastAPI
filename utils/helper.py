@@ -1,16 +1,15 @@
 from starlette.templating import Jinja2Templates
-from starlette.status import HTTP_303_SEE_OTHER
 from configurations.token import verify_token
-from fastapi import Request, Depends, Response
+from fastapi import Request, Depends
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database
+from configurations import models, database
 from datetime import datetime, timedelta
-from utils import paginate, time_calculate
+from utils import time_calculate
+
+templates = Jinja2Templates(directory="templates")
 
 def closed(request, site_settings):
     return templates.TemplateResponse("site/closed.html", {"request":request, "site_settings":site_settings})
-
-templates = Jinja2Templates(directory="templates")
 
 
 def check_user(request: Request, db: Session = database.get_db()):
@@ -29,20 +28,34 @@ def check_user(request: Request, db: Session = database.get_db()):
 
 def check_user_in_site(request: Request, db: Session = database.get_db()):
     site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
+    if site_settings:
+        site_language = db.query(models.SiteLanguages).filter_by(id=site_settings.set_site_language).first()
+    else:
+        site_language = db.query(models.SiteLanguages).filter_by(id=1).first()
     access_token = request.cookies.get("access_token")
+    language_cookie = request.cookies.get("user_site_language")
     if access_token:
         current_user = verify_token(access_token)
         user = db.query(models.User).filter_by(id=current_user).first()
+        if user:
+            user_language = db.query(models.SiteLanguages).filter_by(id=user.user_site_language).first()
+            if user_language:
+                site_language = user_language
     else:
+        guest_language = db.query(models.SiteLanguages).filter_by(id=language_cookie).first()
         current_user = ""
         user = ""
+        if guest_language:
+            site_language = guest_language
     us = {
         'site_settings':site_settings,
+        'site_language':site_language,
         'access_token':access_token,
         'current_user':current_user,
         'user':user
     }
     return us
+
 
 
 def flash_message(request: Request):
@@ -66,6 +79,7 @@ def default_variables(request: Request, db: Session = database.get_db()):
     staff = db.query(models.Staff).all()
     site = db.query(models.SiteSettings).first()
     sliders = db.query(models.SliderSettings).all()
+    languages_all = db.query(models.SiteLanguages).all()
     counts = return_count()
     messages_time = time_calculate.messages_time()
     _flash_message = flash_message(request)
@@ -82,6 +96,7 @@ def default_variables(request: Request, db: Session = database.get_db()):
         'user_admin':user_admin,
         'education':education,
         'education_category':education_category,
+        'languages_all':languages_all,
         'counts':counts,
         'messages_time':messages_time,
         '_flash_message':_flash_message
@@ -97,11 +112,13 @@ def site_default_variables(request: Request, db: Session = database.get_db()):
     news = db.query(models.SiteNews).all()
     staff = db.query(models.Staff).all()
     news_category = db.query(models.NewsCategory).all()
+    languages_all = db.query(models.SiteLanguages).all()
     variables = {
         '_flash_message':_flash_message,
         'slider':slider,
         'educations':educations,
         'categories':categories,
+        'languages_all':languages_all,
         'news':news,
         'news_category':news_category,
         'staff':staff

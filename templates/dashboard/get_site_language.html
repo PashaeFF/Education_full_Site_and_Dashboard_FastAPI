@@ -1,0 +1,434 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid px-2 px-md-4">
+        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+            <span class="mask  bg-gradient-primary  opacity-6"></span>
+        </div>
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        {% include 'flash.html' %}<br/>
+                        <h4><b>Edit site language - {{ lang.lang_name }} ({{ lang.short_lang_name }})</b></h4>
+                            <form class="row g-3" method ="POST">
+                                <div class="col-md-5">
+                                    <label for="lang_name" class="form-label"><b>Language name:</b></label>
+                                    <input type="text" class="form-control is-valid" name="lang_name" required value="">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="short_lang_name" class="form-label"><b>Short Language name('AZ','RU','EN'):</b></label>
+                                    <input type="text" class="form-control is-valid" name="short_lang_name" required value="">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_about" class="form-label"><b>{{ lang.site_about }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_about" required value="{{ lang.site_about }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="login_page_title" class="form-label"><b>{{ lang.login_page_title }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="login_page_title" required value="{{ lang.login_page_title }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="user_logged_message" class="form-label"><b>{{ lang.user_logged_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="user_logged_message" required value="{{ lang.user_logged_message }}">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="login" class="form-label"><b>{{ lang.login }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="login" required value="{{ lang.login }}">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="wrong_password_message" class="form-label"><b>{{ lang.wrong_password_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="wrong_password_message" required value="{{ lang.wrong_password_message }}">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="user_does_not_exist_message" class="form-label"><b>{{ lang.user_does_not_exist_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="user_does_not_exist_message" required value="{{ lang.user_does_not_exist_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="registration_page_title" class="form-label"><b>{{ lang.registration_page_title }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="registration_page_title" required value="{{ lang.registration_page_title }}">
+                                </div> 
+                                <div class="col-md-5">
+                                    <label for="correct_email_message" class="form-label"><b>{{ lang.correct_email_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="correct_email_message" required value="{{ lang.correct_email_message }}">
+                                </div>  
+                                <div class="col-md-5">
+                                    <label for="password_minimum_8_character_message" class="form-label"><b>{{ lang.password_minimum_8_character_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="password_minimum_8_character_message" required value="{{ lang.password_minimum_8_character_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="name_not_added_message" class="form-label"><b>{{ lang.name_not_added_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="name_not_added_message" required value="{{ lang.name_not_added_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="email_is_available_message" class="form-label"><b>{{ lang.email_is_available_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="email_is_available_message" required value="{{ lang.email_is_available_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="registration_success" class="form-label"><b>{{ lang.registration_success }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="registration_success" required value="{{ lang.registration_success }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="contact_page_title" class="form-label"><b>{{ lang.contact_page_title }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="contact_page_title" required value="{{ lang.contact_page_title }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="message_spam_message" class="form-label"><b>{{ lang.message_spam_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="message_spam_message" required value="{{ lang.message_spam_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="the_message_cannot_empty_message" class="form-label"><b>{{ lang.the_message_cannot_empty_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="the_message_cannot_empty_message" required value="{{ lang.the_message_cannot_empty_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="boxes_are_cannot_empty" class="form-label"><b>{{ lang.boxes_are_cannot_empty }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="boxes_are_cannot_empty" required value="{{ lang.boxes_are_cannot_empty }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="message_has_been_sent_to_management" class="form-label"><b>{{ lang.message_has_been_sent_to_management }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="message_has_been_sent_to_management" required value="{{ lang.message_has_been_sent_to_management }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="educations_page_title" class="form-label"><b>{{ lang.educations_page_title }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="educations_page_title" required value="{{ lang.educations_page_title }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="news_page_title" class="form-label"><b>{{ lang.news_page_title }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="news_page_title" required value="{{ lang.news_page_title }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="user_profile_info_page_title" class="form-label"><b>{{ lang.user_profile_info_page_title }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="user_profile_info_page_title" required value="{{ lang.user_profile_info_page_title }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="image_extension_error_message" class="form-label"><b>{{ lang.image_extension_error_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="image_extension_error_message" required value="{{ lang.image_extension_error_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="profile_success_message" class="form-label"><b>{{ lang.profile_success_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="profile_success_message" required value="{{ lang.profile_success_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="why" class="form-label"><b>{{ lang.why }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="why" required value="{{ lang.why }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="schedules" class="form-label"><b>{{ lang.schedules }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="schedules" required value="{{ lang.schedules }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="week_days" class="form-label"><b>{{ lang.week_days }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="week_days" required value="{{ lang.week_days }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="monday" class="form-label"><b>{{ lang.monday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="monday" required value="{{ lang.monday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="tuesday" class="form-label"><b>{{ lang.tuesday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="tuesday" required value="{{ lang.tuesday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="wednesday" class="form-label"><b>{{ lang.wednesday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="wednesday" required value="{{ lang.wednesday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="thursday" class="form-label"><b>{{ lang.thursday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="thursday" required value="{{ lang.thursday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="friday" class="form-label"><b>{{ lang.friday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="friday" required value="{{ lang.friday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="saturday" class="form-label"><b>{{ lang.saturday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="saturday" required value="{{ lang.saturday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="sunday" class="form-label"><b>{{ lang.sunday }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="sunday" required value="{{ lang.sunday }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="our_staff" class="form-label"><b>{{ lang.our_staff}}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="our_staff" required value="{{ lang.our_staff }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="previous" class="form-label"><b>{{ lang.previous }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="previous" required value="{{ lang.previous }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="next" class="form-label"><b>{{ lang.next }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="next" required value="{{ lang.next }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="educations_all" class="form-label"><b>{{ lang.educations_all }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="educations_all" required value="{{ lang.educations_all }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="detail" class="form-label"><b>{{ lang.detail }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="detail" required value="{{ lang.detail }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="got_question_write_to_us_text" class="form-label"><b>{{ lang.got_question_write_to_us_text }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="got_question_write_to_us_text" required value="{{ lang.got_question_write_to_us_text }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="address" class="form-label"><b>{{ lang.address }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="address" required value="{{ lang.address }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="your_contact_number" class="form-label"><b>{{ lang.your_contact_number }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="your_contact_number" required value="{{ lang.your_contact_number }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="email" class="form-label"><b>{{ lang.email }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="email" required value="{{ lang.email }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="number_of_joined_students" class="form-label"><b>{{ lang.number_of_joined_students }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="number_of_joined_students" required value="{{ lang.number_of_joined_students }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="view" class="form-label"><b>{{ lang.view }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="view" required value="{{ lang.view }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="home" class="form-label"><b>{{ lang.home }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="home" required value="{{ lang.home }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="education" class="form-label"><b>{{ lang.education }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="education" required value="{{ lang.education }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="news" class="form-label"><b>{{ lang.news }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="news" required value="{{ lang.news }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="about" class="form-label"><b>{{ lang.about }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="about" required value="{{ lang.about }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="whatsapp_message" class="form-label"><b>{{ lang.whatsapp_message }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="whatsapp_message" required value="{{ lang.whatsapp_message }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="call_us" class="form-label"><b>{{ lang.call_us }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="call_us" required value="{{ lang.call_us }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="dashboard" class="form-label"><b>{{ lang.dashboard }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="dashboard" required value="{{ lang.dashboard }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="profile" class="form-label"><b>{{ lang.profile }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="profile" required value="{{ lang.profile }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="logout" class="form-label"><b>{{ lang.logout }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="logout" required value="{{ lang.logout }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="categories" class="form-label"><b>{{ lang.categories }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="categories" required value="{{ lang.categories }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="contact" class="form-label"><b>{{ lang.contact }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="contact" required value="{{ lang.contact }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="created_at" class="form-label"><b>{{ lang.created_at }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="created_at" required value="{{ lang.created_at }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="category" class="form-label"><b>{{ lang.category }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="category" required value="{{ lang.category }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="password" class="form-label"><b>{{ lang.password }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="password" required value="{{ lang.password }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="sign_in" class="form-label"><b>{{ lang.sign_in }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="sign_in" required value="{{ lang.sign_in }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="register" class="form-label"><b>{{ lang.register }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="register" required value="{{ lang.register }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_register" class="form-label"><b>{{ lang.site_register }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_register" required value="{{ lang.site_register }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="logged_in" class="form-label"><b>{{ lang.logged_in }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="logged_in" required value="{{ lang.logged_in }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="registered" class="form-label"><b>{{ lang.registered }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="registered" required value="{{ lang.registered }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="name_and_surname" class="form-label"><b>{{ lang.name_and_surname }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="name_and_surname" required value="{{ lang.name_and_surname }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="update_profile" class="form-label"><b>{{ lang.update_profile }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="update_profile" required value="{{ lang.update_profile }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="city" class="form-label"><b>{{ lang.city }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="city" required value="{{ lang.city }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="phone" class="form-label"><b>{{ lang.phone }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="phone" required value="{{ lang.phone }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="date_of_birth" class="form-label"><b>{{ lang.date_of_birth }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="date_of_birth" required value="{{ lang.date_of_birth }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="user_education" class="form-label"><b>{{ lang.user_education }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="user_education" required value="{{ lang.user_education }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="certificate_grades_or_university" class="form-label"><b>{{ lang.certificate_grades_or_university }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="certificate_grades_or_university" required value="{{ lang.certificate_grades_or_university }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="user_about" class="form-label"><b>{{ lang.user_about }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="user_about" required value="{{ lang.user_about }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="registration_date" class="form-label"><b>{{ lang.registration_date }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="registration_date" required value="{{ lang.registration_date }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="user_status" class="form-label"><b>{{ lang.user_status }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="user_status" required value="{{ lang.user_status }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="education_of_choice" class="form-label"><b>{{ lang.education_of_choice }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="education_of_choice" required value="{{ lang.education_of_choice }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="high_education" class="form-label"><b>{{ lang.high_education }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="high_education" required value="{{ lang.high_education }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="secondary_education" class="form-label"><b>{{ lang.secondary_education }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="secondary_education" required value="{{ lang.secondary_education }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="profile_picture" class="form-label"><b>{{ lang.profile_picture }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="profile_picture" required value="{{ lang.profile_picture }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="change_photo" class="form-label"><b>{{ lang.change_photo }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="change_photo" required value="{{ lang.change_photo }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="add_profile_picture" class="form-label"><b>{{ lang.add_profile_picture }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="add_profile_picture" required value="{{ lang.add_profile_picture }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="save" class="form-label"><b>{{ lang.save }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="save" required value="{{ lang.save }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="news_all" class="form-label"><b>{{ lang.news_all }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="news_all" required value="{{ lang.news_all }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="last" class="form-label"><b>{{ lang.last }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="last" required value="{{ lang.last }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="last_added" class="form-label"><b>{{ lang.last_added }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="last_added" required value="{{ lang.last_added }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="video_tutorial" class="form-label"><b>{{ lang.video_tutorial }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="video_tutorial" required value="{{ lang.video_tutorial }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_closed" class="form-label"><b>{{ lang.site_closed }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_closed" required value="{{ lang.site_closed }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_closed_time" class="form-label"><b>{{ lang.site_closed_time }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_closed_time" required value="{{ lang.site_closed_time }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="site_closed_text_reason" class="form-label"><b>{{ lang.site_closed_text_reason }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="site_closed_text_reason" required value="{{ lang.site_closed_text_reason }}">
+                                </div>
+    
+    
+                                <div class="col-md-5">
+                                    <label for="forgot_password" class="form-label"><b>{{ lang.forgot_password }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="forgot_password" required value="{{ lang.forgot_password }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="email_sent" class="form-label"><b>{{ lang.email_sent }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="email_sent" required value="{{ lang.email_sent }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="email_is_not_registere" class="form-label"><b>{{ lang.email_is_not_registere }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="email_is_not_registere" required value="{{ lang.email_is_not_registere }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="password_changed" class="form-label"><b>{{ lang.password_changed }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="password_changed" required value="{{ lang.password_changed }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="forgot_password_question" class="form-label"><b>{{ lang.forgot_password_question }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="forgot_password_question" required value="{{ lang.forgot_password_question }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="confirm_password" class="form-label"><b>{{ lang.confirm_password }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="confirm_password" required value="{{ lang.confirm_password }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="send" class="form-label"><b>{{ lang.send }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="send" required value="{{ lang.send }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="change_password" class="form-label"><b>{{ lang.change_password }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="change_password" required value="{{ lang.change_password }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="password_not_same_confirm_password" class="form-label"><b>{{ lang.password_not_same_confirm_password }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="password_not_same_confirm_password" required value="{{ lang.password_not_same_confirm_password }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="link_timed_out" class="form-label"><b>{{ lang.link_timed_out }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="link_timed_out" required value="{{ lang.link_timed_out }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="visit_the_link_reset_password" class="form-label"><b>{{ lang.visit_the_link_reset_password }}:</b></label>
+                                    <input type="text" class="form-control is-valid" name="visit_the_link_reset_password" required value="{{ lang.visit_the_link_reset_password }}">
+                                </div>
+                            <br/>
+                            <p align="row">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </p>
+                            </form>
+                    </div>     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% include 'dashboard/footer.html' %}

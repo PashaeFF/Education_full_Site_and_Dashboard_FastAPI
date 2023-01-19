@@ -1,0 +1,106 @@
+<!-- Header -->
+{% include 'dashboard/header.html' %}
+<!-- end Header -->
+    <!-- left -->
+      {% include 'dashboard/left_sidebar.html' %}
+    <!-- end -->
+
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+      {% include 'dashboard/navbar.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      {% include 'dashboard/cards.html' %}
+      
+      <hr class>
+      
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-8 mb-md-0 mb-5">
+              <div class="card" style="margin: 0 25px">
+                <div class="card-header pb-0">
+                  {% include 'flash.html' %}<br/>
+                  <div class="row">
+                      <h5><b>Site Languages</b></h5>
+                      <hr>
+          
+            <div class="col-lg-6 col-7">
+            <h6>Dillər</h6>
+            {% if check_ru == None %}
+                <form method="POST" action="/admin/language/install_language_pack/ru">
+                    <button class="btn bg-gradient-success" type="submit">Установить Русский язык</button>
+                </form>
+            {% endif %}
+            {% if check_eng == None %}
+                <form method="POST" action="/admin/language/install_language_pack/en">
+                    <button class="btn bg-gradient-success" type="submit">İnstall English language</button>
+                </form>
+            {% endif %}
+            {% if check_az == None %}
+                <form method="POST" action="/admin/language/install_language_pack/az">
+                    <button class="btn bg-gradient-success" type="submit">Azərbaycan dili yüklə</button>
+                </form>
+            {% endif %}
+            <div align="rigth">
+              <form method="GET" action="/admin/languages/add-language">
+                <button class="btn bg-gradient-success" type="submit">Başqa dil əlavə et</button>
+              </form>
+            </div>
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                  <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / Dil</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Qısa ad</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saytın əsas dili</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for language in languages %}
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                {{ loop.index }}.&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">{{ language.lang_name }}</h6> id: {{ language.id }}
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold">{{ language.short_lang_name }}</span>                        
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            
+                        <span class="text-xs font-weight-bold">{% if site_language == language.id %}<i class="fa fa-check" aria-hidden="true" style="color:rgb(78, 220, 78)"></i>{% endif %}</span>
+                          </td>
+            
+                            <td class="align-center">
+                                <span class="text-xs font-weight-bold"><a href="/admin/languages/{{ language.id }}">Edit</a> {% if site_language != language.id %}/ <a href="/admin/language/{{ language.id }}/delete">Delete</a>{% endif %}</span>
+                            </td>
+                            
+                        </div>
+                        </tr>
+                      {% endfor %}
+ 
+                      </tbody>
+                    </table>
+                    <hr>
+                
+                      
+                    <br/>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {% include 'dashboard/footer.html' %}
+
+      

@@ -50,6 +50,7 @@
 <div class="container event-section">	
 <div class="event-block">
 <main class="col-md-4">
+    {% include 'flash.html' %}
 <form method="POST">
     <div class="col-3">
     <h3>Create Super User</h3>
@@ -59,6 +60,10 @@
     <div class="col-3">
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" name="password">
+    </div>
+    <div class="col-3">
+        <label for="name_surname" class="form-label">Adınız və soyadınız</label>
+        <input type="text" class="form-control" name="name_surname">
     </div>
     <hr>
     <div class="col-3">
@@ -78,6 +83,15 @@
         <label for="site_slogan" class="form-label">Site Slogan</label>
         <input type="site_slogan" class="form-control" name="site_slogan">
     </div>
+    <hr>
+    <div class="col-3">
+        <label for="site_title" class="form-label">Saytın dili:</label><br/>
+        <select class="form-select" name="set_site_language">
+            {% for language in languages %}
+            <option value="{{ loop.index }}">&nbsp;&nbsp;{{ language }}</option>
+            {% endfor %}
+        </select>
+    </div><br/><br/>
     <hr>
     <div class="col-3">
     <button type="submit" class="btn btn-primary">Submit</button>

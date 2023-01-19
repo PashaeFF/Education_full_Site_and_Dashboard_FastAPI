@@ -3,16 +3,15 @@
 		<!-- Top Header -->
 		<div class="top-header container-fluid no-padding">
 			<div class="container">
-				
 				<div class="topheader-left">
 					{% if site_settings.wp_number and site_settings.wp_text %}
-						<a href="https://wa.me/{{ site_settings.wp_number }}?text={{ site_settings.wp_text }}" title="{{ site_settings.wp_number }}"><i class="fa fa-mobile" aria-hidden="true"></i>Whatsapp mesaj</a>
+						<a href="https://wa.me/{{ site_settings.wp_number }}?text={{ site_settings.wp_text }}" title="{{ site_settings.wp_number }}"><i class="fa fa-mobile" aria-hidden="true"></i>{{ language.whatsapp_message }}</a>
 					{% endif %}
 					{% if site_settings.phone %}
-						<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>Bizə zəng</a>
+						<a href="tel:{{ site_settings.phone }}" title="{{ site_settings.phone }}"><i class="fa fa-mobile" aria-hidden="true"></i>{{ language.call_us }}</a>
 					{% endif %}
 					{% if site_settings.site_email %}
-						<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}"><i class="fa fa-envelope-o" aria-hidden="true"></i>Email: {{ site_settings.site_email }}</a>
+						<a href="mailto:{{ site_settings.site_email }}" title="{{ site_settings.site_email }}"><i class="fa fa-envelope-o" aria-hidden="true"></i>{{ language.email }}: {{ site_settings.site_email }}</a>
 					{% endif %}
 				</div>
 				
@@ -20,20 +19,27 @@
 				{% if current_user %}
 				<div class="topheader-right">
 					{% if user.admin_user == True or user.super_user == True %}
-					<a href="/admin" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Idare paneli</a>
+					<a href="/admin" title="{{ language.dashboard }}">{{ language.dashboard }}</a>
 					{% endif %}
-					<a href="/profile/{{ user.id }}" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Profil</a>
-					<a href="/logout" title="Register">Chixish</a>
+					<a href="/profile/{{ user.id }}" title="{{ language.profile }}">{{ language.profile }}</a>
+					<a href="/logout" title="{{ language.logout }}">{{ language.logout }} <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+					<a></a>
 				</div>
 				{% else %}
 				<div class="topheader-right">
-					<a href="/login" title="Login"><i class="fa fa-sign-out" aria-hidden="true"></i>Daxil ol</a>
-					<a href="/registration" title="Register">Qeydiyyat</a>
+					<a href="/login" title="{{ language.sign_in }}">{{ language.sign_in }}</a>
+					<a href="/registration" title="{{ language.site_register }}">{{ language.site_register }}</a>
 				</div>
 				{% endif %}
 			</div>
+			
+				<form align="center" method="POST" action="/set_lang/">
+				{% for lang in langs %}
+					<button type="submit" class="btn btn-info" name="id" value="{{ lang.id }}">{{ lang.short_lang_name }}</button>
+				{% endfor %}
+				</form>
+			
 		</div><!-- Top Header /- -->
-		
 		<!-- Menu Block -->
 		<div class="menu-block container-fluid no-padding">
 			<!-- Container -->
@@ -59,9 +65,9 @@
 							<div class="navbar-collapse collapse" id="navbar">
 								<ul class="nav navbar-nav menubar">
 									<li class="dropdown active">
-										<a aria-expanded="false" aria-haspopup="true" href="/" role="button" class="dropdown-toggle" title="Home">Əsas səhifə</a>
+										<a aria-expanded="false" aria-haspopup="true" href="/" role="button" class="dropdown-toggle" title="{{ language.home }}">{{ language.home }}</a>
 									<li class="dropdown">
-										<a aria-expanded="false"  href="/educations" aria-haspopup="true" role="button" class="dropdown-toggle" title="Kateqoriyalar">Kategoriyalar</a>
+										<a aria-expanded="false"  href="/educations" aria-haspopup="true" role="button" class="dropdown-toggle" title="{{ language.categories }}">{{ language.categories }}</a>
 										<i class="ddl-switch fa fa-angle-down"></i>
 										<ul class="dropdown-menu">
 											{% if categories %}
@@ -72,7 +78,7 @@
 										</ul>
 									</li>
 									<li class="dropdown">
-										<a aria-expanded="false"  href="/news" aria-haspopup="true" role="button" class="dropdown-toggle" title="Xeberler">Xəbərlər</a>
+										<a aria-expanded="false"  href="/news" aria-haspopup="true" role="button" class="dropdown-toggle" title="{{ language.news }}">{{ language.news }}</a>
 										<i class="ddl-switch fa fa-angle-down"></i>
 										<ul class="dropdown-menu">
 											{% if news_category %}
@@ -82,21 +88,13 @@
 											{% endif %}
 										</ul>
 									</li>
-									<li><a title="Haqqimizda" href="/about">Haqqımızda</a></li>
-									<li><a title="Contact" href="/contact">Əlaqə</a></li>
+									<li><a title="{{ language.about }}" href="/about">{{ language.about }}</a></li>
+									<li><a title="{{ language.contact }}" href="/contact">{{ language.contact }}</a></li>
 								</ul>
+								
 							</div>
 						</div>
 					</nav><!-- Navigation /- -->
-					<div class="menu-search">
-						<div id="sb-search" class="sb-search">
-							<form>
-								<input class="sb-search-input" placeholder="Axtarmaq istədiyin..." type="text" value="" name="search" id="search" />
-								<button class="sb-search-submit"><i class="fa fa-search"></i></button>
-								<span class="sb-icon-search"></span>
-							</form>
-						</div>
-					</div>
 				</div>
 			</div><!-- Container /- -->
 		</div><!-- Menu Block /- -->

@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="pagebanner-content">
 				{% if news_category.name %}
-				<h3>{{ news_category.name }} - xəbərlər</h3>
+				<h3>{{ news_category.name }} - {{ language.news }}</h3>
 				{% else %}
 				<h3>{{ page_title }}</h3>
 				{% endif %}
@@ -30,14 +30,14 @@
 							</div>
 							
 							<div class="col-md-7 col-sm-6 col-xs-7">
-								<h3><a href="/news/{{ news.select_category.name }}/{{ news.id }}" title="Science In The New Era">{{ news.news_title }}</a></h3>
+								<h3><a href="/news/{{ news.select_category.name }}/{{ news.id }}" title="{{ news.news_title }}">{{ news.news_title }}</a></h3>
 								<div class="event-meta">
 									<span><i aria-hidden="true" class="fa fa-clock-o"></i>{{ news.created_at.strftime('%Y-%m-%d') }}</span>
 								</div>
 								<p>{{ news.description[0:100] }}....</p>
 							</div>
 							<div class="col-md-2 col-sm-2 col-xs-12">
-								<a href="/news/{{ news.select_category.name }}/{{ news.id }}" class="readmore" title="ƏtraflI">Ətraflı</a>
+								<a href="/news/{{ news.select_category.name }}/{{ news.id }}" class="readmore" title="{{ language.detail }}">{{ language.detail }}</a>
 							</div>
 						</div>
 					</div>
@@ -51,10 +51,10 @@
 		<nav class="ow-pagination">
 			<ul class="pagination">
 		{% if response.pagination.previous  !=  None %}
-			<li><a href="/news/{{ news_category.name }}{{ response.pagination.previous }}"><< Previous</a></li>
+			<li><a href="/news/{{ news_category.name }}{{ response.pagination.previous }}">{{ language.previous }}</a></li>
 		{% endif %}
 		{% if response.pagination.next  !=  None %}
-			<li><a href="/news/{{ news_category.name }}{{ response.pagination.next }}">Next >></a></li>
+			<li><a href="/news/{{ news_category.name }}{{ response.pagination.next }}">{{ language.next }}</a></li>
 		{% endif %}
 		</ul>
 		</nav>
@@ -63,10 +63,10 @@
 		<nav class="ow-pagination">
 			<ul class="pagination">
 		{% if response.pagination.previous  !=  None %}
-			<li><a href="/news{{ response.pagination.previous }}"><< Previous</a></li>
+			<li><a href="/news{{ response.pagination.previous }}">{{ language.previous }}</a></li>
 		{% endif %}
 		{% if response.pagination.next  !=  None %}
-			<li><a href="/news{{ news_category.name }}{{ response.pagination.next }}">Next >></a></li>
+			<li><a href="/news{{ news_category.name }}{{ response.pagination.next }}">{{ language.next }}</a></li>
 		{% endif %}
 		</ul>
 		</nav>

@@ -33,7 +33,7 @@
 						<div class="welcome-content">
 							<span>{{ edu.education_type }}</span>
 							<p>{{ edu.about_education[0:40] }}...</p>
-							<a href="/educations/{{edu.education_type}}/{{ edu.id }}" title="Daxil ol">Daxil ol</a>
+							<a href="/educations/{{edu.education_type}}/{{ edu.id }}" title="{{ language.view }}">{{ language.view }}</a>
 						</div>
 					</div>
 				</div>
@@ -45,10 +45,10 @@
 		<nav class="ow-pagination">
 			<ul class="pagination">
 		{% if response.pagination.previous  !=  None %}
-			<li><a href="/educations/{{ categories.name }}{{ response.pagination.previous }}"><< Previous</a></li>
+			<li><a href="/educations/{{ categories.name }}{{ response.pagination.previous }}">{{ language.previous }}</a></li>
 		{% endif %}
 		{% if response.pagination.next  !=  None %}
-			<li><a href="/educations/{{ categories.name }}{{ response.pagination.next }}">Next >></a></li>
+			<li><a href="/educations/{{ categories.name }}{{ response.pagination.next }}">{{ language.next }}</a></li>
 		{% endif %}
 		</ul>
 		</nav>
@@ -57,10 +57,10 @@
 		<nav class="ow-pagination">
 			<ul class="pagination">
 		{% if response.pagination.previous  !=  None %}
-			<li><a href="/educations{{ response.pagination.previous }}"><< Previous</a></li>
+			<li><a href="/educations{{ response.pagination.previous }}">{{ language.previous }}</a></li>
 		{% endif %}
 		{% if response.pagination.next  !=  None %}
-			<li><a href="/educations{{ categories.name }}{{ response.pagination.next }}">Next >></a></li>
+			<li><a href="/educations{{ categories.name }}{{ response.pagination.next }}">{{ language.next }}</a></li>
 		{% endif %}
 		</ul>
 		</nav>

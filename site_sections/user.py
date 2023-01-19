@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Request, UploadFile, Depends, File
 from PIL import Image
 from sqlalchemy.orm import Session
-import configurations.models as models, configurations.database as database, secrets, pathlib
+from configurations import models, database
+import secrets, pathlib
 from starlette.responses import RedirectResponse
 from starlette.status import HTTP_303_SEE_OTHER
 from utils.helper import templates, check_user_in_site, site_default_variables
@@ -14,6 +15,7 @@ user_panel = APIRouter(
 @user_panel.get("/profile/{id}")
 def update_profile(id: int, request: Request, db: Session = Depends(database.get_db)):
     check_site_user = check_user_in_site(request)
+    lang = check_user_in_site(request)['site_language']
     if check_site_user['site_settings']:
         if check_site_user['site_settings'].is_active is None:
             return templates.TemplateResponse("site/closed.html", {"request":request})
@@ -25,12 +27,12 @@ def update_profile(id: int, request: Request, db: Session = Depends(database.get
                     news_category = db.query(models.NewsCategory).all()
                     profile = db.query(models.User).filter_by(id=id).first()
                     if profile:
-                        page_title = profile.name_surname +" - Profil məlumatları"
+                        page_title = profile.name_surname +" - "+lang.user_profile_info_page_title
                     else:
                         return RedirectResponse("/",status_code=HTTP_303_SEE_OTHER)
                     return templates.TemplateResponse("site/route/profile.html", {"request":request, "user":check_site_user['user'], "edu":edu, "categories":categories,
                                                                                 "current_user":check_site_user['current_user'], "profile":profile, "news_category":news_category,
-                                                                                "page_title":page_title, "site_settings":check_site_user['site_settings']})
+                                                                                "page_title":page_title, "site_settings":check_site_user['site_settings'],"language":lang})
                 else:
                     return RedirectResponse("/",status_code=HTTP_303_SEE_OTHER)
             else:
@@ -40,6 +42,7 @@ def update_profile(id: int, request: Request, db: Session = Depends(database.get
 @user_panel.get("/update_profile/{id}")
 def update_profile(id: int, request: Request, db: Session = Depends(database.get_db)):
     check_site_user = check_user_in_site(request)
+    lang = check_user_in_site(request)['site_language']
     if check_site_user['site_settings']:
         if check_site_user['site_settings'].is_active is None:
             return templates.TemplateResponse("site/closed.html", {"request":request})
@@ -48,18 +51,18 @@ def update_profile(id: int, request: Request, db: Session = Depends(database.get
             if check_site_user['user']:
                 if id == check_site_user['user'].id or check_site_user['user'].admin_user == True or check_site_user['user'].super_user == True:
                     check_id = db.query(models.User).filter_by(id=id).first()
-                    page_title = check_id.name_surname +" - Profil məlumatları"
+                    page_title = check_id.name_surname +" - "+lang.user_profile_info_page_title
                     return templates.TemplateResponse("site/route/update_profile.html", {"request":request, "user":check_site_user['user'], "edu":variables['educations'], "categories":variables['categories'], "current_user":check_site_user['current_user'],
                                                                                         "news_category":variables['news_category'], "page_title":page_title, "site_settings":check_site_user['site_settings'],
-                                                                                        "flash":variables['_flash_message'], "check_id":check_id})
+                                                                                        "flash":variables['_flash_message'], "check_id":check_id,"language":lang})
                 else:
                     return RedirectResponse("/",status_code=HTTP_303_SEE_OTHER)
-            if check_site_user['current_user']:
+            if  check_site_user['current_user']:
                 check_id = db.query(models.User).filter_by(id=id).first()
                 page_title = check_id.name_surname +" - Profil məlumatları"
                 return templates.TemplateResponse("site/route/update_profile.html", {"request":request, "user":check_site_user['user'], "edu":variables['educations'], "categories":variables['categories'], "current_user":check_site_user['current_user'],
                                                                                     "news_category":variables['news_category'], "page_title":page_title, "site_settings":check_site_user['site_settings'],
-                                                                                    "flash":variables['_flash_message'], "check_id":check_id})
+                                                                                    "flash":variables['_flash_message'], "check_id":check_id,"language":lang})
             else:
                 return RedirectResponse("/",status_code=HTTP_303_SEE_OTHER)
 
@@ -67,6 +70,7 @@ def update_profile(id: int, request: Request, db: Session = Depends(database.get
 @user_panel.post("/update_profile/{id}")
 async def post_update_profile(id:int, request: Request, db:Session = Depends(database.get_db), file: UploadFile = File(...)):
     check_site_user = check_user_in_site(request)
+    lang = check_user_in_site(request)['site_language']
     if check_site_user['user']:
         if id == check_site_user['user'].id or check_site_user['user'].admin_user == True or check_site_user['user'].super_user == True:
             user = db.query(models.User).filter_by(id=id)
@@ -88,7 +92,7 @@ async def post_update_profile(id:int, request: Request, db:Session = Depends(dat
                 if len(filename) > 0:
                     extension = filename.split(".")[1]
                     if extension not in ["png","jpg","jpeg"]:
-                        request.session["flash_messsage"].append({"message": "Yalnız JPG, PNG, JPEG", "category": "error"})
+                        request.session["flash_messsage"].append({"message": lang.image_extension_error_message, "category": "error"})
                         request = RedirectResponse(url=f"/update_profile/{id}",status_code=HTTP_303_SEE_OTHER)
                         return request
                     else:
@@ -109,12 +113,12 @@ async def post_update_profile(id:int, request: Request, db:Session = Depends(dat
                         user.update({'name_surname':name_surname, 'age':age, 'city':city, 'profile_picture':token_name, 'phone':phone, 'education':education,
                                     'certificate_points':certificate_points, 'about':about, 'select_university_id':select_university_id},synchronize_session=False)
                         db.commit()
-                        request.session["flash_messsage"].append({"message": "Profil tamamlandı", "category": "success"})
+                        request.session["flash_messsage"].append({"message": lang.profile_success_message, "category": "success"})
                         request = RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
                         return request
             user.update({'name_surname':name_surname, 'age':age, 'city':city, 'phone':phone, 'education':education, 'certificate_points':certificate_points,
                         'about':about, 'select_university_id':select_university_id},synchronize_session=False)
             db.commit()
-            request.session["flash_messsage"].append({"message": "Profil tamamlandı", "category": "success"})
+            request.session["flash_messsage"].append({"message": lang.profile_success_message, "category": "success"})
             request = RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
             return request

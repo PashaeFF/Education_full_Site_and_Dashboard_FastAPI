@@ -17,19 +17,19 @@
             {% include 'flash.html' %}
             
 				{% if current_user %}
-					Daxil olmusunuz...
+					{{ language.logged_in }}
 				{% else %}
 				<main class="col-md-4"> 
 					<form method ="POST">
 						<div class="mb-3">
-							<label for="email" class="form-label">Email address</label>
+							<label for="email" class="form-label">{{ language.email }}</label>
 							<input type="email" required class="form-control" name="email" placeholder="email@gmail.com" aria-describedby="emailHelp">
 						</div>
 						<div class="mb-3">
-							<label for="password" class="form-label">Password</label>
-							<input type="password" required class="form-control" name="password" placeholder = "Parol">
+							<label for="password" class="form-label">{{ language.password }}</label>
+							<input type="password" required class="form-control" name="password" placeholder = "{{ language.password }}">
 						</div><br/>
-						<button type="submit" class="btn btn-primary">Daxil ol</button>
+						<button type="submit" class="btn btn-primary">{{ language.login }}</button> <a href="/forgot-password">{{ language.forgot_password_question }}</a>
 					</form>
 					<div class="clear"></div>
             	</main>
