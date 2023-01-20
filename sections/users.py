@@ -18,9 +18,10 @@ async def index(request: Request, page: int = 1, page_size: int = 10):
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
             response = paginate.paginate(data=variables['user_admin'], data_length=len(variables['user_admin']),page=page, page_size=page_size)
+            page_title = 'İstifadəçilər'
             return templates.TemplateResponse("dashboard/admin_users.html", {"request": request, "user_admin":response, "count":len(variables['users']), 
                                                 "messages_time":variables['messages_time'], "unread":variables['unread'], "counts":variables['counts'], 
-                                                "user":check['user']} )
+                                                "user":check['user'], "page_title":page_title} )
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -37,8 +38,10 @@ def user_profile(id: int, request: Request, db: Session = Depends(database.get_d
         if check['user'].admin_user == True or check['user'].super_user == True:
             if change_user:
                 variables = default_variables(request)
+                page_title = 'İstifadəçilər'
                 return templates.TemplateResponse("dashboard/profile.html", {"request":request,"user":check['user'], "messages_time":variables['messages_time'], 
-                                                                            "flash":variables['_flash_message'], "unread":variables['unread'], "change_user":change_user})
+                                                                            "flash":variables['_flash_message'], "unread":variables['unread'], "change_user":change_user,
+                                                                            "page_title ":page_title})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)
@@ -60,8 +63,10 @@ def user_update(id: int, request: Request, db:Session = Depends(database.get_db)
             if change_user:
                 selected_edu = db.query(models.Education).filter_by(id=id).first()
                 variables = default_variables(request)
+                page_title = 'İstifadəçilər'
                 return templates.TemplateResponse("dashboard/edit_user.html", {"request":request, "user":check['user'], "count": len(variables['users']), "messages_time":variables['messages_time'],
-                                                    "education":variables['education'], "selected_edu":selected_edu, "unread":variables['unread'], "counts":variables['counts'], "change_user":change_user})
+                                                    "education":variables['education'], "selected_edu":selected_edu, "unread":variables['unread'], "counts":variables['counts'], "change_user":change_user,
+                                                    "page_title ":page_title})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)

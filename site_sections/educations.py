@@ -10,7 +10,7 @@ site_educations = APIRouter(
 )
 
 @site_educations.get("/educations")
-def get_all_news(request: Request, page: int = 1, page_size: int = 6):
+def get_all_educations(request: Request, page: int = 1, page_size: int = 6):
     check_site_user = check_user_in_site(request)
     lang = check_user_in_site(request)['site_language']
     if check_site_user['site_settings']:
@@ -25,6 +25,7 @@ def get_all_news(request: Request, page: int = 1, page_size: int = 6):
                                                 "categories":variables['categories'], "news_category":variables['news_category'],
                                                 "user":check_site_user['user'], "current_user":check_site_user['current_user'],
                                                 "language":lang})
+
 
 @site_educations.get("/educations/{name}")
 def get_category(name: str, request: Request, db: Session = Depends(database.get_db), page: int = 1, page_size: int = 6):

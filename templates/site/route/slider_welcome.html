@@ -1,7 +1,8 @@
 <div class="container welcome-section">
     <div class="section-padding"></div>
     <div class="section-header">
-        <h3>{{ language.last_added }}</h3>
+        {% set last_added = language.last_added.split(' ') %}
+        <h3>{{ last_added[0] }} <span>{{ last_added[1] }} {{ last_added[2] }}</span></h3>
     </div>
     <div class="row">
         {% include 'flash.html' %}

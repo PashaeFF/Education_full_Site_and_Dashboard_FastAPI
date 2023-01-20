@@ -21,8 +21,10 @@ def site_slider_settings(request: Request):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Slayderlər'
             return templates.TemplateResponse("dashboard/slider.html", {"request":request, "sliders":variables['sliders'], "count": len(variables['users']), "flash":variables['_flash_message'],
-                                                                        "unread":variables['unread'], "counts":variables['counts'], "messages_time": variables['messages_time'], "user":check['user']})
+                                                                        "unread":variables['unread'], "counts":variables['counts'], "messages_time": variables['messages_time'], "user":check['user'],
+                                                                        "page_title":page_title})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:

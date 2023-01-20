@@ -1,0 +1,67 @@
+ <!-- Start Blog Section -->
+ {% if news %}
+ <section class="blog-section semi_dark_bg section-ptb" data-aos="fade-up">
+    <div class="blog-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center mb-4">
+                        <h4>Blog Posts</h4>
+                        <h2>Latest News</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for item in news[-4:] %}
+                <div class="col-lg-6 mb-3d-5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="big-blog-area border bg-white">
+                        {% if news|last %}
+                        <div class="blog-thumb">
+                            {% if item.news_image %}
+                                <img src="/static/news_images/{{ item.news_image }}" alt="big blog" class="img-fluid"></a>
+                            {% else %}
+                                <img src="/static/site/images/eduway_news.png" alt="big blog" class="img-fluid"></a>
+                            {% endif %}
+                        </div>
+                        
+                        
+                        <div class="blog-content p-4">
+                            <div class="blog-meta">
+                                <span><i aria-hidden="true" class="fa fa-list-alt"></i> {{ item.select_category.name }}</span> <span class="seperator"> | </span>
+                                <span><i aria-hidden="true" class="fa fa-clock-o"></i> {{ item.created_at.strftime('%Y-%m-%d') }}</span>
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">{{ item.news_title }}</a></h3>
+                                <p>{{ item.description[0:200] }}...</p>
+                                <a href="/news/{{ item.select_category.name }}/{{ item.id }}">{{ language.detail }}<i class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                    
+                    <div class="blog-lists-wrapper">
+                        {% else %}
+                        <div class="single-blog-wrapper">
+                            <div class="blog-thumb pe-4">
+                                <a href="#"><img src="assets/images/blog_03.jpg" alt="blog"></a>
+                            </div>
+                            <div class="blog-content-wrapper">
+                                <h4><a href="#">Most unusual uses of artificial intelli gence projects.</a></h4>
+                                <p>Lorem ipsum dolor sit amet, cteturadipiscing elit, sed do eiusmod tempor. ipsum
+                                    dolor.</p>
+                                <div class="post-meta"><span> Posted on 25 March, 2019</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- End Blog Section -->
+{% endif %}

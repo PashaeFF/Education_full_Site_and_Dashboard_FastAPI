@@ -21,10 +21,11 @@ def educations(request: Request, page: int = 1, page_size: int = 10):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Təhsil'
             response = paginate.paginate(data=variables['education'], data_length=len(variables['education']),page=page, page_size=page_size)
             return templates.TemplateResponse("dashboard/educations.html",{"request":request, "response":response, "unread":variables['unread'], "users":variables['users'],
                                                 "education_category":variables['education_category'], "counts":variables['counts'], "count":len(variables['users']), "messages_time": variables['messages_time'],
-                                                "user":check['user'], "flash":variables['_flash_message']})
+                                                "user":check['user'], "flash":variables['_flash_message'], 'page_title':page_title})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -132,8 +133,10 @@ def get_education(id:int, request: Request, db:Session = Depends(database.get_db
                 variables = default_variables(request)
                 user_in_edu = db.query(models.User).filter_by(select_university_id = id).all()
                 edu_users = paginate.paginate(data=user_in_edu, data_length=len(user_in_edu), page=page, page_size=page_size)
+                page_title = 'Təhsil'
                 return templates.TemplateResponse("dashboard/get_education.html",{"request":request, "unread":variables['unread'], "user":check['user'], "response":edu_users, "edu_id":id,
-                                                    "counts":variables['counts'], "edu":edu, "user_in_edu":user_in_edu, "count":len(variables['users']), "messages_time": variables['messages_time']})
+                                                    "counts":variables['counts'], "edu":edu, "user_in_edu":user_in_edu, "count":len(variables['users']), "messages_time": variables['messages_time'],
+                                                    "page_title":page_title})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
@@ -153,9 +156,10 @@ def update_education(id:int, request: Request, db:Session = Depends(database.get
         if check['user'].admin_user == True or check['user'].super_user == True:
             if edu:
                 variables = default_variables(request)
+                page_title = 'Təhsil'
                 return templates.TemplateResponse("dashboard/update_education.html",{"request":request, "education_category":variables['education_category'], 
                                                                                     "unread":variables['unread'], "edu":edu,"counts":variables['counts'], "count":len(variables['users']),
-                                                                                    "messages_time": variables['messages_time'], "user":check['user']})
+                                                                                    "messages_time": variables['messages_time'], "user":check['user'], "page_title":page_title})
             else:
                 request.session["flash_messsage"].append({"message": f"Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
@@ -220,6 +224,27 @@ def delete_education(id:int, request: Request, db:Session = Depends(database.get
                 request.session["flash_messsage"].append({"message": "Mövcud deyil", "category": "error"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
+        else:
+            return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+    else:
+        return RedirectResponse(url="/admin/login", status_code=HTTP_303_SEE_OTHER)
+
+@education_panel.get("/educategory/{id}/delete")
+def delete_edu_categoryy(id:int, request: Request, db:Session = Depends(database.get_db)):
+    check = check_user(request)
+    delete_option = db.query(models.Education).filter_by(id=id)
+    request.session["flash_messsage"] = []
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
+            delete_option = db.query(models.EduCategory).filter_by(id=id)
+            name = delete_option.first().name
+            same_category = db.query(models.Education).filter_by(education_type=name)
+            same_category.delete()
+            delete_option.delete()
+            db.commit()
+            request.session["flash_messsage"].append({"message": f"{name} silindi", "category": "success"})
+            request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
+            return request
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:

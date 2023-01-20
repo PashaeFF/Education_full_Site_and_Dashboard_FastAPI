@@ -146,7 +146,7 @@ a {
 	word-wrap: break-word;
 }
 .section-header h3 span{
-	color: #001aad;
+	color: #7f088c
 }
 .section-header p {
 	color: #777;
@@ -580,7 +580,7 @@ a {
 /* ## Header */
 /* -- Top Header */	
 .top-header {
-	background-color: #333;
+	background-color: #7f088c;
 	line-height: 50px;
 }
 .topheader-left {
@@ -588,7 +588,7 @@ a {
 	width: 50%;
 }
 .topheader-left a {
-	color: #999;
+	color: rgb(255, 254, 254);
     display: inline-block;
     font-size: 13px;
     margin-right: 10px;
@@ -631,7 +631,7 @@ a {
 	width: 50%;
 }
 .topheader-right a {
-	color: #999;
+	color: rgb(255, 255, 255);
     font-size: 13px;
     line-height: 26px;
     margin-right: 10px;
@@ -806,7 +806,7 @@ a {
 /* ## Footer */
 /* -- Footer Main */
 .footer-main {
-	background-color: #232323;	
+	background-color: #7f088c;	
 }
 .footer-main .row {
 	padding-top: 88px;
@@ -838,7 +838,7 @@ a.footer-logo{
     top: -6px;
 }
 .footer-logo span{
-	color: #777;
+	color: rgb(0, 0, 0);
     display: block;
     font-family: 'Roboto Slab', serif;
     font-size: 13px;
@@ -854,7 +854,7 @@ a.footer-logo{
 	display: inline-block;
 }
 .about_widget ul li a{
-	color: #888888;
+	color: #ffffff;
     font-size: 13px;
     letter-spacing: 0.65px;
     line-height: 24px;
@@ -1133,7 +1133,7 @@ a.footer-logo{
 	font-size: 12px;
 	line-height: 26px;
 	letter-spacing: 0.6px;
-	color: #888;
+	color: rgb(255, 255, 255);
 	display: inline-block;
 	font-family: 'Roboto Slab', serif;
 }
@@ -1154,7 +1154,7 @@ a.footer-logo{
 	font-size: 12px;
 	line-height: 26px;
 	letter-spacing: 0.6px;
-	color: #888;
+	color: rgb(255, 255, 255);
 	display: inline-block;
 	font-family: 'Roboto Slab', serif;
 	font-weight: 400;

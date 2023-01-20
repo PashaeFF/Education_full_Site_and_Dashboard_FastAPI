@@ -38,9 +38,13 @@ def check_user_in_site(request: Request, db: Session = database.get_db()):
         current_user = verify_token(access_token)
         user = db.query(models.User).filter_by(id=current_user).first()
         if user:
-            user_language = db.query(models.SiteLanguages).filter_by(id=user.user_site_language).first()
-            if user_language:
-                site_language = user_language
+            if user.is_active == True:
+                user_language = db.query(models.SiteLanguages).filter_by(id=user.user_site_language).first()
+                if user_language:
+                    site_language = user_language
+            else:
+                current_user = ""
+                user = ""
     else:
         guest_language = db.query(models.SiteLanguages).filter_by(id=language_cookie).first()
         current_user = ""
@@ -55,7 +59,6 @@ def check_user_in_site(request: Request, db: Session = database.get_db()):
         'user':user
     }
     return us
-
 
 
 def flash_message(request: Request):

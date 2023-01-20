@@ -47,19 +47,24 @@ async def post_login(response: Response, request: Request, db: Session = Depends
     user = db.query(models.User).filter_by(email=email).first()
     request.session["flash_messsage"] = []
     if user:
-        if Hasher.verify_password(password,user.password) == True:
-            data = {
-                "sub": email,
-                "id": user.id,
-            }
-            request.session["flash_messsage"].append({"message": lang.user_logged_message, "category": "success"})
-            response = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
-            response.set_cookie(key="access_token", value=f"Bearer {create_access_token(data=data)}", httponly=True)
-            return response
-        else:
-            request.session["flash_messsage"].append({"message": lang.wrong_password_message, "category": "error"})
-            request = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
-            return request
+        if user.is_active == True:
+            if Hasher.verify_password(password,user.password) == True:
+                data = {
+                    "sub": email,
+                    "id": user.id,
+                }
+                request.session["flash_messsage"].append({"message": lang.user_logged_message, "category": "success"})
+                response = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
+                response.set_cookie(key="access_token", value=f"Bearer {create_access_token(data=data)}", httponly=True)
+                return response
+            
+            else:
+                request.session["flash_messsage"].append({"message": lang.wrong_password_message, "category": "error"})
+                request = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
+                return request
+        request.session["flash_messsage"].append({"message": 'Deaktiv user', "category": "error"})
+        request = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
+        return request
     else:
         request.session["flash_messsage"].append({"message": lang.user_does_not_exist_message, "category": "error"})
         request = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)

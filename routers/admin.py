@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from sections import education_dashboard, users, slider, settings, news, staff, messages, site_languages
 from utils.helper import templates, check_user, default_variables
 from utils import paginate
-from configurations.token import verify_token
 from configurations import models, database
 
 dashboard = APIRouter(
@@ -20,10 +19,11 @@ async def index(request: Request, page: int = 1, page_size: int = 10):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'İdarə paneli'
             response = paginate.paginate(data=variables['users'], data_length=len(variables['users']),page=page, page_size=page_size)
             return templates.TemplateResponse("dashboard/index.html", {"request": request, "response": response, "count": len(variables['users']), "user":check['user'],
                                                                         "messages_time":variables['messages_time'], "counts":variables['counts'], "unread": variables['unread'],
-                                                                        "flash": variables['_flash_message']} )
+                                                                        "flash": variables['_flash_message'], "page_title":page_title} )
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:

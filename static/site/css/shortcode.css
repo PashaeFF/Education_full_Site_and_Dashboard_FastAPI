@@ -111,7 +111,7 @@
 }
 .photoslider-section .item a {
 	animation-delay: 3s;
-	background-color: #6822ff;
+	background-color: #a066b6;
     color: #333;
     display: inline-block;
     font-family: 'Mark Pro', Serif;
@@ -137,7 +137,7 @@
 	width: 0;
 	bottom: 0;
 	top: 0;
-	background-color: rgba(255,255,255,1);
+	background-color: rgb(207 153 215 / 43%);
 	transition: all 0.3s ease 0s;
 	-webkit-transition: all 0.3s ease 0s;
 	-moz-transition: all 0.3s ease 0s;
@@ -370,7 +370,7 @@
 	letter-spacing: 0.48px;
 	line-height: 26px;
 	padding: 9px 22px;
-	background-color: #6822ff;
+	background-color: #e875de;
 	color: #fff;
 	transition: all 1s ease 0s;
 	-webkit-transition: all 1s ease 0s;
@@ -2173,7 +2173,8 @@
 .blog .type-post .entry-contentblock{
 	max-width: 805px;
 	top: -55px;
-	border: 1px solid #f8f8f8;
+	border: 1px solid #d3a0cfa4;
+	box-shadow:  -5px 10px rgba(195, 171, 194, 0.663);
 	padding-left: 41px;
 	padding-bottom: 40px;
 	padding-top: 38px;

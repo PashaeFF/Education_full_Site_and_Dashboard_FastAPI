@@ -21,10 +21,11 @@ def news(request: Request, page: int = 1, page_size: int = 10):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Xəbərlər'
             news_all = paginate.paginate(data=variables['site_news'], data_length=len(variables['site_news']), page=page, page_size=page_size)
             return templates.TemplateResponse("dashboard/news.html",{"request":request, "response":news_all, "news_category":variables['news_category'],
                                                 "counts":variables['counts'], "unread":variables['unread'], "count":len(variables['users']), "messages_time": variables['messages_time'], "user":check['user'],
-                                                "flash":variables['_flash_message']})
+                                                "flash":variables['_flash_message'], "page_title":page_title})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -129,9 +130,10 @@ def get_update_news(id:int, request: Request, db:Session = Depends(database.get_
         if check['user'].admin_user == True or check['user'].super_user == True:
             if news:
                 variables = default_variables(request)
+                page_title = 'Xəbərlər'
                 return templates.TemplateResponse("dashboard/get_update_news.html",{"request":request, "unread":variables['unread'], "messages_time": variables['messages_time'],
                                                     "counts":variables['counts'], "news_category":variables['news_category'], "news":news, "count":len(variables['users']), "user":check['user'],
-                                                    "flash":variables['_flash_message']})
+                                                    "flash":variables['_flash_message'],"page_title":page_title})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil", "category": "error"})
                 request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)

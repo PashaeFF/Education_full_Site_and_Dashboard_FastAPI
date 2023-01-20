@@ -134,6 +134,16 @@ class SiteSettings(Base):
   ######################################
  #########  Site Languages  ###########
 ######################################
+ #########     Dashboard    ###########
+######################################
+# class DashboardLanguages(Base):
+#   __tablename__ = 'dashboard_language'
+
+#   id = Column(Integer, primary_key=True)
+  
+
+ #########       Site       ###########
+######################################
 class SiteLanguages(Base):
   __tablename__ = 'site_language'
 

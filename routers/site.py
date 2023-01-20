@@ -11,21 +11,22 @@ site_main = APIRouter(
     tags=['Site']
 )
 
+
 @site_main.post("/set_lang/")
 async def user_set_language(request: Request, response: Response, db: Session = Depends(database.get_db)):
     form = await request.form()
     check_site_user = check_user_in_site(request)
     if check_site_user['user']:
+        print(check_site_user['user'].id)
         user_set_language = db.query(models.User).filter_by(id=check_site_user['user'].id)
         user_set_language.update({
             'user_site_language':form.get('id')
             })
         db.commit()
         return RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
-    else:
-        response = RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
-        response.set_cookie(key="user_site_language", value=form.get('id'), httponly=True)
-        return response
+    response = RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
+    response.set_cookie(key="user_site_language", value=form.get('id'), httponly=True)
+    return response
         
 
 @site_main.get("/")

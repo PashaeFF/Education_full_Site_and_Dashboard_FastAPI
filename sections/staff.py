@@ -8,9 +8,11 @@ from starlette.status import HTTP_303_SEE_OTHER
 import secrets, pathlib
 from utils.helper import templates, check_user, default_variables
 
+
 staff_panel = APIRouter(
     tags=['Dashboard / Staff'],
 )
+
 
 @staff_panel.get('/staff')
 def staff(request: Request):
@@ -18,8 +20,10 @@ def staff(request: Request):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Heyət'
             return templates.TemplateResponse("dashboard/staff.html",{"request":request,"staff":variables['staff'], "messages_time": variables['messages_time'],
-                                                "unread":variables['unread'], "counts":variables['counts'], "count":len(variables['users']), "user":check['user'], "flash":variables['_flash_message']})
+                                                "unread":variables['unread'], "counts":variables['counts'], "count":len(variables['users']), "user":check['user'],
+                                                 "flash":variables['_flash_message'], "page_title":page_title})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:

@@ -15,9 +15,10 @@ def site_settings(request: Request, db:Session = Depends(database.get_db)):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Parametrlər'
             return templates.TemplateResponse("dashboard/site_settings.html",{"request":request, "unread":variables['unread'], "site":variables['site'],
                                                 "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message'],
-                                                "site_language":variables['languages_all']})
+                                                "site_language":variables['languages_all'], "page_title":page_title})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:

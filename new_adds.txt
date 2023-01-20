@@ -1,0 +1,4 @@
+1) auth.py >>>>>> async def post_login
+request.session["flash_messsage"].append({"message": 'Deaktiv user', "category": "error"})
+
+2)

@@ -26,10 +26,11 @@ def all_languages_page(request: Request, db: Session = Depends(database.get_db))
             check_eng = db.query(models.SiteLanguages).filter_by(lang_name=eng_lang.lang_name[0]).first()
             check_az = db.query(models.SiteLanguages).filter_by(lang_name=az_lang.lang_name[0]).first()
             variables = default_variables(request)
+            page_title = 'Saytın dilləri'
             return templates.TemplateResponse("dashboard/site_languages.html",{"request":request, "languages":variables['languages_all'], "news_category":variables['news_category'],
                                                 "counts":variables['counts'], "unread":variables['unread'], "count":len(variables['users']), "messages_time": variables['messages_time'],
                                                 "user":check['user'], "flash":variables['_flash_message'], "site_language":check_lang['site_settings'].set_site_language,
-                                                "check_eng":check_eng, "check_az":check_az, "check_ru":check_ru })
+                                                "check_eng":check_eng, "check_az":check_az, "check_ru":check_ru, "page_title":page_title})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -50,7 +51,7 @@ async def install_language_pack(lang_pack:str, request: Request, db: Session = D
         if check['user'].admin_user == True or check['user'].super_user == True:
             if lang_pack == "en":
                 if check_eng:
-                    request.session["flash_messsage"].append({"message": f"Bazada {en.lang_name[0]} paketi mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": f"{en.lang_name[0]} dil paketi mövcuddur", "category": "error"})
                     request = RedirectResponse(url="/admin/languages/",status_code=HTTP_303_SEE_OTHER)
                     return request 
                 else:
@@ -60,7 +61,7 @@ async def install_language_pack(lang_pack:str, request: Request, db: Session = D
                     return request
             elif lang_pack == "az":
                 if check_az:
-                    request.session["flash_messsage"].append({"message": f"Bazada {az.lang_name[0]} paketi mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": f"{az.lang_name[0]} paketi mövcuddur", "category": "error"})
                     request = RedirectResponse(url="/admin/languages/",status_code=HTTP_303_SEE_OTHER)
                     return request 
                 else:
@@ -70,7 +71,7 @@ async def install_language_pack(lang_pack:str, request: Request, db: Session = D
                     return request
             elif lang_pack == "ru":
                 if check_ru:
-                    request.session["flash_messsage"].append({"message": f"Bazada {ru.lang_name[0]} paketi mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": f"{ru.lang_name[0]} paketi mövcuddur", "category": "error"})
                     request = RedirectResponse(url="/admin/languages/",status_code=HTTP_303_SEE_OTHER)
                     return request 
                 else:
@@ -95,10 +96,11 @@ def add_site_language(request:Request):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Saytın dilləri'
             return templates.TemplateResponse("/dashboard/add_site_language.html", {
                                                 'request':request, "unread":variables['unread'], "site":variables['site'],
                                                 "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message'],
-                                                "default":default})
+                                                "default":default, "page_title":page_title})
 
 
 @languages_panel.post("/languages/add-language")
@@ -118,11 +120,11 @@ async def add_site_language_form(request:Request, db: Session = Depends(database
 
             for i in lang:
                 if form.get('lang_name') == i.lang_name:
-                    request.session["flash_messsage"].append({"message": f"Bazada {form.get('lang_name')} adlı dil var!", "category": "error"})
+                    request.session["flash_messsage"].append({"message": f"{form.get('lang_name')} adlı dil var!", "category": "error"})
                     request = RedirectResponse(url="/admin/languages/add-language",status_code=HTTP_303_SEE_OTHER)
                     return request
                 if form.get('short_lang_name') == i.short_lang_name:
-                    request.session["flash_messsage"].append({"message": f"Bazada {form.get('short_lang_name')} adlı dil var!", "category": "error"})
+                    request.session["flash_messsage"].append({"message": f"{form.get('short_lang_name')} adlı dil var!", "category": "error"})
                     request = RedirectResponse(url="/admin/languages/add-language",status_code=HTTP_303_SEE_OTHER)
                     return request
 
@@ -247,6 +249,7 @@ def get_language_page(id:int, request:Request, db: Session = Depends(database.ge
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
+            page_title = 'Saytın dilləri'
             return templates.TemplateResponse("/dashboard/get_site_language.html", {
                                                 'request':request, 'lang':language, "unread":variables['unread'], "site":variables['site'],
                                                 "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message'],
