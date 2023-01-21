@@ -188,9 +188,6 @@ twitter = 'Twitter'
 behance = 'Behance'
 profile_picture = 'Profil fotosu'
 
-
-
-
 ######## universal values ##########
 name_and_surname = 'Ad və soyad' 
 date_of_birth = 'Doğum tarixi'

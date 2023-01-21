@@ -62,7 +62,7 @@ async def post_login(response: Response, request: Request, db: Session = Depends
                 request.session["flash_messsage"].append({"message": lang.wrong_password_message, "category": "error"})
                 request = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
                 return request
-        request.session["flash_messsage"].append({"message": 'Deaktiv user', "category": "error"})
+        request.session["flash_messsage"].append({"message": lang.deactive_user_message, "category": "error"})
         request = RedirectResponse(url=request.headers['referer'], status_code=HTTP_303_SEE_OTHER)
         return request
     else:

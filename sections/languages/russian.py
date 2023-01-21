@@ -129,6 +129,22 @@ forgot_password_question = 'Забыли свой пароль?'
 #reset-password.html
 confirm_password = 'Подтверждение пароля'
 send = 'Отправить'
+#user.py
+max_4_file = 'Вы можете загрузить максимум 4 файла'
+profile_info = 'Информация профиля'
+deleted = 'Все удалено'
+files_uploaded = 'Файлы загружены'
+file_upload = 'Загрузить файл'
+#auth.py
+deactive_user_message = 'Пользователь не активен'
+#profile.html
+student_files = 'Студенческие файлы'
+delete_all = 'Удалить все'
+add = 'Добавить'
+#upload_files.html
+add_max_4_file = 'Добавить файл (максимум 4 файла)'
+there_are_no_files = 'Нет файлов'
+
 
 def set_russian_language(db: Session = database.get_db()):
     russian_language = models.SiteLanguages(
@@ -230,7 +246,18 @@ def set_russian_language(db: Session = database.get_db()):
                                         password_changed=password_changed,
                                         forgot_password_question=forgot_password_question,
                                         confirm_password=confirm_password,
-                                        send=send
+                                        send=send,
+                                        max_4_file = max_4_file,
+                                        profile_info = profile_info,
+                                        deleted = deleted,
+                                        files_uploaded = files_uploaded,
+                                        file_upload = file_upload,
+                                        deactive_user_message = deactive_user_message,
+                                        student_files = student_files,
+                                        delete_all = delete_all,
+                                        add = add,
+                                        add_max_4_file = add_max_4_file,
+                                        there_are_no_files = there_are_no_files
                                         )
     db.add(russian_language)
     db.commit()

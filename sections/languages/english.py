@@ -129,6 +129,21 @@ forgot_password_question = 'Forgot password?'
 #reset-password.html
 confirm_password = 'Confirm Password'
 send = 'Send'
+#user.py
+max_4_file = 'You can upload a maximum of 4 files'
+profile_info = 'Profile information'
+deleted = 'All deleted'
+files_uploaded = 'Files uploaded'
+file_upload = 'File upload'
+#auth.py
+deactive_user_message = 'Пользователь не активен'
+#profile.html
+student_files = 'Студенческие файлы'
+delete_all = 'Удалить все'
+add = 'Add'
+#upload_files.html
+add_max_4_file = 'Add file (Maximum 4 files)'
+there_are_no_files = 'There are no files'
 
 def set_english_language(db: Session = database.get_db()):
     english_language = models.SiteLanguages(
@@ -230,7 +245,18 @@ def set_english_language(db: Session = database.get_db()):
                                         password_changed=password_changed,
                                         forgot_password_question=forgot_password_question,
                                         confirm_password=confirm_password,
-                                        send=send
+                                        send=send,
+                                        max_4_file=max_4_file,
+                                        profile_info=profile_info,
+                                        deleted=deleted,
+                                        files_uploaded=files_uploaded,
+                                        file_upload=file_upload,
+                                        deactive_user_message=deactive_user_message,
+                                        student_files=student_files,
+                                        delete_all=delete_all,
+                                        add=add,
+                                        add_max_4_file=add_max_4_file,
+                                        there_are_no_files=there_are_no_files
                                         )
     db.add(english_language)
     db.commit()

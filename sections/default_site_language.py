@@ -129,6 +129,21 @@ forgot_password_question = 'Parolu unutmusan?'
 #reset-password.html
 confirm_password = 'Parolun təsdiqi'
 send = 'Göndər'
+#user.py
+max_4_file = 'Maksimum 4 fayl yükləyə bilərsiniz'
+profile_info = 'Profil məlumatları'
+deleted = 'Hamısı silindi'
+files_uploaded = 'Fayllar yükləndi'
+file_upload = 'Fayl yüklənməsi'
+#auth.py
+deactive_user_message = 'İstifadəçi deaktivdir'
+#profile.html
+student_files = 'Tələbə faylları'
+delete_all = 'Hamısını sil'
+add = 'Əlavə et'
+#upload_files.html
+add_max_4_file = 'Fayl əlavə et(Maksimum 4 ədəd)'
+there_are_no_files = 'Heç bir fayl yoxdur'
 
 
 def set_default_language(db: Session = database.get_db()):
@@ -231,7 +246,18 @@ def set_default_language(db: Session = database.get_db()):
                                         password_changed=password_changed,
                                         forgot_password_question=forgot_password_question,
                                         confirm_password=confirm_password,
-                                        send=send
+                                        send=send,
+                                        max_4_file=max_4_file,
+                                        profile_info=profile_info,
+                                        deleted=deleted,
+                                        files_uploaded=files_uploaded,
+                                        file_upload=file_upload,
+                                        deactive_user_message=deactive_user_message,
+                                        student_files=student_files,
+                                        delete_all=delete_all,
+                                        add=add,
+                                        add_max_4_file=add_max_4_file,
+                                        there_are_no_files=there_are_no_files
                                         )
     db.add(default_site_language)
     db.commit()

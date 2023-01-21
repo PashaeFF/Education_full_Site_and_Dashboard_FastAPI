@@ -4,8 +4,6 @@
     <!-- left -->
       {% include 'dashboard/left_sidebar.html' %}
     <!-- end -->
-
-  
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
       {% include 'dashboard/navbar.html' %}
@@ -18,7 +16,6 @@
         <div class="row gx-4 mb-2">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              
               {% if change_user.profile_picture %}
                 <img src="/static/profile_pictures/{{ change_user.profile_picture }}" alt="profile_image"  width="90" height="90" class="w-100 border-radius-lg shadow-sm centered-and-cropped">
               {% else %}
@@ -26,13 +23,11 @@
               {% endif %}
             </div>
           </div>
-          
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
                 {{ change_user.name_surname }}
               </h5>
-              
             </div>
           </div>
           {% include 'flash.html' %}
@@ -49,13 +44,10 @@
                 <div class="card-body">
                   {% if user_education_files %}
                     {% for image in user_education_files %}
-                    
                         <a href="/static/user_files/{{ change_user.id }}/{{image}}"><img src="/static/user_files/{{ change_user.id }}/{{image}}" style="width:240px;"></a>
                         <hr>
                     {% endfor %}
                   {% endif %}
-                  
-                  
                 </div>
               </div>
             </div>

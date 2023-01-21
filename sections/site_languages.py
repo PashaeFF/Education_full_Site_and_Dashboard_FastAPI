@@ -227,7 +227,18 @@ async def add_site_language_form(request:Request, db: Session = Depends(database
                                         confirm_password=form.get('confirm_password'),
                                         send=form.get('send'),
                                         link_timed_out=form.get('link_timed_out'),
-                                        visit_the_link_reset_password=form.get('visit_the_link_reset_password')
+                                        visit_the_link_reset_password=form.get('visit_the_link_reset_password'),
+                                        max_4_file=form.get('max_4_file'),
+                                        profile_info=form.get('profile_info'),
+                                        deleted=form.get('deleted'),
+                                        files_uploaded=form.get('files_uploaded'),
+                                        file_upload=form.get('file_upload'),
+                                        deactive_user_message=form.get('deactive_user_message'),
+                                        student_files=form.get('student_files'),
+                                        delete_all=form.get('delete_all'),
+                                        add=form.get('add'),
+                                        add_max_4_file=form.get('add_max_4_file'),
+                                        there_are_no_files=form.get('there_are_no_files')
                                         )
             db.add(add_new_language)
             db.commit()
@@ -321,7 +332,18 @@ async def change_site_language(id:int, request:Request, db: Session = Depends(da
                     "password_not_same_confirm_password":form.get('password_not_same_confirm_password'),
                     "password_changed":form.get('password_changed'), "forgot_password_question":form.get('forgot_password_question'),
                     "confirm_password":form.get('confirm_password'), "send":form.get('send'), "link_timed_out":form.get('link_timed_out'),
-                    'visit_the_link_reset_password':form.get('visit_the_link_reset_password')
+                    "visit_the_link_reset_password":form.get('visit_the_link_reset_password'),
+                    "max_4_file":form.get('max_4_file'),
+                    "profile_info":form.get('profile_info'),
+                    "deleted":form.get('deleted'),
+                    "files_uploaded":form.get('files_uploaded'),
+                    "file_upload":form.get('file_upload'),
+                    "deactive_user_message":form.get('deactive_user_message'),
+                    "student_files":form.get('student_files'),
+                    "delete_all":form.get('delete_all'),
+                    "add":form.get('add'),
+                    "add_max_4_file":form.get('add_max_4_file'),
+                    "there_are_no_files":form.get('there_are_no_files')
                     })
             
             db.commit()

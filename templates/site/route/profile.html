@@ -81,7 +81,7 @@
                     </div>
                     <hr>
                     <div class="col">
-                        <p class="m-b-10 f-w-600">Education files</p>
+                        <p class="m-b-10 f-w-600">{{ language.student_files }}</p>
                         <h6 class="text-muted f-w-400">
                             {% if user_education_files %}
                                 {% for image in user_education_files %}
@@ -89,11 +89,11 @@
                                 {% endfor %}
                                 <form method="POST" action="/files/{{ profile.id }}/delete">
                                     <br/>
-                                    <input type="submit" value="Hamisini sil">
+                                    <input type="submit" value="{{ language.delete_all }}">
                                 </form>
                                 
                             {% else %}
-                                Hech bir fayl yoxdur. <a href="/user/{{ profile.id }}/upload">Elave et</a>
+                                {{ language.there_are_no_files }}. <a href="/user/{{ profile.id }}/upload">{{ language.add }}</a>
                             {% endif %}
                         </h6>
                     </div>

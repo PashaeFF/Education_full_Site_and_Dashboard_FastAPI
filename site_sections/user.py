@@ -63,7 +63,7 @@ def user_upload(id: int, request: Request, db: Session = Depends(database.get_db
                     profile = db.query(models.User).filter_by(id=id).first()
                     variables = site_default_variables(request)
                     if profile:
-                        page_title = profile.name_surname +" - Fayl upload"
+                        page_title = profile.name_surname +" - "+lang.file_upload
                         if profile.education_files:
                             return RedirectResponse("/",status_code=HTTP_303_SEE_OTHER)
                     else:
@@ -91,7 +91,7 @@ async def user_upload_file(id: int, request: Request, db: Session = Depends(data
                 user = db.query(models.User).filter_by(id=check_site_user['current_user'])
                 if id == check_site_user['user'].id:
                     if len(files) > 4:
-                        request.session["flash_messsage"].append({"message": "Maksimum 4 fayl", "category": "error"})
+                        request.session["flash_messsage"].append({"message": lang.max_4_file, "category": "error"})
                         request = RedirectResponse(url=f"/user/{user.first().id}/upload",status_code=HTTP_303_SEE_OTHER)
                         return request
                     directory = check_site_user['user'].id
@@ -119,7 +119,7 @@ async def user_upload_file(id: int, request: Request, db: Session = Depends(data
                                 file.close()
                         user.update({'education_files':user_files[:-1]},synchronize_session=False)
                         db.commit()
-                        request.session["flash_messsage"].append({"message": 'Fayllar yuklendi', "category": "success"})
+                        request.session["flash_messsage"].append({"message": lang.files_uploaded, "category": "success"})
                         request = RedirectResponse(url=f"/profile/{id}",status_code=HTTP_303_SEE_OTHER)
                         return request
 
@@ -144,7 +144,7 @@ def update_profile(id: int, request: Request, db: Session = Depends(database.get
                     return RedirectResponse("/",status_code=HTTP_303_SEE_OTHER)
             if  check_site_user['current_user']:
                 check_id = db.query(models.User).filter_by(id=id).first()
-                page_title = check_id.name_surname +" - Profil məlumatları"
+                page_title = check_id.name_surname +" - "+lang.profile_info
                 return templates.TemplateResponse("site/route/update_profile.html", {"request":request, "user":check_site_user['user'], "edu":variables['educations'], "categories":variables['categories'], "current_user":check_site_user['current_user'],
                                                                                     "news_category":variables['news_category'], "page_title":page_title, "site_settings":check_site_user['site_settings'],
                                                                                     "flash":variables['_flash_message'], "check_id":check_id,"language":lang})
@@ -212,6 +212,7 @@ async def post_update_profile(id:int, request: Request, db:Session = Depends(dat
 @user_panel.post("/files/{id}/delete")
 def delete_user_files(id:int, request: Request, db:Session = Depends(database.get_db)):
     check_site_user = check_user_in_site(request)
+    lang = check_user_in_site(request)['site_language']
     if check_site_user['user']:
         profile = db.query(models.User).filter_by(id=id)
         user_education_files = profile.first().education_files.split(',')
@@ -224,6 +225,6 @@ def delete_user_files(id:int, request: Request, db:Session = Depends(database.ge
                 for image in user_education_files:
                     delete_image = pathlib.Path(FILEPATH+image)
                     delete_image.unlink()
-            request.session["flash_messsage"].append({"message": "Silindi", "category": "success"})
+            request.session["flash_messsage"].append({"message": lang.deleted, "category": "success"})
             request = RedirectResponse(url=f"/profile/{profile.first().id}",status_code=HTTP_303_SEE_OTHER)
             return request

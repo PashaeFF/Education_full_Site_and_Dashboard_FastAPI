@@ -248,6 +248,17 @@ class SiteLanguages(Base):
   link_timed_out = Column(String, nullable=False)
   visit_the_link_reset_password = Column(String, nullable=False)
   send = Column(String, nullable=False)
+  max_4_file = Column(String, nullable=False)
+  profile_info = Column(String, nullable=False)
+  deleted = Column(String, nullable=False)
+  files_uploaded = Column(String, nullable=False)
+  file_upload = Column(String, nullable=False)
+  deactive_user_message = Column(String, nullable=False)
+  student_files = Column(String, nullable=False)
+  delete_all = Column(String, nullable=False)
+  add = Column(String, nullable=False)
+  add_max_4_file = Column(String, nullable=False)
+  there_are_no_files = Column(String, nullable=False)
   
   ######################################
  ########   Admin Messages   ##########
