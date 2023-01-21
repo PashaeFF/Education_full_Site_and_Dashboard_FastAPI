@@ -47,9 +47,14 @@
                   <h6 class="mb-0">Documents</h6>
                 </div>
                 <div class="card-body">
-                  <a href ="{{ url_for('static', path='dashboard/assets/img/home-decor-1.jpg') }}" class="d-block shadow-l border-radius-l">
-                    <img src="{{ url_for('static', path='dashboard/assets/img/home-decor-1.jpg') }}" width = "240px" class="img-fluid shadow border-radius-xl">
-                  </a><br/>
+                  {% if user_education_files %}
+                    {% for image in user_education_files %}
+                    
+                        <a href="/static/user_files/{{ change_user.id }}/{{image}}"><img src="/static/user_files/{{ change_user.id }}/{{image}}" style="width:240px;"></a>
+                        <hr>
+                    {% endfor %}
+                  {% endif %}
+                  
                   
                 </div>
               </div>

@@ -39,9 +39,13 @@ def user_profile(id: int, request: Request, db: Session = Depends(database.get_d
             if change_user:
                 variables = default_variables(request)
                 page_title = 'İstifadəçilər'
+                if change_user.education_files:
+                    user_education_files = change_user.education_files.split(',')
+                else:
+                    user_education_files = ""
                 return templates.TemplateResponse("dashboard/profile.html", {"request":request,"user":check['user'], "messages_time":variables['messages_time'], 
                                                                             "flash":variables['_flash_message'], "unread":variables['unread'], "change_user":change_user,
-                                                                            "page_title ":page_title})
+                                                                            "page_title ":page_title, "user_education_files":user_education_files})
             else:
                 request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)
