@@ -59,3 +59,5 @@ def get_category(name: str, request: Request, db: Session = Depends(database.get
                                                 "response":response, "site_settings":check_site_user['site_settings'], "news_category":variables['news_category'],
                                                 "user":check_site_user['user'], "current_user":check_site_user['current_user'],"language":lang})
 
+
+

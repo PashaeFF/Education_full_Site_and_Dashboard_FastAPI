@@ -41,6 +41,7 @@
                             <p class="m-b-10 f-w-600">{{ language.email }}</p>
                             <h6 class="text-muted f-w-400">{{ profile.email }}</h6>
                         </div>
+                        
                     </div>
                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
                     <div class="row">
@@ -75,6 +76,15 @@
                             <p class="m-b-10 f-w-600">{{ language.education_of_choice }}</p>
                             <h6 class="text-muted f-w-400">{% for category in categories if profile.select_university.id == category.id %}{{ category.name }}{% endfor %} - {{ profile.select_university.name }}</h6>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="col">
+                        <p class="m-b-10 f-w-600">Education files</p>
+                        <h6 class="text-muted f-w-400">
+                            {% for image in user_education_files %}
+                                <a href="/static/user_files/{{ profile.id }}/{{image}}"><img src="/static/user_files/{{ profile.id }}/{{image}}" style="width:128px;height:128px;"></a>
+                            {% endfor %}
+                        </h6>
                     </div>
                     <ul class="social-link list-unstyled m-t-40 m-b-10">
                         <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>

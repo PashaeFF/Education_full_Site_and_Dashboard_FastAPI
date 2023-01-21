@@ -223,3 +223,24 @@ def delete_education(id:int, request: Request, db:Session = Depends(database.get
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+
+
+@news_panel.get("/newscategory/{id}/delete")
+def delete_news_categoryy(id:int, request: Request, db:Session = Depends(database.get_db)):
+    check = check_user(request)
+    request.session["flash_messsage"] = []
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
+            delete_option = db.query(models.NewsCategory).filter_by(id=id)
+            name = delete_option.first().name
+            same_category = db.query(models.SiteNews).filter_by(select_category_id=id)
+            same_category.delete()
+            delete_option.delete()
+            db.commit()
+            request.session["flash_messsage"].append({"message": f"{name} silindi", "category": "success"})
+            request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
+            return request
+        else:
+            return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+    else:
+        return RedirectResponse(url="/admin/login", status_code=HTTP_303_SEE_OTHER)

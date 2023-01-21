@@ -1,0 +1,42 @@
+{% include 'site/route/header.html' %}
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+	{% include 'site/route/topnav.html' %}
+	<!-- PageBanner -->
+	<div class="container-fluid no-padding pagebanner">
+		<div class="container">
+			<div class="pagebanner-content">
+				<h3>{{ page_title }}</h3>
+			</div>
+		</div>
+	</div><!-- PageBanner /- -->
+	<!-- Event Section -->
+	<div class="container event-section">
+		<div class="section-padding"></div>			
+		<div class="event-block">
+		<!-- Body -->
+            {% include 'flash.html' %}
+            <div class="col-md-4">
+                
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="col-md-5">
+                        <label for="files">Fayl elave et(maksimum 4 fayl):</label>
+                        <input type="file" id="files" name="files" multiple><br><br>
+                    </div>
+                    <div class="col-md-12">
+                        <br/>
+                      <hr>
+                      <button class="btn btn-primary" type="submit">{{ language.save }}</button>
+                    </div>
+                  </form>
+            </div>
+            </div>
+        <!-- end Body --> 
+		</div>
+			
+		<div class="section-padding"></div>
+	</div><!-- Event Section /- -->	
+	<!-- Footer Main -->
+	{% include 'site/route/footer.html' %}
+	
+</body>
+</html>
