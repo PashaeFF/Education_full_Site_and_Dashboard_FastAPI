@@ -6,7 +6,7 @@
             <i class="fa fa-cube" aria-hidden="true" style="font-size:22px;color:white"></i>
             <span class="ms-1 font-weight-bold text-white">Dashboard</span>
         </div>
-        <form align="center" method="POST" action="/lang/">
+        <form align="center" method="POST" action="/admin/lang/">
           {% for lang in dashboard_languages %}
             <button type="submit" class="btn btn-info" name="id" value="{{ lang.id }}">{{ lang.dashboard_short_language_name }}</button>
           {% endfor %}

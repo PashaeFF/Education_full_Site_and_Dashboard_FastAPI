@@ -43,25 +43,6 @@ def dashboard_login(request: Request):
                                                                 "dashboard_languages":check['dashboard_languages']})
 
 
-@dashboard.post("/lang/")
-async def post_language(request: Request, db: Session = Depends(database.get_db)):
-    check = check_user(request)
-    if check['user']:
-        if check['user'].admin_user == True or check['user'].super_user == True:
-            user = db.query(models.User).filter_by(id=check['current_user'])
-            if user:
-                form = await request.form()
-                user.update({"user_dashboard_language":form.get('id')})
-                db.commit()
-                for i in request.headers.items():
-                    if i[0] == 'referer':
-                        referer = i[1]
-                return RedirectResponse(url=referer, status_code=HTTP_303_SEE_OTHER)
-        else:
-            return RedirectResponse("/", status_code=HTTP_303_SEE_OTHER)
-    else:
-        return RedirectResponse("/", status_code=HTTP_303_SEE_OTHER)
-
 
 @dashboard.post("/functions/{id}")
 async def post_functions(id:str, request: Request, db: Session = Depends(database.get_db)):
@@ -80,6 +61,26 @@ async def post_functions(id:str, request: Request, db: Session = Depends(databas
                 if id == "color":
                     sidebar_selected_color = form.get("sidebar_selected_color")
                     user.update({"sidebar_selected_color":sidebar_selected_color})
+                db.commit()
+                for i in request.headers.items():
+                    if i[0] == 'referer':
+                        referer = i[1]
+                return RedirectResponse(url=referer, status_code=HTTP_303_SEE_OTHER)
+        else:
+            return RedirectResponse("/", status_code=HTTP_303_SEE_OTHER)
+    else:
+        return RedirectResponse("/", status_code=HTTP_303_SEE_OTHER)
+    
+@dashboard.post("/lang/")
+async def post_language(request: Request, db: Session = Depends(database.get_db)):
+    check = check_user(request)
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
+            user = db.query(models.User).filter_by(id=check['current_user'])
+            if user:
+                form = await request.form()
+                print("formmm: ",form)
+                user.update({"user_dashboard_language":form.get('id')})
                 db.commit()
                 for i in request.headers.items():
                     if i[0] == 'referer':
