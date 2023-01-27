@@ -8,7 +8,7 @@ from utils.helper import templates
 from utils.hashing import Hasher
 from configurations.token import create_access_token
 from sections import default_site_language, default_dashboard_language
-from sections.languages import english, russian, dashboard_english_language
+from sections.languages import dashboard_english, dashboard_russian, english, russian
 
 installer = APIRouter(
     prefix= ("/install")
@@ -38,10 +38,10 @@ async def select_language_post(request: Request, db: Session = Depends(database.
             default_dashboard_language.set_azerbaijan_language()
             return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
         elif form.get('set_dashboard_language') == "2":
-            dashboard_english_language.set_english()
+            dashboard_english.set_english()
             return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
         elif form.get('set_dashboard_language') == "3":
-            default_dashboard_language.set_azerbaijan_language()
+            dashboard_russian.set_russian()
             return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
         else:
             return RedirectResponse("/install", HTTP_303_SEE_OTHER)
@@ -121,7 +121,9 @@ async def post_installer_page(request: Request, response: Response, db: Session 
             if i.dashboard_language_name != 'Azərbaycan dili':
                 default_dashboard_language.set_azerbaijan_language()
             if i.dashboard_language_name != 'English':
-                dashboard_english_language.set_english()
+                dashboard_english.set_english()
+            if i.dashboard_language_name != 'Русский':
+                dashboard_russian.set_russian()
 
         db.add(user)
         db.add(site)
