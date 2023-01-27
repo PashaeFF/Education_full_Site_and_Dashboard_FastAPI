@@ -18,6 +18,7 @@ class User(Base):
   profile_picture = Column(String, nullable=True)
   education_files = Column(Text, nullable=True)
   user_site_language = Column(Integer, nullable=True, default=1)
+  user_dashboard_language = Column(Integer, nullable=True, default=1)
 
   navbar_fixed = Column(String, nullable=True, default="")
   site_mode = Column(String, nullable=True, default="")
@@ -116,6 +117,7 @@ class SiteSettings(Base):
   address = Column(String, nullable=True, default="")
   google_map = Column(String, nullable=True, default="")
   set_site_language = Column(Integer, nullable=False, default=1)
+  set_dashboard_language = Column(Integer, nullable=False, default=1)
 
 
   youtube_video = Column(String, nullable=True, default="")
@@ -140,8 +142,8 @@ class DashboardLanguages(Base):
   __tablename__ = 'dashboard_language'
 
   id = Column(Integer, primary_key=True)
-  dashboard_language_name = Column(String, nullable=False)
-  dashboard_short_language_name = Column(String, nullable=False)
+  dashboard_language_name = Column(String, nullable=False, unique=True)
+  dashboard_short_language_name = Column(String, nullable=False, unique=True)
   image_extension_error = Column(String, nullable=False)
   conflict_error = Column(String, nullable=False)
   required_boxes_error = Column(String, nullable=False)
@@ -149,7 +151,6 @@ class DashboardLanguages(Base):
   name_cannot_be_empty = Column(String, nullable=False)
   does_not_exist = Column(String, nullable=False)
   updated = Column(String, nullable=False)
-  deleted = Column(String, nullable=False)
   messages_deleted = Column(String, nullable=False)
   message_deleted = Column(String, nullable=False)
   news_title_or_description_empty = Column(String, nullable=False)
@@ -307,6 +308,18 @@ class DashboardLanguages(Base):
   password = Column(String, nullable=False)
   login = Column(String, nullable=False)
   site_languages = Column(String, nullable=False)
+  correct_email_message = Column(String, nullable=False)
+  password_minimum_8_character_message = Column(String, nullable=False)
+  boxes_are_cannot_empty = Column(String, nullable=False)
+  there_is_no_such_option = Column(String, nullable=False)
+  the_site_is_ready_for_use = Column(String, nullable=False)
+  installation_panel = Column(String, nullable=False)
+  create_super_user = Column(String, nullable=False)
+  site_url = Column(String, nullable=False)
+  site_language = Column(String, nullable=False)
+  category_name = Column(String, nullable=False)
+  posts_count = Column(String, nullable=False)
+  add_photo = Column(String, nullable=False)
     
 
  #########       Site       ###########

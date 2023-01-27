@@ -19,14 +19,14 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         {% include 'flash.html' %}<br/>
-                        <h4><b>Edit site language - {{ lang.lang_name }} ({{ lang.short_lang_name }})</b></h4>
+                        <h4><b>{{ language.edit_site_language }} - {{ lang.lang_name }} ({{ lang.short_lang_name }})</b></h4>
                             <form class="row g-3" method ="POST">
                                 <div class="col-md-5">
-                                    <label for="lang_name" class="form-label"><b>Language name:</b></label>
+                                    <label for="lang_name" class="form-label"><b>{{ language.language_name }}:</b></label>
                                     <input type="text" class="form-control is-valid" name="lang_name" required value="">
                                 </div> 
                                 <div class="col-md-5">
-                                    <label for="short_lang_name" class="form-label"><b>Short Language name('AZ','RU','EN'):</b></label>
+                                    <label for="short_lang_name" class="form-label"><b>{{ language.short_language_name }}:</b></label>
                                     <input type="text" class="form-control is-valid" name="short_lang_name" required value="">
                                 </div>
                                 <div class="col-md-5">
@@ -468,7 +468,7 @@
                                 </div>
                                 <br/>
                             <p align="row">
-                                <button class="btn btn-primary" type="submit">Update</button>
+                                <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                             </p>
                             </form>
                     </div>     

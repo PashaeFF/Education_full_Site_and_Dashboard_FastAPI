@@ -6,6 +6,11 @@
             <i class="fa fa-cube" aria-hidden="true" style="font-size:22px;color:white"></i>
             <span class="ms-1 font-weight-bold text-white">Dashboard</span>
         </div>
+        <form align="center" method="POST" action="/lang/">
+          {% for lang in dashboard_languages %}
+            <button type="submit" class="btn btn-info" name="id" value="{{ lang.id }}">{{ lang.dashboard_short_language_name }}</button>
+          {% endfor %}
+        </form>
     <hr class="horizontal light mt-0 mb-2">
    
       <ul class="navbar-nav">
@@ -26,7 +31,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-envelope"></i>
             </div>
-            <span class="nav-link-text ms-1">Mesajlar ({{ unread | length }})</span>
+            <span class="nav-link-text ms-1">{{ language.messages }} ({{ unread | length }})</span>
           </a>
   
           <li class="nav-item mt-3">
@@ -38,7 +43,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-users"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">Users</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.users }}</font></span>
           </a>
         </li>
   
@@ -47,12 +52,12 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-user-shield"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">Admin Users</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.admin_users }}</font></span>
           </a>
         </li>
   
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Site Settings</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ language.site_settings }}</h6>
         </li>
   
       <li class="nav-item">
@@ -60,7 +65,7 @@
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-sliders"></i>
               </div>
-              <span class="nav-link-text ms-2"><font size = "4" color="white">Slider Settings</font></span>
+              <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.slider_settings }}</font></span>
           </a>
       </li>
       <li class="nav-item">
@@ -68,7 +73,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-cog"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">Site Settings</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.site_settings }}</font></span>
         </a>
       </li>
   
@@ -77,7 +82,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-user-graduate"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">Educations</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.educations_settings }}</font></span>
           </a>
         </li>
         <li class="nav-item">
@@ -85,7 +90,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-newspaper-o"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">News</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.news }}</font></span>
           </a>
         </li>
         <li class="nav-item">
@@ -93,7 +98,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-language" aria-hidden="true"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">Saytın dilləri</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.site_languages }}</font></span>
           </a>
         </li>
         <li class="nav-item">
@@ -101,7 +106,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-user-tie"></i>
             </div>
-            <span class="nav-link-text ms-2"><font size = "4" color="white">Staff</font></span>
+            <span class="nav-link-text ms-2"><font size = "4" color="white">{{ language.staff }}</font></span>
           </a>
         </li>
       </ul>

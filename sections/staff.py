@@ -20,10 +20,11 @@ def staff(request: Request):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
-            page_title = 'Heyət'
+            page_title = check['dashboard_language'].staff_title
             return templates.TemplateResponse("dashboard/staff.html",{"request":request,"staff":variables['staff'], "messages_time": variables['messages_time'],
                                                 "unread":variables['unread'], "counts":variables['counts'], "count":len(variables['users']), "user":check['user'],
-                                                 "flash":variables['_flash_message'], "page_title":page_title})
+                                                 "flash":variables['_flash_message'], "page_title":page_title, "language":check['dashboard_language'],
+                                                 "dashboard_languages":check['dashboard_languages']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -50,7 +51,7 @@ async def create_staff(request: Request, db:Session = Depends(database.get_db),f
             if len(filename) > 0 and len(name_surname) > 0 and len(job_position) > 0:
                 extension = filename.split(".")[1]
                 if extension not in ["png","jpg","jpeg"]:
-                    request.session["flash_messsage"].append({"message": "Yalnız JPG, PNG, JPEG", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].image_extension_error, "category": "error"})
                     request = RedirectResponse(url=f"/admin/staff",status_code=HTTP_303_SEE_OTHER)
                     return request
                 else:
@@ -67,11 +68,11 @@ async def create_staff(request: Request, db:Session = Depends(database.get_db),f
                 db.add(new_staff)
                 db.commit()
                 db.refresh(new_staff)
-                request.session["flash_messsage"].append({"message": "Əlavə olundu", "category": "success"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].was_added, "category": "success"})
                 request = RedirectResponse(url=f"/admin/staff",status_code=HTTP_303_SEE_OTHER)
                 return request
             else:
-                request.session["flash_messsage"].append({"message": "Ulduzlu sahələri mütləq doldurmalısınız..", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].required_boxes_error, "category": "error"})
                 request = RedirectResponse(url=f"/admin/staff",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -95,7 +96,7 @@ def delete_staff(id:int, request: Request, db:Session = Depends(database.get_db)
                 old = pathlib.Path(FILEPATH+image)
                 old.unlink()
             request.session["flash_messsage"] = []
-            request.session["flash_messsage"].append({"message": "Silindi", "category": "success"})
+            request.session["flash_messsage"].append({"message": check['dashboard_language'].deleted, "category": "success"})
             request = RedirectResponse(url=f"/admin/staff",status_code=HTTP_303_SEE_OTHER)
             return request
         else:

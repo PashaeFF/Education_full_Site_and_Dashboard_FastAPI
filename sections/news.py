@@ -21,11 +21,12 @@ def news(request: Request, page: int = 1, page_size: int = 10):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
-            page_title = 'Xəbərlər'
+            page_title = check['dashboard_language'].news_title
             news_all = paginate.paginate(data=variables['site_news'], data_length=len(variables['site_news']), page=page, page_size=page_size)
             return templates.TemplateResponse("dashboard/news.html",{"request":request, "response":news_all, "news_category":variables['news_category'],
                                                 "counts":variables['counts'], "unread":variables['unread'], "count":len(variables['users']), "messages_time": variables['messages_time'], "user":check['user'],
-                                                "flash":variables['_flash_message'], "page_title":page_title})
+                                                "flash":variables['_flash_message'], "page_title":page_title, "language":check['dashboard_language'],
+                                                "dashboard_languages":check['dashboard_languages']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -51,7 +52,7 @@ async def create_news(request: Request, db:Session = Depends(database.get_db),fi
                 if len(filename) > 0:
                     extension = filename.split(".")[1]
                     if extension not in ["png","jpg","jpeg"]:
-                        request.session["flash_messsage"].append({"message": "Yalnız JPG, PNG, JPEG", "category": "error"})
+                        request.session["flash_messsage"].append({"message": check['dashboard_language'].image_extension_error, "category": "error"})
                         request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                         return request
                     else:
@@ -69,18 +70,18 @@ async def create_news(request: Request, db:Session = Depends(database.get_db),fi
             check_name = db.query(models.SiteNews).filter_by(news_title=news_title).first()
             if check_name:
                 if news_title == check_name.news_title:
-                    request.session["flash_messsage"].append({"message": "Ad mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].conflict_error, "category": "error"})
                     request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                     return request
             else:
                 if len(news_title) == 0 and len(description) == 0:
-                    request.session["flash_messsage"].append({"message": "Xəbər adı və Description boş ola bilməz...", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].news_title_or_description_empty, "category": "error"})
                     request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                     return request
                 db.add(new_news)
                 db.commit()
                 db.refresh(new_news)
-                request.session["flash_messsage"].append({"message": f"'{news_title}' adlı xəbər əlavə olundu", "category": "success"})
+                request.session["flash_messsage"].append({"message": f"'{news_title}' {check['dashboard_language'].added_to_the_news}", "category": "success"})
                 request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -100,19 +101,19 @@ async def add_news_category(request: Request, db:Session = Depends(database.get_
             check_name = db.query(models.NewsCategory).filter_by(name=category_name).first()
             if check_name:
                 if category_name == check_name.name:
-                    request.session["flash_messsage"].append({"message": "Ad mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].conflict_error, "category": "error"})
                     request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                     return request
             else:
                 if len(category_name) == 0:
-                    request.session["flash_messsage"].append({"message": "Ad boş ola bilməz...", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].name_cannot_be_empty, "category": "error"})
                     request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                     return request
                 new_news_category = models.NewsCategory(name=category_name)
                 db.add(new_news_category)
                 db.commit()
                 db.refresh(new_news_category)
-                request.session["flash_messsage"].append({"message": f"'{category_name}' adlı kateqoriya əlavə olundu", "category": "success"})
+                request.session["flash_messsage"].append({"message": f"'{category_name}' {check['dashboard_language'].added_to_categories}", "category": "success"})
                 request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -130,12 +131,13 @@ def get_update_news(id:int, request: Request, db:Session = Depends(database.get_
         if check['user'].admin_user == True or check['user'].super_user == True:
             if news:
                 variables = default_variables(request)
-                page_title = 'Xəbərlər'
+                page_title = check['dashboard_language'].news_title
                 return templates.TemplateResponse("dashboard/get_update_news.html",{"request":request, "unread":variables['unread'], "messages_time": variables['messages_time'],
                                                     "counts":variables['counts'], "news_category":variables['news_category'], "news":news, "count":len(variables['users']), "user":check['user'],
-                                                    "flash":variables['_flash_message'],"page_title":page_title})
+                                                    "flash":variables['_flash_message'],"page_title":page_title, "language":check['dashboard_language'],
+                                                    "dashboard_languages":check['dashboard_languages']})
             else:
-                request.session["flash_messsage"].append({"message": "Mövcud deyil", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -167,7 +169,7 @@ async def post_update_news(id:int, request: Request, db:Session = Depends(databa
                 if len(filename) > 0:
                     extension = filename.split(".")[1]
                     if extension not in ["png","jpg","jpeg"]:
-                        request.session["flash_messsage"].append({"message": "Yalnız JPG, PNG, JPEG", "category": "error"})
+                        request.session["flash_messsage"].append({"message": check['dashboard_language'].image_extension_error, "category": "error"})
                         request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                         return request
                     else:
@@ -187,7 +189,7 @@ async def post_update_news(id:int, request: Request, db:Session = Depends(databa
                         db.commit()
             changed_news.update({"news_title":news_title,"description":description,"select_category_id":select_category_id})
             db.commit()
-            request.session["flash_messsage"].append({"message": "Updated", "category": "success"})
+            request.session["flash_messsage"].append({"message": check['dashboard_language'].updated, "category": "success"})
             request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
             return request
         else:
@@ -212,11 +214,11 @@ def delete_education(id:int, request: Request, db:Session = Depends(database.get
                 if news_image:
                     delete_image = pathlib.Path(FILEPATH+news_image)
                     delete_image.unlink()
-                request.session["flash_messsage"].append({"message": f"{name} silindi", "category": "success"})
+                request.session["flash_messsage"].append({"message": f"{name} {check['dashboard_language'].deleted}", "category": "success"})
                 request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                 return request
             else:
-                request.session["flash_messsage"].append({"message": "Mövcud deyil", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -237,7 +239,7 @@ def delete_news_categoryy(id:int, request: Request, db:Session = Depends(databas
             same_category.delete()
             delete_option.delete()
             db.commit()
-            request.session["flash_messsage"].append({"message": f"{name} silindi", "category": "success"})
+            request.session["flash_messsage"].append({"message": f"{name} {check['dashboard_language'].deleted}", "category": "success"})
             request = RedirectResponse(url="/admin/news",status_code=HTTP_303_SEE_OTHER)
             return request
         else:

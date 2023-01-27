@@ -1,8 +1,7 @@
 <div class="card shadow-lg">
     <div class="card-header pb-0 pt-3">
       <div class="float-start">
-        <h5 class="mt-3 mb-0">Confiqurasiyalar</h5>
-        <p>Dashboard ayarları</p>
+        <h5 class="mt-3 mb-0">{{ language.configurations }}</h5>
       </div>
       <div class="float-end mt-4">
         <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -15,7 +14,7 @@
     <div class="card-body pt-sm-3 pt-0">
       <!-- Sidebar Backgrounds -->
       <div>
-        <h6 class="mb-0">Sidebar Rəngi</h6>
+        <h6 class="mb-0">{{ language.sidedar_color }}</h6>
       </div>
       
         <div class="badge-colors my-2 text-start">
@@ -30,7 +29,7 @@
         </div>
       <!-- Navbar Fixed -->
       <div class="mt-3 d-flex">
-        <h6 class="mb-0">Navbar Fixed</h6>
+        <h6 class="mb-0">{{ language.navbar_fixed }}</h6>
         <div class="form-check form-switch ps-0 ms-auto my-auto">
           <form method="POST" action="/admin/functions/fixed">
             <input class="form-check-input mt-1 ms-auto" type="checkbox" name="navbar_fixed" {{"checked" if user.navbar_fixed == "on" else ""}} onChange="this.form.submit()">
@@ -39,7 +38,7 @@
       </div>
       <hr class="horizontal dark my-3">
       <div class="mt-2 d-flex">
-        <h6 class="mb-0">Light / Dark</h6>
+        <h6 class="mb-0">{{ language.ligth_or_dark }}</h6>
         <div class="form-check form-switch ps-0 ms-auto my-auto">
           <form method="POST" action="/admin/functions/mode">
             <input class="form-check-input mt-1 ms-auto" type="checkbox" name="site_mode" {{"checked" if user.site_mode == "on" else ""}} onChange="this.form.submit()">

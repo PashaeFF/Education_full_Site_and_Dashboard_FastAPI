@@ -13,16 +13,22 @@ def closed(request, site_settings):
 
 
 def check_user(request: Request, db: Session = database.get_db()):
+    site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
     access_token = request.cookies.get("access_token")
     current_user = verify_token(access_token)
     if current_user:
         user = db.query(models.User).filter_by(id=current_user).first()
+        dashboard_language = db.query(models.DashboardLanguages).filter_by(id=user.user_dashboard_language).first()
+        dashboard_languages = db.query(models.DashboardLanguages).all()
     else:
         user = ""
+        dashboard_language = db.query(models.DashboardLanguages).filter_by(id=site_settings.set_dashboard_language).first()
     us = {
         'access_token':access_token,
         'current_user':current_user,
-        'user':user
+        'user':user,
+        'dashboard_language':dashboard_language,
+        'dashboard_languages':dashboard_languages
     }
     return us
 

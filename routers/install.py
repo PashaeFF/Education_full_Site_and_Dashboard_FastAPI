@@ -7,17 +7,52 @@ from starlette.status import HTTP_303_SEE_OTHER, HTTP_201_CREATED
 from utils.helper import templates
 from utils.hashing import Hasher
 from configurations.token import create_access_token
-from sections import default_site_language
-from sections.languages import english, russian
+from sections import default_site_language, default_dashboard_language
+from sections.languages import english, russian, dashboard_english_language
 
 installer = APIRouter(
     prefix= ("/install")
 )
 
+
 @installer.get("/")
+def select_language(request: Request, db: Session = Depends(database.get_db)):
+    site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
+    if site_settings:
+        return RedirectResponse("/")
+    else:
+        languages = db.query(models.DashboardLanguages).all()
+        if languages:
+            return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
+        return templates.TemplateResponse("select_language.html", {"request":request})
+
+
+@installer.post("/")
+async def select_language_post(request: Request, db: Session = Depends(database.get_db)):
+    site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
+    if site_settings:
+        return RedirectResponse("/")
+    else:
+        form = await request.form()
+        if form.get('set_dashboard_language') == "1":
+            default_dashboard_language.set_azerbaijan_language()
+            return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
+        elif form.get('set_dashboard_language') == "2":
+            dashboard_english_language.set_english()
+            return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
+        elif form.get('set_dashboard_language') == "3":
+            default_dashboard_language.set_azerbaijan_language()
+            return RedirectResponse("/install/2", HTTP_303_SEE_OTHER)
+        else:
+            return RedirectResponse("/install", HTTP_303_SEE_OTHER)
+
+
+
+@installer.get("/2")
 def installer_page(request: Request, db: Session = Depends(database.get_db)):
     site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
     languages = [default_site_language.lang_name[0], russian.lang_name[0], english.lang_name[0]]
+    dashboard_language = db.query(models.DashboardLanguages).filter_by(id=1).first()
     if site_settings:
         return RedirectResponse("/")
     else:
@@ -25,12 +60,14 @@ def installer_page(request: Request, db: Session = Depends(database.get_db)):
         if request.session.get("flash_messsage"):
             _flash_message = request.session.get("flash_messsage")
             request.session.pop("flash_messsage") if "flash_messsage" in request.session else []
-        return templates.TemplateResponse("installation_page.html", {"request":request, "flash":_flash_message, "languages":languages})
+        return templates.TemplateResponse("installation_page.html", {"request":request, "flash":_flash_message, "languages":languages,
+                                                                    "dashboard_language":dashboard_language})
 
 
-@installer.post("/")
+@installer.post("/2")
 async def post_installer_page(request: Request, response: Response, db: Session = Depends(database.get_db)):
     site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
+    dashboard_language = db.query(models.DashboardLanguages).filter_by(id=1).first()
     if site_settings:
         return RedirectResponse("/")
     else:
@@ -45,16 +82,16 @@ async def post_installer_page(request: Request, response: Response, db: Session 
         set_site_language = form.get("set_site_language")
         request.session["flash_messsage"] = []
         if "@" not in email:
-            request.session["flash_messsage"].append({"message": "Emaili düzgün qeyd edin", "category": "error"})
-            request = RedirectResponse(url="/install",status_code=HTTP_303_SEE_OTHER)
+            request.session["flash_messsage"].append({"message": dashboard_language.correct_email_message, "category": "error"})
+            request = RedirectResponse(url="/install/2",status_code=HTTP_303_SEE_OTHER)
             return request
         if len(password) < 8:
-            request.session["flash_messsage"].append({"message": "Parol minimum 8 simvol olmalıdır", "category": "error"})
-            response = RedirectResponse(url="/install",status_code=HTTP_303_SEE_OTHER)
+            request.session["flash_messsage"].append({"message": dashboard_language.password_minimum_8_character_message, "category": "error"})
+            response = RedirectResponse(url="/install/2",status_code=HTTP_303_SEE_OTHER)
             return response
         if len(name_surname) < 1 and len(site_url) < 1 and len(site_title) < 1 and len(site_logo) < 1 and len(site_slogan) < 1:
-            request.session["flash_messsage"].append({"message": "Xanalar boş ola bilməz...", "category": "error"})
-            response = RedirectResponse(url="/install",status_code=HTTP_303_SEE_OTHER)
+            request.session["flash_messsage"].append({"message": dashboard_language.boxes_are_cannot_empty, "category": "error"})
+            response = RedirectResponse(url="/install/2",status_code=HTTP_303_SEE_OTHER)
             return response
         user = models.User(
             email=email,
@@ -68,16 +105,23 @@ async def post_installer_page(request: Request, response: Response, db: Session 
             site_logo=site_logo,
             site_slogan=site_slogan
             )
+        langs_all = db.query(models.DashboardLanguages).all()
         if set_site_language == '1':
             default_site_language.set_default_language()
         elif set_site_language == '2':
             russian.set_russian_language()
         elif set_site_language == '3':
             english.set_english_language()
+            
         else:
-            request.session["flash_messsage"].append({"message": "Belə seçim yoxdur...", "category": "error"})
-            response = RedirectResponse(url="/install",status_code=HTTP_303_SEE_OTHER)
+            request.session["flash_messsage"].append({"message": dashboard_language.there_is_no_such_option, "category": "error"})
+            response = RedirectResponse(url="/install/2",status_code=HTTP_303_SEE_OTHER)
             return response
+        for i in langs_all:
+            if i.dashboard_language_name != 'Azərbaycan dili':
+                default_dashboard_language.set_azerbaijan_language()
+            if i.dashboard_language_name != 'English':
+                dashboard_english_language.set_english()
 
         db.add(user)
         db.add(site)
@@ -90,7 +134,7 @@ async def post_installer_page(request: Request, response: Response, db: Session 
                 "sub": email,
                 "id": user.id,
             }
-        request.session["flash_messsage"].append({"message": "Sayt istifadəyə hazırdır ;)", "category": "success"})
+        request.session["flash_messsage"].append({"message": dashboard_language.the_site_is_ready_for_use, "category": "success"})
         response = RedirectResponse(url=f"/admin",status_code=HTTP_303_SEE_OTHER)
         response.set_cookie(key="access_token", value=f"Bearer {create_access_token(data=data)}", httponly=True)
         return response

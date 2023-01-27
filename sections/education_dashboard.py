@@ -14,6 +14,7 @@ education_panel = APIRouter(
     tags=['Dashboard / Education Panel'],
 )
 
+
 ###########     educations     ###########
 @education_panel.get("/educations")
 def educations(request: Request, page: int = 1, page_size: int = 10):
@@ -21,11 +22,12 @@ def educations(request: Request, page: int = 1, page_size: int = 10):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
-            page_title = 'Təhsil'
+            page_title = check['dashboard_language'].educations_title
             response = paginate.paginate(data=variables['education'], data_length=len(variables['education']),page=page, page_size=page_size)
             return templates.TemplateResponse("dashboard/educations.html",{"request":request, "response":response, "unread":variables['unread'], "users":variables['users'],
-                                                "education_category":variables['education_category'], "counts":variables['counts'], "count":len(variables['users']), "messages_time": variables['messages_time'],
-                                                "user":check['user'], "flash":variables['_flash_message'], 'page_title':page_title})
+                                                "education_category":variables['education_category'], "counts":variables['counts'], "count":len(variables['users']), 
+                                                "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message'], 'page_title':page_title,
+                                                "language":check['dashboard_language'], "dashboard_languages":check['dashboard_languages']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -52,7 +54,7 @@ async def create_educations(request: Request, db:Session = Depends(database.get_
                 if len(filename) > 0:
                     extension = filename.split(".")[1]
                     if extension not in ["png","jpg","jpeg"]:
-                        request.session["flash_messsage"].append({"message": "Yalnız JPG, PNG, JPEG", "category": "error"})
+                        request.session["flash_messsage"].append({"message": check['dashboard_language'].image_extension_error, "category": "error"})
                         request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                         return request
                     else:
@@ -70,18 +72,18 @@ async def create_educations(request: Request, db:Session = Depends(database.get_
             check_name = db.query(models.Education).filter_by(name=name).first()
             if check_name:
                 if name == check_name.name:
-                    request.session["flash_messsage"].append({"message": "Ad mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].conflict_error, "category": "error"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
             else: 
                 if len(name) == 0 and len(about_education) == 0 and len(city) == 0:
-                    request.session["flash_messsage"].append({"message": "Ulduzlu sahələri mütləq doldurmalısınız...", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].required_boxes_error, "category": "error"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
                 db.add(new_education)
                 db.commit()
                 db.refresh(new_education)
-                request.session["flash_messsage"].append({"message": f"'{name}' əlavə olundu", "category": "success"})
+                request.session["flash_messsage"].append({"message": f"'{name}' {check['dashboard_language'].was_added}", "category": "success"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -101,19 +103,19 @@ async def add_education_category(request: Request, db:Session = Depends(database
             check_name = db.query(models.EduCategory).filter_by(name=edu_name).first()
             if check_name:
                 if edu_name == check_name.name:
-                    request.session["flash_messsage"].append({"message": "Ad mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].conflict_error, "category": "error"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
             else:
                 if len(edu_name) == 0:
-                    request.session["flash_messsage"].append({"message": "Ad boş ola bilməz...", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].name_cannot_be_empty, "category": "error"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
                 new_edu_category = models.EduCategory(name=edu_name)
                 db.add(new_edu_category)
                 db.commit()
                 db.refresh(new_edu_category)
-                request.session["flash_messsage"].append({"message": f"'{edu_name}' əlavə olundu", "category": "success"})
+                request.session["flash_messsage"].append({"message": f"'{edu_name}' {check['dashboard_language'].was_added}", "category": "success"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -133,12 +135,12 @@ def get_education(id:int, request: Request, db:Session = Depends(database.get_db
                 variables = default_variables(request)
                 user_in_edu = db.query(models.User).filter_by(select_university_id = id).all()
                 edu_users = paginate.paginate(data=user_in_edu, data_length=len(user_in_edu), page=page, page_size=page_size)
-                page_title = 'Təhsil'
+                page_title = check['dashboard_language'].educations_title
                 return templates.TemplateResponse("dashboard/get_education.html",{"request":request, "unread":variables['unread'], "user":check['user'], "response":edu_users, "edu_id":id,
                                                     "counts":variables['counts'], "edu":edu, "user_in_edu":user_in_edu, "count":len(variables['users']), "messages_time": variables['messages_time'],
-                                                    "page_title":page_title})
+                                                    "page_title":page_title, "language":check['dashboard_language'], "dashboard_languages":check['dashboard_languages']})
             else:
-                request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -156,12 +158,13 @@ def update_education(id:int, request: Request, db:Session = Depends(database.get
         if check['user'].admin_user == True or check['user'].super_user == True:
             if edu:
                 variables = default_variables(request)
-                page_title = 'Təhsil'
+                page_title = check['dashboard_language'].educations_title
                 return templates.TemplateResponse("dashboard/update_education.html",{"request":request, "education_category":variables['education_category'], 
                                                                                     "unread":variables['unread'], "edu":edu,"counts":variables['counts'], "count":len(variables['users']),
-                                                                                    "messages_time": variables['messages_time'], "user":check['user'], "page_title":page_title})
+                                                                                    "messages_time": variables['messages_time'], "user":check['user'], "page_title":page_title,
+                                                                                    "language":check['dashboard_language'], "dashboard_languages":check['dashboard_languages']})
             else:
-                request.session["flash_messsage"].append({"message": f"Mövcud deyil...", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -185,18 +188,18 @@ async def update_post_education(id:int, request: Request, db:Session = Depends(d
             check_name = db.query(models.Education).filter_by(name=name).first()
             if check_name:
                 if name == check_name.name:
-                    request.session["flash_messsage"].append({"message": "Ad mövcuddur", "category": "error"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].conflict_error, "category": "error"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
             else:
                 if len(name) and len(about_education) and len(city) and len(education_type) == 0:
-                    request.session["flash_messsage"].append({"message": f"Ulduzlu sahələr boş ola bilməz...", "category": "success"})
+                    request.session["flash_messsage"].append({"message": check['dashboard_language'].required_boxes_error, "category": "success"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
                 else:
                     edu.update({"name":name, "about_education":about_education, "education_type":education_type, "city":city},synchronize_session=False)
                     db.commit()
-                    request.session["flash_messsage"].append({"message": f"'{name}' update olundu", "category": "success"})
+                    request.session["flash_messsage"].append({"message": f"'{name}' {check['dashboard_language'].updated}", "category": "success"})
                     request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                     return request
         else:
@@ -217,11 +220,11 @@ def delete_education(id:int, request: Request, db:Session = Depends(database.get
                 name = delete_option.first().name
                 delete_option.delete()
                 db.commit()
-                request.session["flash_messsage"].append({"message": f"{name} silindi", "category": "success"})
+                request.session["flash_messsage"].append({"message": f"{name} {check['dashboard_language'].deleted}", "category": "success"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
             else:
-                request.session["flash_messsage"].append({"message": "Mövcud deyil", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -242,7 +245,7 @@ def delete_edu_categoryy(id:int, request: Request, db:Session = Depends(database
             same_category.delete()
             delete_option.delete()
             db.commit()
-            request.session["flash_messsage"].append({"message": f"{name} silindi", "category": "success"})
+            request.session["flash_messsage"].append({"message": f"{name} {check['dashboard_language'].deleted}", "category": "success"})
             request = RedirectResponse(url="/admin/educations",status_code=HTTP_303_SEE_OTHER)
             return request
         else:

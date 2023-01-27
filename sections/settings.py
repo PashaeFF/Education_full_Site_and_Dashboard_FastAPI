@@ -15,10 +15,11 @@ def site_settings(request: Request, db:Session = Depends(database.get_db)):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
-            page_title = 'Parametrlər'
+            page_title = check['dashboard_language'].settings_title
             return templates.TemplateResponse("dashboard/site_settings.html",{"request":request, "unread":variables['unread'], "site":variables['site'],
                                                 "messages_time": variables['messages_time'], "user":check['user'], "flash":variables['_flash_message'],
-                                                "site_language":variables['languages_all'], "page_title":page_title})
+                                                "site_language":variables['languages_all'], "page_title":page_title, "language":check['dashboard_language'],
+                                                "dashboard_languages":check['dashboard_languages']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -72,7 +73,7 @@ async def post_site_settings(request: Request, db:Session = Depends(database.get
                         "saturday":saturday, "sunday":sunday },synchronize_session=False)
             db.commit()
             request.session["flash_messsage"] = []
-            request.session["flash_messsage"].append({"message": "Updated", "category": "success"})
+            request.session["flash_messsage"].append({"message": check['dashboard_language'].updated, "category": "success"})
             request = RedirectResponse(url="/admin/settings",status_code=HTTP_303_SEE_OTHER)
             return request
         else:

@@ -16,23 +16,23 @@
           <div class="card mt-4">
             <div class="card-body p-3 pb-0">
               {% if message.sender_id %}
-                <font color="black">Göndərən:</font> <a href="/admin/user/{{ message.sender_id }}">{{ message.name }}</a> <i class="fa fa-user" style="font-size:12px;color:green"></i><br/>
+                <font color="black">{{ language.sender }}:</font> <a href="/admin/user/{{ message.sender_id }}">{{ message.name }}</a> <i class="fa fa-user" style="font-size:12px;color:green"></i><br/>
               {% else %}
-                <font color="black">Göndərən:</font> {{ message.name }}<br/>
+                <font color="black">{{ language.sender }}:</font> {{ message.name }}<br/>
               {% endif %}
-              <font color="black">Email:</font> <a href="mailto:{{ message.email }}">{{ message.email }}</a><br/>
+              <font color="black">{{ language.email }}:</font> <a href="mailto:{{ message.email }}">{{ message.email }}</a><br/>
               <hr>
-              <font color="black">Mesaj:</font><br/>
+              <font color="black">{{ language.message }}:</font><br/>
                {{ message.message }}...<br/>
                <hr>
                   <p align="right">
-                  <font color="black">Göndərilmə vaxtı: {{ message.created_at.strftime('%Y-%m-%d | %H:%M') }}</font><br/>
-                  <a href="/admin/inbox/{{ message.id }}/delete">Mesajı sil</a><br/>
+                  <font color="black">{{ language.sent_time }}: {{ message.created_at.strftime('%Y-%m-%d | %H:%M') }}</font><br/>
+                  <a href="/admin/inbox/{{ message.id }}/delete">{{ language.delete_message }}</a><br/>
                 </p>
                   <br/>
                 
                 <hr>
-                <p align="center"><b><a href="/admin/inbox">Mesajlara qayıt</a></b></p><br/>
+                <p align="center"><b><a href="/admin/inbox">{{ language.back_to_messages }}</a></b></p><br/>
               
           
             </div>

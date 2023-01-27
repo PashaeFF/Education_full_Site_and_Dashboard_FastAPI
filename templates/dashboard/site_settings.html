@@ -19,11 +19,11 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         {% include 'flash.html' %}<br/>
-                        <h4><b>Edit Site</b></h4>
+                        <h4><b>{{ language.edit_site }}</b></h4>
                         {% if site %}
                             <form class="row g-3" method ="POST">
                             <div class="col-md-5">
-                                <label for="site_title" class="form-label"><b>Saytın əsas dili:</b></label>
+                                <label for="site_title" class="form-label"><b>{{ language.main_language }}:</b></label>
                                 <select class="form-select" name="set_site_language">
                                     {% for language in site_language %}
                                     <option value="{{ language.id }}">&nbsp;&nbsp;{{ language.lang_name }}</option>
@@ -32,99 +32,99 @@
                             </div>
                             <hr/>
                             <div class="col-md-5">
-                                <label for="site_title" class="form-label"><b>Site title:</b></label>
+                                <label for="site_title" class="form-label"><b>{{ language.site_title }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="site_title" value="{{ site.site_title }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="site_logo" class="form-label"><b>Site logo:</b></label>
+                                <label for="site_logo" class="form-label"><b>{{ language.site_logo }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="site_logo" value="{{ site.site_logo }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="site_slogan" class="form-label"><b>Site slogan:</b></label>
+                                <label for="site_slogan" class="form-label"><b>{{ language.site_slogan }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="site_slogan" value="{{ site.site_slogan }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="site_email" class="form-label"><b>Site Email:</b></label>
+                                <label for="site_email" class="form-label"><b>{{ language.site_email }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="site_email" value="{{ site.site_email }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="phone" class="form-label"><b>Site Phone:</b></label>
+                                <label for="phone" class="form-label"><b>{{ language.site_phone }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="phone" value="{{ site.phone }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="wp_number" class="form-label"><b>Whatsapp Number:</b></label>
+                                <label for="wp_number" class="form-label"><b>{{ language.whatsapp_number }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="wp_number" value="{{ site.wp_number }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="wp_text" class="form-label"><b>Whatsapp text:</b></label>
+                                <label for="wp_text" class="form-label"><b>{{ language.whatsapp_text }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="wp_text" value="{{ site.wp_text }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="address" class="form-label"><b>Adres:</b></label>
+                                <label for="address" class="form-label"><b>{{ language.address }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="address" value="{{ site.address }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="google_map" class="form-label"><b>Google Map:</b></label>
+                                <label for="google_map" class="form-label"><b>{{ language.google_map_location }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="google_map" value="{{ site.google_map }}">
                             </div>  
                             <div class="col-md-5">
-                                <label for="site_description" class="form-label"><b>Site Description:</b></label>
+                                <label for="site_description" class="form-label"><b>{{ language.site_description }}:</b></label>
                                 <textarea name="site_description" class="form-label" rows="4" cols="50">{{ site.site_description }}</textarea>
                             </div>
                             <div class="col-md-5">
-                                <label for="site_about" class="form-label"><b>Site About:</b></label>
+                                <label for="site_about" class="form-label"><b>{{ language.site_about }}:</b></label>
                                 <textarea name="site_about" class="form-label" rows="4" cols="50">{{ site.site_about }}</textarea>
                             </div>
                             <div class="col-md-5">
-                                <label for="about_teams" class="form-label"><b>About teams:</b></label>
+                                <label for="about_teams" class="form-label"><b>{{ language.about_teams }}:</b></label>
                                 <textarea name="about_teams" class="form-label" rows="4" cols="50">{{ site.about_teams }}</textarea>
                             </div>
                             <div class="col-md-5">
-                                <label for="youtube_video" class="form-label"><b>Youtube Video:</b></label>
+                                <label for="youtube_video" class="form-label"><b>{{ language.youtube_video_link }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="youtube_video" value="{{ site.youtube_video }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="facebook" class="form-label"><b>Facebook Page:</b></label>
+                                <label for="facebook" class="form-label"><b>{{ language.facebook_page }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="facebook" value="{{ site.facebook }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="instagram" class="form-label"><b>Instagram Page:</b></label>
+                                <label for="instagram" class="form-label"><b>{{ language.instagram_page }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="instagram" value="{{ site.instagram }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="linkedin" class="form-label"><b>Linkedin:</b></label>
+                                <label for="linkedin" class="form-label"><b>{{ language.linkedin_page }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="linkedin" value="{{ site.linkedin }}">
                             </div>
                             
 
                             {# schedules #}
-                            <h5>Ish gunleri ve saatlari</h5>
+                            <h5>{{ language.schedules }}</h5>
                             <div class="col-md-5">
-                                <label for="monday" class="form-label"><b>B.e:</b></label>
+                                <label for="monday" class="form-label"><b>{{ language.monday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="monday" value="{{ site.monday }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="tuesday" class="form-label"><b>Ch.a:</b></label>
+                                <label for="tuesday" class="form-label"><b>{{ language.tuesday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="tuesday" value="{{ site.tuesday }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="wednesday" class="form-label"><b>Ch:</b></label>
+                                <label for="wednesday" class="form-label"><b>{{ language.wednesday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="wednesday" value="{{ site.wednesday }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="thursday" class="form-label"><b>C.a:</b></label>
+                                <label for="thursday" class="form-label"><b>{{ language.thursday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="thursday" value="{{ site.thursday }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="friday" class="form-label"><b>C:</b></label>
+                                <label for="friday" class="form-label"><b>{{ language.friday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="friday" value="{{ site.friday }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="saturday" class="form-label"><b>Sh:</b></label>
+                                <label for="saturday" class="form-label"><b>{{ language.saturday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="saturday" value="{{ site.saturday }}">
                             </div> 
                             <div class="col-md-5">
-                                <label for="sunday" class="form-label"><b>B:</b></label>
+                                <label for="sunday" class="form-label"><b>{{ language.sunday }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="sunday" value="{{ site.sunday }}">
                             </div>
                             {# schedules #}
@@ -132,15 +132,15 @@
                                 <div class="form-check form-switch ps-0">
                                     <input class="form-check-input ms-auto" type="checkbox"  name="is_active" {{"checked" if site.is_active == True else ""}}>
                                     {% if site.is_active == True %}
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Sayti Deaktiv et</label>
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">{{ language.deactivate_the_site }}</label>
                                     {% else %}
-                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Sayti Aktiv et</label>
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">{{ language.activate_the_site }}</label>
                                     {% endif %}
                                 </div>
                            
                             <br/>
                             <p align="row">
-                                <button class="btn btn-primary" type="submit">Update</button>
+                                <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                             </p>
                             </form>
                         {% endif %}

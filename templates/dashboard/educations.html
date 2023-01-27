@@ -24,23 +24,23 @@
                 <div class="card-header pb-0">
                   <div class="row">
                     {% include 'flash.html' %}<br/>
-                      <h5><b>Create education</b></h5>
+                      <h5><b>{{ language.create_education }}</b></h5>
                       {% if education_category %}
                       <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/education/add/education">
                       <div class="col-md-5">
-                        <label for="name" class="form-label"><b>*Adi:</b></label>
+                        <label for="name" class="form-label"><b>*{{ language.education_name }}:</b></label>
                         <input type="text" class="form-control is-valid" name="name" value="" required><br/>
                         </div>
                       <div class="col-md-5">
-                        <label for="city" class="form-label"><b>*Olke, Sheher:</b></label>
+                        <label for="city" class="form-label"><b>*{{ language.country_or_city }}:</b></label>
                         <input type="text" class="form-control is-valid" name="city" value="" required><br/>
                       </div>
                         <div class="col-md-5">
-                        <label for="name" class="form-label"><b>*Haqqinda:</b></label>
+                        <label for="name" class="form-label"><b>*{{ language.about_education }}:</b></label>
                         <textarea class="form-control is-valid" name="about_education" value="" required></textarea><br/>
                         </div>
                         <div class="col-md-5">
-                          <label for="file" class="form-label"><b>Photo:</b><br/></label>
+                          <label for="file" class="form-label"><b>{{ language.photo }}:</b><br/></label>
                           <input type="file" name="file">
                         </div>
                         <div class="col-md-5">
@@ -50,22 +50,22 @@
                           {% endfor %}
                         </select>
                         </br/>
-                        <button class="btn btn-primary" type="submit">Update</button>
+                        <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                       </div>
                       </form>
                     {% else %}
-                    <b>Kategoriya yoxdur. Ilk once Kategoriya elave edin...</b><br/>
+                    <b>{{ language.no_category_message }}</b><br/>
                     <br/>
                     {% endif %}
                     <hr>
                       
-            <h5><b>Categoriya elave et</b></h5>
+            <h5><b>{{ language.add_category }}</b></h5>
             <form class="row g-3" method="POST" action="/admin/education/add/category">
               <div class="col-md-5">
-                <label for="text" class="form-label"><b>Edu categoriya:</b><br/></label>
+                <label for="text" class="form-label"><b>{{ language.category }}:</b><br/></label>
                 <input type="text" class="form-control is-valid" name="edu_name" required>
                 </br/>
-                <button class="btn btn-primary" type="submit">Update</button>
+                <button class="btn btn-primary" type="submit">{{ language.update }}</button>
               </div>
             </form>
             <hr>
@@ -74,8 +74,8 @@
                       <table class="table align-items-center mb-0">
                         <thead>
                           <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kateqoriya adi</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Post sayi</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.category_name }}</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.posts_count }}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -101,7 +101,7 @@
                               </span>
                             </td>
                             <td class="align-center">
-                                    <span class="text-xs font-weight-bold"><a href="/admin/educategory/{{ x.id }}/delete">Delete</a></span>
+                                    <span class="text-xs font-weight-bold"><a href="/admin/educategory/{{ x.id }}/delete">{{ language.delete }}</a></span>
                             </td>
                           </tr>
                      
@@ -122,16 +122,16 @@
                 </div>
     
                 <div class="col-12">
-                <h6 align="center">Tehsil</h6>
+                <h6 align="center">{{ language.education }}</h6>
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Education</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kategoriya</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telebeler</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.education }}</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ language.category }}</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.students }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -168,7 +168,7 @@
                                   {% endif %}
                                 {% endfor %}
                               </div>
-                              <a class href="/admin/educations/{{ x.id }}"><span class="text-xs font-weight-bold">{{x.select_education|length}} nəfər</span></a>
+                              <a class href="/admin/educations/{{ x.id }}"><span class="text-xs font-weight-bold">{{x.select_education|length}} {{ language.person }}</span></a>
                           </td>
                           <td class="align-center">
                                   <span class="text-xs font-weight-bold"><a href="/admin/educations/{{ x.id }}/update">Edit</a> / <a href="/admin/educations/{{ x.id }}/delete">Delete</a></span>
@@ -182,10 +182,10 @@
                     </table>
                     <div class="align-middle text-center text-sm"><hr>
                                                                   {% if response.pagination.previous  !=  None %}
-                                                                    <a href="educations{{ response.pagination.previous }}"><< Previous</a>
+                                                                    <a href="educations{{ response.pagination.previous }}"><< {{ language.previous }}</a>
                                                                   {% endif %} |
                                                                   {% if response.pagination.next  !=  None %}
-                                                                    <a href="educations{{ response.pagination.next }}">Next >></a></div>
+                                                                    <a href="educations{{ response.pagination.next }}">{{ language.next }} >></a></div>
                                                                   {% endif %}
                     <br/>
 

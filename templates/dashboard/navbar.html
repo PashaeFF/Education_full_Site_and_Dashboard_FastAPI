@@ -6,7 +6,7 @@
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
 
-        <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+        <h6 class="font-weight-bolder mb-0">{{ language.dashboard_title }}</h6>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -15,7 +15,7 @@
           <li class="nav-item d-flex align-items-center">
             <a href="/logout" class="nav-link text-body font-weight-bold px-0">
               <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none">Logout</span>
+              <span class="d-sm-inline d-none">{{ language.logout }}</span>
             </a>
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -70,7 +70,7 @@
               {% endfor %}
               {% endif %}
               <hr>
-            <p align="center"><span class="font-weight-bold"><a href ="#">Bütün mesajlar</a></</p>
+            <p align="center"><span class="font-weight-bold"><a href ="/admin/inbox">{{ language.all_messages }}</a></p>
             </ul>
             
           </li>

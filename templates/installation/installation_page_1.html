@@ -41,7 +41,7 @@
     <div class="top-header container-fluid no-padding">
         <div class="container">
             <div class="topheader-left">
-                <h3><font color ="white">{{ dashboard_language.installation_panel }}</font></h3>
+                <h3><font color ="white">Installation panel</font></h3>
             </div>
         </div>
     </div>
@@ -53,48 +53,39 @@
     {% include 'flash.html' %}
 <form method="POST">
     <div class="col-3">
-    <h3>{{ dashboard_language.create_super_user }}</h3>
-      <label for="email" class="form-label">{{ dashboard_language.email }}</label>
-      <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+    <h3>Create app file</h3>
+      <label for="SQLALCHEMY_DATABASE_URL" class="form-label">SQLALCHEMY_DATABASE_URL</label>
+      <input type="text" class="form-control" name="SQLALCHEMY_DATABASE_URL" aria-describedby="emailHelp">
     </div>
     <div class="col-3">
-      <label for="password" class="form-label">{{ dashboard_language.password }}</label>
-      <input type="password" class="form-control" name="password">
+      <label for="SECRET KEY" class="form-label">SECRET KEY</label>
+      <input type="text" class="form-control" name="SECRET KEY">
     </div>
     <div class="col-3">
-        <label for="name_surname" class="form-label">{{ dashboard_language.name_and_surname }}</label>
-        <input type="text" class="form-control" name="name_surname">
-    </div>
-    <hr>
-    <div class="col-3">
-    <h3>{{ dashboard_language.site_settings }}</h3>
-      <label for="site_url" class="form-label">{{ dashboard_language.site_url }}</label>
-      <input type="site_url" class="form-control" name="site_url" aria-describedby="emailHelp">
-    </div>
-    <div class="col-3">
-      <label for="site_title" class="form-label">{{ dashboard_language.site_title }} </label>
-      <input type="site_title" class="form-control" name="site_title">
-    </div>
-    <div class="col-3">
-        <label for="site_logo" class="form-label">{{ dashboard_language.site_logo }}</label>
-        <input type="site_logo" class="form-control" name="site_logo">
-    </div>
-    <div class="col-3">
-        <label for="site_slogan" class="form-label">{{ dashboard_language.site_slogan }}</label>
-        <input type="site_slogan" class="form-control" name="site_slogan">
+        <label for="ALGORITHM" class="form-label">ALGORITHM</label>
+        <input type="text" class="form-control" name="ALGORITHM">
     </div>
     <hr>
     <div class="col-3">
-        <label for="site_title" class="form-label">{{ dashboard_language.site_language }}:</label><br/>
-        <select class="form-select" name="set_site_language">
-            {% for language in languages %}
-            <option value="{{ loop.index }}">&nbsp;&nbsp;{{ language }}</option>
-            {% endfor %}
-        </select>
-    </div><br/><br/>
+      <label for="ACCESS_TOKEN_EXPIRE_MINUTES" class="form-label">ACCESS_TOKEN_EXPIRE_MINUTES</label>
+      <input type="text" class="form-control" name="ACCESS_TOKEN_EXPIRE_MINUTES" aria-describedby="emailHelp">
+    </div>
+    <div class="col-3">
+      <label for="MAIL_SERVER" class="form-label">MAIL_SERVER</label>
+      <input type="text" class="form-control" name="MAIL_SERVER">
+    </div>
+    <div class="col-3">
+        <label for="MAIL_SENDER" class="form-label">MAIL_SENDER</label>
+        <input type="text" class="form-control" name="MAIL_SENDER">
+    </div>
+    <div class="col-3">
+        <label for="MAIL_PASSWORD" class="form-label">MAIL_PASSWORD</label>
+        <input type="text" class="form-control" name="MAIL_PASSWORD">
+    </div>
+    <hr>
     <hr>
     <div class="col-3">
-    <button type="submit" class="btn btn-primary">{{ dashboard_language.add }}</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
 </main>

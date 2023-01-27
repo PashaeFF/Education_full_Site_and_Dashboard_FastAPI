@@ -23,19 +23,19 @@
                 <div class="card-header pb-0">
                   {% include 'flash.html' %}<br/>
                   <div class="row">
-                      <h5><b>Xəbər əlavə et</b></h5>
+                      <h5><b>{{ language.add_news }}</b></h5>
                       {% if news_category %}
                         <form class="row g-3" method ="POST" enctype="multipart/form-data" action="/admin/add_news"> 
                         <div class="col-md-5">
-                          <label for="name" class="form-label"><b>*Title:</b></label>
+                          <label for="name" class="form-label"><b>*{{ language.title }}:</b></label>
                           <input type="text" class="form-control is-valid" name="news_title" required><br/>
                           </div>
                           <div class="col-md-5">
-                          <label for="name" class="form-label"><b>*Description:</b></label>
+                          <label for="name" class="form-label"><b>*{{ language.description }}:</b></label>
                           <textarea class="form-control is-valid" name="description" required></textarea><br/>
                           </div>
                           <div class="col-md-5">
-                            <label for="file" class="form-label"><b>Təsvir:</b><br/></label>
+                            <label for="file" class="form-label"><b>{{ language.add_photo }}:</b><br/></label>
                             <input type="file" name="file">
                           </div>
                           <div class="col-md-5">
@@ -45,22 +45,22 @@
                             {% endfor %}
                           </select>
                           </br/>
-                          <button class="btn btn-primary" type="submit">Əlavə et</button>
+                          <button class="btn btn-primary" type="submit">{{ language.add }}</button>
                         </div>
                         </form>
                       {% else %}
-                        <b>Kateqoriya yoxdur. İlk oncə Kateqoriya əlavə edin...</b><br/>
+                        <b>{{ language.no_category_message }}</b><br/>
                         <br/>
                       {% endif %}
                       <hr>
                       
-            <h5><b>Kateqoriya əlavə et</b></h5>
+            <h5><b>{{ language.add_category }}</b></h5>
             <form class="row g-3" method="POST" action="/admin/add_news_category">
               <div class="col-md-5">
-                <label for="text" class="form-label"><b>Kateqoriya:</b><br/></label>
+                <label for="text" class="form-label"><b>{{ language.category }}:</b><br/></label>
                 <input type="text" class="form-control is-valid" name="category_name" required>
                 </br/>
-                <button class="btn btn-primary" type="submit">Əlavə et</button>
+                <button class="btn btn-primary" type="submit">{{ language.add }}</button>
               </div>
             </form>
             <hr>
@@ -71,8 +71,8 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kateqoriya adi</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Post sayi</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.category_name }}</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.posts_count }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -98,7 +98,7 @@
                         </span>
                       </td>
                       <td class="align-center">
-                              <span class="text-xs font-weight-bold"><a href="/admin/newscategory/{{ x.id }}/delete">Delete</a></span>
+                        <span class="text-xs font-weight-bold"><a href="/admin/newscategory/{{ x.id }}/delete">{{ language.delete }}</a></span>
                       </td>
                     </tr>
                
@@ -118,7 +118,7 @@
             </div>
 
             <div class="col-12">
-            <h6 align="center">Xəbərlər</h6>
+            <h6 align="center">{{ language.news }}</h6>
             </div>
 
                 <div class="card-body px-0 pb-2">
@@ -126,9 +126,9 @@
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / Title</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kateqoriya</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dərc edilib</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / {{ language.title }}</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ language.category }}</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.time_to_be_added }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -155,7 +155,7 @@
                             <span class="text-xs font-weight-bold">{{x.created_at}}</span>
                           </td>
                           <td class="align-center">
-                                  <span class="text-xs font-weight-bold"><a href="/admin/news/{{ x.id }}">Edit</a> / <a href="/admin/news/{{ x.id }}/delete">Delete</a></span>
+                                  <span class="text-xs font-weight-bold"><a href="/admin/news/{{ x.id }}">{{ language.edit }}</a> / <a href="/admin/news/{{ x.id }}/delete">{{ language.delete }}</a></span>
                           </td>
                         </tr>
                       {% endfor %}
@@ -165,10 +165,10 @@
                     <hr>
                     <div class="align-middle text-center text-sm">{{ response.data_length }}
                                                                   {% if response.pagination.previous  !=  None %}
-                                                                    <a href="news{{ response.pagination.previous }}"><< Previous</a>
+                                                                    <a href="news{{ response.pagination.previous }}"><< {{ language.previous }}</a>
                                                                   {% endif %} |
                                                                   {% if response.pagination.next  !=  None %}
-                                                                    <a href="news{{ response.pagination.next }}">Next >></a></div>
+                                                                    <a href="news{{ response.pagination.next }}">{{ language.next }} >></a></div>
                                                                   {% endif %}
                       
                     <br/>

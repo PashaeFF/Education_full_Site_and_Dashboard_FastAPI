@@ -15,44 +15,44 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="card mt-4">
             <div class="card-header p-3">
-              <h5 class="mb-0">Rəhbərlik mesajları ({{ unread | length }} / {{ m_data | length }})</h5>
+              <h5 class="mb-0">{{ language.admin_messages }} ({{ unread | length }} / {{ m_data | length }})</h5>
               <hr>
               {% include 'flash.html' %}
               {% if m_data | length > 0 %}
                 {% if user.sidebar_selected_color == "1" %}
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ language.delete_all_messages }}</button>
                 {% elif user.sidebar_selected_color == "2" %}
-                  <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                  <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ language.delete_all_messages }}</button>
                 {% elif user.sidebar_selected_color == "3" %}
-                  <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                  <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ language.delete_all_messages }}</button>
                 {% elif user.sidebar_selected_color == "4" %}
-                  <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                  <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ language.delete_all_messages }}</button>
                 {% elif user.sidebar_selected_color == "5" %}
-                  <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                  <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ language.delete_all_messages }}</button>
                 {% elif user.sidebar_selected_color == "6" %}
-                  <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Mesajları sil</button>
+                  <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ language.delete_all_messages }}</button>
                 {% endif %}
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Bütün Admin mesajlarını silmək</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ language.delete_all_admin_messages }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        Bütün admin mesajlarını silməyə əminsiniz??
+                        {{ language.confirm_delete_all_messages }}
                       </div>
                       <div class="modal-footer">
-                        <a href="/admin/inbox/delete_all"><button type="button" class="btn bg-gradient-danger">Hamısını Sil</button></a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Xeyr</button>
+                        <a href="/admin/inbox/delete_all"><button type="button" class="btn bg-gradient-danger">{{ language.delete_all_messages }}</button></a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ language.no }}</button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             {% else %}
-            Mesaj yoxdur...
+            {{ language.no_message }}
             {% endif %}
 
               
@@ -82,10 +82,10 @@
 
               <div class="align-middle text-center text-sm">{{ messages.data_length }}
                 {% if messages.pagination.previous  !=  None %}
-                  <a href="inbox{{ messages.pagination.previous }}"><< Previous</a>
+                  <a href="inbox{{ messages.pagination.previous }}"><< {{ language.previous }}</a>
                 {% endif %} |
                 {% if messages.pagination.next  !=  None %}
-                  <a href="inbox{{ messages.pagination.next }}">Next >></a>
+                  <a href="inbox{{ messages.pagination.next }}">{{ language.next }} >></a>
                   
                 {% endif %}
                 <br/>
@@ -93,64 +93,6 @@
               </div>
 
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="position-fixed bottom-1 end-1 z-index-2">
-        <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
-          <div class="toast-header border-0">
-            <i class="material-icons text-success me-2">
-        check
-      </i>
-            <span class="me-auto font-weight-bold">Material Dashboard </span>
-            <small class="text-body">11 mins ago</small>
-            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-          </div>
-          <hr class="horizontal dark m-0">
-          <div class="toast-body">
-            Hello, world! This is a notification message.
-          </div>
-        </div>
-        <div class="toast fade hide p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast" aria-atomic="true">
-          <div class="toast-header bg-transparent border-0">
-            <i class="material-icons text-white me-2">
-        notifications
-      </i>
-            <span class="me-auto text-white font-weight-bold">Material Dashboard </span>
-            <small class="text-white">11 mins ago</small>
-            <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-          </div>
-          <hr class="horizontal light m-0">
-          <div class="toast-body text-white">
-            Hello, world! This is a notification message.
-          </div>
-        </div>
-        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
-          <div class="toast-header border-0">
-            <i class="material-icons text-warning me-2">
-        travel_explore
-      </i>
-            <span class="me-auto font-weight-bold">Material Dashboard </span>
-            <small class="text-body">11 mins ago</small>
-            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-          </div>
-          <hr class="horizontal dark m-0">
-          <div class="toast-body">
-            Hello, world! This is a notification message.
-          </div>
-        </div>
-        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="dangerToast" aria-atomic="true">
-          <div class="toast-header border-0">
-            <i class="material-icons text-danger me-2">
-        campaign
-      </i>
-            <span class="me-auto text-gradient text-danger font-weight-bold">Material Dashboard </span>
-            <small class="text-body">11 mins ago</small>
-            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
-          </div>
-          <hr class="horizontal dark m-0">
-          <div class="toast-body">
-            Hello, world! This is a notification message.
           </div>
         </div>
       </div>

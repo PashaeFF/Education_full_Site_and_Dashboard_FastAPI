@@ -6,13 +6,13 @@
             <i class="material-icons opacity-10">person</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">1 ay erzinde qeydiyyat</p>
+            <p class="text-sm mb-0 text-capitalize">{{ language.number_of_registrations_in_one_month }}</p>
             <h4 class="mb-0">{{ counts["users_month_count"] }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ counts.difference_month }} </span>- 1 ay erzinde ferq</p>
+          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ counts.difference_month }} </span>- {{ language.difference_during_the_last_one_month }}</p>
         </div>
       </div>
     </div>
@@ -23,13 +23,13 @@
             <i class="material-icons opacity-10">person</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">1 Hefte erzinde qeydiyyat</p>
+            <p class="text-sm mb-0 text-capitalize">{{ language.registrations_in_the_last_one_week }}</p>
             <h4 class="mb-0">{{ counts.users_week_count }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ counts.difference_week }} </span>- 1 hefte erzinde ferq</p>
+          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ counts.difference_week }} </span>- {{ language.difference_in_one_week }}</p>
         </div>
       </div>
     </div>
@@ -40,13 +40,13 @@
             <i class="material-icons opacity-10">person</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Bu gun qeydiyyat</p>
+            <p class="text-sm mb-0 text-capitalize">{{ language.todays_registration_count }}</p>
             <h4 class="mb-0">{{ counts.users_one_day_count }}</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ counts.difference_one_day }} </span>- 1 gun erzinde ferq</p>
+          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ counts.difference_one_day }} </span>- {{ language.the_difference_in_one_day }}</p>
         
         </div>
       </div>
@@ -58,7 +58,7 @@
             <i class="material-icons opacity-10">person</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Umumi User sayi</p>
+            <p class="text-sm mb-0 text-capitalize">{{ language.total_counts_of_users }}</p>
             <h4 class="mb-0">{{ count }}</h4>
           </div>
         </div>

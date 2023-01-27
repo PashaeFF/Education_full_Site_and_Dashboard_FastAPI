@@ -18,7 +18,7 @@
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
-                    <h6>Adminlər</h6>
+                    <h6>{{ language.admins_users }}</h6>
                   </div>
                 </div>
               </div>
@@ -27,10 +27,10 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ad ve Soyad</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Əlaqə</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dogum tarixi</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.name_and_surname }}</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ language.user_status }}</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.phone }}</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.date_of_birth }}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -52,13 +52,13 @@
                           </div>
                         </td>
                         <td>
-                          <span class="text-xs font-weight-bold">Admin</span> 
+                          <span class="text-xs font-weight-bold">{{ language.admin }}</span> 
                         </td>
                         <td class="align-middle text-center text-sm">
                           <span class="text-xs font-weight-bold">{{x.phone}}</span>
                         </td>
                         <td class="align-center">
-                                <span class="text-xs font-weight-bold"><a href="/admin/user/{{ x.id }}">Infoya bax</a> / <a href="/admin/user/{{ x.id }}/edit">Duzelish et</a></span>
+                                <span class="text-xs font-weight-bold"><a href="/admin/user/{{ x.id }}">{{ language.info }}</a> / <a href="/admin/user/{{ x.id }}/edit">{{ language.edit }}</a></span>
                         </td>
                       </tr>
                       {% endfor %}
@@ -67,10 +67,10 @@
                   <hr>
                   <div class="align-middle text-center text-sm">
                                                                 {% if user_admin.pagination.previous  !=  None %}
-                                                                  <a href="admin-users{{ user_admin.pagination.previous }}"><< Previous</a>
+                                                                  <a href="admin-users{{ user_admin.pagination.previous }}"><< {{ language.previous }}</a>
                                                                 {% endif %} |
                                                                 {% if user_admin.pagination.next  !=  None %}
-                                                                  <a href="admin-users{{ user_admin.pagination.next }}">Next >></a></div>
+                                                                  <a href="admin-users{{ user_admin.pagination.next }}">{{ language.next }} >></a></div>
                                                                 {% endif %}
                 </div>
               </div>

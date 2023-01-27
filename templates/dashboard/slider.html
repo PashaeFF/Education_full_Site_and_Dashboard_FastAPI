@@ -20,48 +20,48 @@
                     {% if sliders|length  == 4%}
                     <font color="red"><div class="align-middle text-center text-l">Max. 4 slide elave etmek olar. Elave Slide uchun kohnelerden hansinisa silmek lazimdir</div></font>
                     {% else %}
-                    <h4><b>Slider ayarlari</b></h4><hr>
+                    <h4><b>{{ language.slider_settings }}</b></h4><hr>
                     <div class="row">
-                        <h6><b>Slide</b></h6>
+                        <h6><b>{{ language.slide }}</b></h6>
                         <form class="row g-3" method="POST" enctype="multipart/form-data">
                             <div class="col-md-5">
-                                <label for="file" class="form-label"><b>Slide image:</b><br/></label>
+                                <label for="file" class="form-label"><b>{{ language.slide_image }}:</b><br/></label>
                                 <input type="file" class="form-control is-valid" name="file" required>
-                                <p align ="center"><font color="red">Normal gorunush uchun 1920 × 801 pixel</font></p>
-                                <label for="file2" class="form-label"><b>Post image:</b><br/></label>
+                                <p align ="center"><font color="red">{{ language.slide_image_recommendation }}</font></p>
+                                <label for="file2" class="form-label"><b>{{ language.post_image }}:</b><br/></label>
                                 <input type="file" class="form-control is-valid" name="file2" required>
-                                <label for="description" class="form-label"><b>Slide Title:</b><br/></label>
+                                <label for="description" class="form-label"><b>{{ language.slide_title }}:</b><br/></label>
                                 <input type="text" class="form-control is-valid" name="title" rows="4" cols="50">
-                                <label for="description" class="form-label"><b>Slide Description:</b><br/></label>
+                                <label for="description" class="form-label"><b>{{ language.slide_description }}:</b><br/></label>
                                 <textarea class name="description" rows="4" cols="50"></textarea><br/>
-                                <button class="btn btn-primary" type="submit">Update</button>
+                                <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                             </div>
                         </form>
                     </div>
                     {% endif %}
                     <hr>      
                     
-                    <h4><b>Slidelar</b></h4><hr>
+                    <h4><b>{{ language.slides }}</b></h4><hr>
                     <div class="row">
                         
                         {% for slide in sliders %}
                             <div class="col-md-5">
-                                <h6><b>Slide</b></h6>
+                                <h6><b>{{ language.slide  }}</b></h6>
                                 <form class="row g-3" method="POST" enctype="multipart/form-data" action="slider/{{ slide.id }}">
                                     <img src="/static/site/images/slider/{{ slide.photos }}" width="100%"><br/>
-                                <label for="file" class="form-label"><b>Slide Sheklini deyish:</b><br/></label>
+                                <label for="file" class="form-label"><b>{{ language.change_slide_image  }}:</b><br/></label>
                                 <input type="file" class="form-control is-valid" name="file" required>
-                                <p align ="center"><font color="red">Normal gorunush uchun 1920 × 801 pixel</font></p>
+                                <p align ="center"><font color="red">{{ language.slide_image_recommendation }}</font></p>
                                 <img src="/static/site/images/slider/news_photo/{{  slide.news_photo }}" width="100%"><br/>
-                                <label for="file2" class="form-label"><b>Post sheklini deyish:</b><br/></label>
+                                <label for="file2" class="form-label"><b>{{ language.change_post_image }}:</b><br/></label>
                                 <input type="file" class="form-control is-valid" name="file2" required>
-                                <label for="description" class="form-label"><b>Slide Title:</b><br/></label>
+                                <label for="description" class="form-label"><b>{{ language.slide_title }}:</b><br/></label>
                                 <input type="text" class="form-control is-valid" name="title" rows="4" cols="50" value="{{ slide.title }}">
-                                <label for="description" class="form-label"><b>Slide Description:</b><br/></label>
+                                <label for="description" class="form-label"><b>{{ language.slide_description }}:</b><br/></label>
                                 <textarea name="description" rows="4" cols="50">{{ slide.description }}</textarea><br/>
-                                <button class="btn btn-primary" type="submit">Update</button>
+                                <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                                 </form>
-                                <a class="btn btn-primary" href="/admin/slider/{{ slide.id }}/delete">Delete</a></span>
+                                <a class="btn btn-primary" href="/admin/slider/{{ slide.id }}/delete">{{ language.delete }}</a></span>
                                 <hr>
                                 
                             </div>

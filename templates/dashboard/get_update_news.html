@@ -17,13 +17,13 @@
         <div class="card" style="margin: 0 25px">
             <div class="card-header pb-0">
                 <div class="row">
-                    <h5><b>Update News</b></h5>
+                    <h5><b>{{ language.update_news }}</b></h5>
                     {% if news_category %}
                         <form class="row g-3" method ="POST" enctype="multipart/form-data">
                         <div class="col-md-5">
-                            <label for="name" class="form-label"><b>*Title:</b></label>
+                            <label for="name" class="form-label"><b>*{{ language.title }}:</b></label>
                             <input type="text" class="form-control is-valid" name="news_title" value="{{ news.news_title }}" required><br/>
-                            <label for="name" class="form-label"><b>*Description:</b></label>
+                            <label for="name" class="form-label"><b>*{{ language.description }}:</b></label>
                             <textarea class="form-control is-valid" name="description" required>{{ news.description }}</textarea><br/>
                         <select class="form-select" name="select_category_id">
                             {% for i in news_category %}
@@ -37,26 +37,26 @@
                         </select>
                         {% if news.news_image %}
                             <div class="col-md-5">
-                                <label for="name" class="form-label"><b>*Photo:</b></label><br/>
+                                <label for="name" class="form-label"><b>*{{ language.photo }}:</b></label><br/>
                                 <img src="/static/news_images/{{ news.news_image }}" width="100%"><br/>
                             </div>
                             <div class="col-md-5">
-                                <label for="file" class="form-label"><b>Change photo:</b><br/></label>
+                                <label for="file" class="form-label"><b>{{ language.change_photo }}:</b><br/></label>
                                 <input type="file" name="file">
                               </div>
                         {% else %}
                             <div class="col-md-5">
-                                <label for="file" class="form-label"><b>Photo elave et:</b><br/></label>
+                                <label for="file" class="form-label"><b>{{ language.add_photo }}:</b><br/></label>
                                 <input type="file" name="file">
                             </div>
                         {% endif %}
                         <div class="col-md-5">
                             </br/>
-                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                         </div>
                         </form>
                     {% else %}
-                        <b>Kategoriya yoxdur. Ilk once Kategoriya elave edin...</b><br/>
+                        <b>{{ language.no_category_message }}</b><br/>
                         <br/>
                     {% endif %}
                     <hr>

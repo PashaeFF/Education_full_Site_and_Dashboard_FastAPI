@@ -18,10 +18,11 @@ async def index(request: Request, page: int = 1, page_size: int = 10):
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
             response = paginate.paginate(data=variables['user_admin'], data_length=len(variables['user_admin']),page=page, page_size=page_size)
-            page_title = 'İstifadəçilər'
+            page_title = check['dashboard_language'].users
             return templates.TemplateResponse("dashboard/admin_users.html", {"request": request, "user_admin":response, "count":len(variables['users']), 
                                                 "messages_time":variables['messages_time'], "unread":variables['unread'], "counts":variables['counts'], 
-                                                "user":check['user'], "page_title":page_title} )
+                                                "user":check['user'], "page_title":page_title, "language":check['dashboard_language'],
+                                                "dashboard_languages":check['dashboard_languages']} )
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -38,16 +39,17 @@ def user_profile(id: int, request: Request, db: Session = Depends(database.get_d
         if check['user'].admin_user == True or check['user'].super_user == True:
             if change_user:
                 variables = default_variables(request)
-                page_title = 'İstifadəçilər'
+                page_title = check['dashboard_language'].users
                 if change_user.education_files:
                     user_education_files = change_user.education_files.split(',')
                 else:
                     user_education_files = ""
                 return templates.TemplateResponse("dashboard/profile.html", {"request":request,"user":check['user'], "messages_time":variables['messages_time'], 
                                                                             "flash":variables['_flash_message'], "unread":variables['unread'], "change_user":change_user,
-                                                                            "page_title ":page_title, "user_education_files":user_education_files})
+                                                                            "page_title ":page_title, "user_education_files":user_education_files, "language":check['dashboard_language'],
+                                                                            "dashboard_languages":check['dashboard_languages']})
             else:
-                request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -67,12 +69,12 @@ def user_update(id: int, request: Request, db:Session = Depends(database.get_db)
             if change_user:
                 selected_edu = db.query(models.Education).filter_by(id=id).first()
                 variables = default_variables(request)
-                page_title = 'İstifadəçilər'
+                page_title = check['dashboard_language'].users
                 return templates.TemplateResponse("dashboard/edit_user.html", {"request":request, "user":check['user'], "count": len(variables['users']), "messages_time":variables['messages_time'],
                                                     "education":variables['education'], "selected_edu":selected_edu, "unread":variables['unread'], "counts":variables['counts'], "change_user":change_user,
-                                                    "page_title ":page_title})
+                                                    "page_title ":page_title, "language":check['dashboard_language'], "dashboard_languages":check['dashboard_languages']})
             else:
-                request.session["flash_messsage"].append({"message": "Mövcud deyil...", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:
@@ -114,11 +116,11 @@ async def update(id:int, request: Request, db:Session = Depends(database.get_db)
                             'education':education, 'certificate_points':certificate_points, 'about':about,
                             'select_university_id':select_university_id, 'created_at':created_at, 'admin_user':admin_user, 'is_active':is_active },synchronize_session=False)
                 db.commit()
-                request.session["flash_messsage"].append({"message": "Updated", "category": "success"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].updated, "category": "success"})
                 request = RedirectResponse(url=f"/admin/user/{id}", status_code=HTTP_303_SEE_OTHER)
                 return request
             else:
-                request.session["flash_messsage"].append({"message": f"Mövcud deyil...", "category": "error"})
+                request.session["flash_messsage"].append({"message": check['dashboard_language'].does_not_exist, "category": "error"})
                 request = RedirectResponse(url="/admin/",status_code=HTTP_303_SEE_OTHER)
                 return request
         else:

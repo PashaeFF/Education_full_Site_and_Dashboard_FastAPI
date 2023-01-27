@@ -19,11 +19,12 @@ async def index(request: Request, page: int = 1, page_size: int = 10):
     if check['user']:
         if check['user'].admin_user == True or check['user'].super_user == True:
             variables = default_variables(request)
-            page_title = 'İdarə paneli'
+            page_title = check['dashboard_language'].dashboard_title
             response = paginate.paginate(data=variables['users'], data_length=len(variables['users']),page=page, page_size=page_size)
             return templates.TemplateResponse("dashboard/index.html", {"request": request, "response": response, "count": len(variables['users']), "user":check['user'],
                                                                         "messages_time":variables['messages_time'], "counts":variables['counts'], "unread": variables['unread'],
-                                                                        "flash": variables['_flash_message'], "page_title":page_title} )
+                                                                        "flash": variables['_flash_message'], "page_title":page_title, "language":check['dashboard_language'],
+                                                                        "dashboard_languages":check['dashboard_languages']})
         else:
             return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     else:
@@ -36,9 +37,30 @@ def dashboard_login(request: Request):
     variables = default_variables(request)
     if check['current_user']:
         return RedirectResponse(url="/admin", status_code=HTTP_303_SEE_OTHER)
-    page_title = "Idarə paneli"
+    page_title = check['dashboard_language'].dashboard_title
     return templates.TemplateResponse("dashboard/sign-in.html",{"request":request, "user":check['user'], "current_user":check['current_user'],
-                                                                "page_title":page_title, "flash":variables['_flash_message']})
+                                                                "page_title":page_title, "flash":variables['_flash_message'], "language":check['dashboard_language'],
+                                                                "dashboard_languages":check['dashboard_languages']})
+
+
+@dashboard.post("/lang/")
+async def post_language(request: Request, db: Session = Depends(database.get_db)):
+    check = check_user(request)
+    if check['user']:
+        if check['user'].admin_user == True or check['user'].super_user == True:
+            user = db.query(models.User).filter_by(id=check['current_user'])
+            if user:
+                form = await request.form()
+                user.update({"user_dashboard_language":form.get('id')})
+                db.commit()
+                for i in request.headers.items():
+                    if i[0] == 'referer':
+                        referer = i[1]
+                return RedirectResponse(url=referer, status_code=HTTP_303_SEE_OTHER)
+        else:
+            return RedirectResponse("/", status_code=HTTP_303_SEE_OTHER)
+    else:
+        return RedirectResponse("/", status_code=HTTP_303_SEE_OTHER)
 
 
 @dashboard.post("/functions/{id}")

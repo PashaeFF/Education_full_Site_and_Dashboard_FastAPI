@@ -23,50 +23,50 @@
                 <div class="card-header pb-0">
                   {% include 'flash.html' %}<br/>
                   <div class="row">
-                      <h5><b>Staff elave et</b></h5>
+                      <h5><b>{{ language.add_staff }}</b></h5>
                       <form class="row g-3" method ="POST" enctype="multipart/form-data">
                       <div class="col-md-5">
-                        <label for="name_surname" class="form-label"><b>*Ad ve Soyad:</b></label>
+                        <label for="name_surname" class="form-label"><b>*{{ language.name_and_surname }}:</b></label>
                         <input type="text" class="form-control is-valid" name="name_surname" value="" required><br/>
                         </div>
                         <div class="col-md-5">
-                        <label for="job_position" class="form-label"><b>*Vezife:</b></label>
+                        <label for="job_position" class="form-label"><b>*{{ language.job_position }}:</b></label>
                         <input type="text" class="form-control is-valid" name="job_position" value="" required><br/>
                         </div>
                         <div class="col-md-5">
-                          <label for="facebook" class="form-label"><b>Facebook:</b></label>
+                          <label for="facebook" class="form-label"><b>{{ language.facebook }}:</b></label>
                           <input type="text" class="form-control is-valid" name="facebook"><br/>
                         </div>
                         <div class="col-md-5">
-                          <label for="instagram" class="form-label"><b>Instagram:</b></label>
+                          <label for="instagram" class="form-label"><b>{{ language.instagram }}:</b></label>
                           <input type="text" class="form-control is-valid" name="instagram"><br/>
                         </div>
                         <div class="col-md-5">
-                          <label for="twitter" class="form-label"><b>Twitter:</b></label>
+                          <label for="twitter" class="form-label"><b>{{ language.twitter }}:</b></label>
                           <input type="text" class="form-control is-valid" name="twitter"><br/>
                         </div>
                         <div class="col-md-5">
-                          <label for="linkedin" class="form-label"><b>Linkedin:</b></label>
+                          <label for="linkedin" class="form-label"><b>{{ language.linkedin }}:</b></label>
                           <input type="text" class="form-control is-valid" name="linkedin"><br/>
                         </div>
                         <div class="col-md-5">
-                          <label for="behance" class="form-label"><b>Behance:</b></label>
+                          <label for="behance" class="form-label"><b>{{ language.behance }}:</b></label>
                           <input type="text" class="form-control is-valid" name="behance"><br/>
                         </div>
 
                         <div class="col-md-5">
-                          <label for="file" class="form-label"><b>*Profil photo:</b><br/></label>
+                          <label for="file" class="form-label"><b>*{{ language.profile_picture }}:</b><br/></label>
                           <input type="file" name="file" required>
                         </div>
                         <div class="col-md-5">
-                        <button class="btn btn-primary" type="submit">Update</button>
+                        <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                       </div>
                       </form>
 
                     <hr>
           
             <div class="col-lg-6 col-7">
-            <h6>Staff</h6>
+            <h6>{{ language.staff }}</h6>
             </div>
 
                   </div>
@@ -79,8 +79,8 @@
 
                         <tr>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ad ve Soyad</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Job Position</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ language.name_and_surname }}</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.job_position }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -103,7 +103,7 @@
                             <span class="text-xs font-weight-bold">{{x.job_position}}</span>
                           </td>
                           <td class="align-center">
-                            <span class="text-xs font-weight-bold"><a href="/admin/staff/{{ x.id }}/delete">Delete</a></span>
+                            <span class="text-xs font-weight-bold"><a href="/admin/staff/{{ x.id }}/delete">{{ language.delete }}</a></span>
                           </td>
                         </tr>
                    

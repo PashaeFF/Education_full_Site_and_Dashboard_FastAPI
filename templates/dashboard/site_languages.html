@@ -23,29 +23,29 @@
                 <div class="card-header pb-0">
                   {% include 'flash.html' %}<br/>
                   <div class="row">
-                      <h5><b>Site Languages</b></h5>
+                      <h5><b>{{ language.site_languages }}</b></h5>
                       <hr>
           
             <div class="col-lg-6 col-7">
-            <h6>Dillər</h6>
+            <h6>{{ language.site_languages }}</h6>
             {% if check_ru == None %}
                 <form method="POST" action="/admin/language/install_language_pack/ru">
-                    <button class="btn bg-gradient-success" type="submit">Установить Русский язык</button>
+                    <button class="btn bg-gradient-success" type="submit">{{ language.install_ru }}</button>
                 </form>
             {% endif %}
             {% if check_eng == None %}
                 <form method="POST" action="/admin/language/install_language_pack/en">
-                    <button class="btn bg-gradient-success" type="submit">İnstall English language</button>
+                    <button class="btn bg-gradient-success" type="submit">{{ language.install_en }}</button>
                 </form>
             {% endif %}
             {% if check_az == None %}
                 <form method="POST" action="/admin/language/install_language_pack/az">
-                    <button class="btn bg-gradient-success" type="submit">Azərbaycan dili yüklə</button>
+                    <button class="btn bg-gradient-success" type="submit">{{ language.install_az }}</button>
                 </form>
             {% endif %}
             <div align="rigth">
               <form method="GET" action="/admin/languages/add-language">
-                <button class="btn bg-gradient-success" type="submit">Başqa dil əlavə et</button>
+                <button class="btn bg-gradient-success" type="submit">{{ language.add_other_language }}</button>
               </form>
             </div>
                   </div>
@@ -55,9 +55,9 @@
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / Dil</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Qısa ad</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saytın əsas dili</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID / {{ language.language }}</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ language.short_name }}</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.main_language }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -81,7 +81,7 @@
                           </td>
             
                             <td class="align-center">
-                                <span class="text-xs font-weight-bold"><a href="/admin/languages/{{ language.id }}">Edit</a> {% if site_language != language.id %}/ <a href="/admin/language/{{ language.id }}/delete">Delete</a>{% endif %}</span>
+                                <span class="text-xs font-weight-bold"><a href="/admin/languages/{{ language.id }}">{{ language.edit }}</a> {% if site_language != language.id %}/ <a href="/admin/language/{{ language.id }}/delete">{{ language.delete }}</a>{% endif %}</span>
                             </td>
                             
                         </div>

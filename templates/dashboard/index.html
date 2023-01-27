@@ -25,7 +25,7 @@
                   <div class="row">
                     {% include 'flash.html' %}
                     <div class="col-lg-6 col-7">
-                      <h6>Users</h6>
+                      <h6>{{ language.users }}</h6>
                     </div>
 
                   </div>
@@ -36,10 +36,10 @@
                       <thead>
                         
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telebe</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tehsil</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Elaqe</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dogum tarixi</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.student }}</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ language.education }}</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.phone }}</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ language.date_of_birth }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -69,7 +69,7 @@
                             <span class="text-xs font-weight-bold">{{x.phone}}</span>
                           </td>
                           <td class="align-center">
-                                  <span class="text-xs font-weight-bold"><a href="/admin/user/{{ x.id }}">Infoya bax</a> / <a href="/admin/user/{{ x.id }}/edit">Duzelish et</a></span>
+                                  <span class="text-xs font-weight-bold"><a href="/admin/user/{{ x.id }}">{{ language.info }}</a> / <a href="/admin/user/{{ x.id }}/edit">{{ language.edit }}</a></span>
                           </td>
                         </tr>
                         {% endfor %}
@@ -78,10 +78,10 @@
                     </table>
                     <div class="align-middle text-center text-sm"><hr>
                                                                   {% if response.pagination.previous  !=  None %}
-                                                                    <a href=".{{ response.pagination.previous }}"><< Previous</a>
+                                                                    <a href=".{{ response.pagination.previous }}"><< {{ language.previous}}</a>
                                                                   {% endif %} |
                                                                   {% if response.pagination.next  !=  None %}
-                                                                    <a href=".{{ response.pagination.next }}">Next >></a></div>
+                                                                    <a href=".{{ response.pagination.next }}">{{ language.next }} >></a></div>
                                                                   {% endif %}
                   </div>
                 </div>

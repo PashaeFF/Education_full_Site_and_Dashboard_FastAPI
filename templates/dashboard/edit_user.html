@@ -20,48 +20,48 @@
             <div class="card" style="margin: 0 25px">
                 <div class="card-header pb-0">
                   <div class="row">
-                    <h4><b>Edit Profile</b></h4>
-                        <font size="2" color ="red"><b>Qeyd: Ulduzlu saheleri mutleq doldurmalisiniz...</b></font><br/><br/>
+                    <h4><b>{{ language.edit_profile }}</b></h4>
+                        <font size="2" color ="red"><b>*{{ language.required_boxes_error }}</b></font><br/><br/>
                         <form class="row g-3" method ="POST">
                             <div class="col-md-5">
-                                <label for="email" class="form-label"><b>*Emaili:</b></label>
+                                <label for="email" class="form-label"><b>*{{ language.email }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="email" value="{{ change_user.email }}" required>
                                 </div>
                             <div class="col-md-5">
-                            <label for="name_surname" class="form-label"><b>*Ad ve Soyad:</b></label>
+                            <label for="name_surname" class="form-label"><b>*{{ language.name_and_surname }}:</b></label>
                             <input type="text" class="form-control is-valid" name="name_surname" value="{{ change_user.name_surname }}" required>
                             </div>
                             <div class="col-md-5">
-                                <label for="phone" class="form-label"><br/><b>*Phone:</b></label>
+                                <label for="phone" class="form-label"><br/><b>*{{ language.phone }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="phone" value="{{ change_user.phone }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="age" class="form-label"><br/><b>*Dogum tarixi:</b></label>
+                                <label for="age" class="form-label"><br/><b>*{{ language.date_of_birth }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="age" value="{{ change_user.age }}">
                             </div>
 
                             <div class="col-md-5">
-                                <label for="city" class="form-label"><br/><b>*Dogum yeri:</b></label>
+                                <label for="city" class="form-label"><br/><b>*{{ language.city }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="city" value="{{ change_user.city }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="education" class="form-label"><br/><b>*Tehsili:</b></label>
+                                <label for="education" class="form-label"><br/><b>*{{ language.user_education }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="education" value="{{ change_user.education }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="certificate_points" class="form-label"><br/><b>*Attestat qiymetleri veya bitirdiyi universitet:</b></label>
+                                <label for="certificate_points" class="form-label"><br/><b>*{{ language.certificate_grades_or_university }}:</b></label>
                                 <input type="text" class="form-control is-valid" name="certificate_points" value="{{ change_user.certificate_points }}">
                             </div>
                             <div class="col-md-5">
-                                <label for="about"><br/><b>Haqqinda:</b></label>
+                                <label for="about"><br/><b>{{ language.user_about }}:</b></label>
                                 <textarea name="about" class="form-label" rows="4" cols="50">{{ change_user.about }}</textarea>
                             </div>
                             <div class="col-md-5">
-                                <label for="created_at"><br/><b>Qeydiyyat tarixi:</b></label>
+                                <label for="created_at"><br/><b>{{ language.registration_date }}:</b></label>
                                 <textarea name="created_at" class="form-label" rows="4" cols="50">{{ change_user.created_at }}</textarea>
                             </div>
                             <div class="col-12">
-                                <label for="select_university_id"><br/><b>*Sechdiyi:</b></label>
+                                <label for="select_university_id"><br/><b>*{{ language.education_of_choice }}:</b></label>
                                 
                                 <select name="select_university_id" id="plan">
                                     {% if education %}
@@ -78,16 +78,16 @@
                             </div>
                             <div class="form-check form-switch ps-0">
                                 <input class="form-check-input ms-auto" type="checkbox" name="admin_user" {{"checked" if change_user.admin_user == True else ""}}>
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="admin_user">Admin user</label>
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="admin_user">{{ language.admin_user }}</label>
                             </div>
                             <div class="form-check form-switch ps-0">
                                 <input class="form-check-input ms-auto" type="checkbox" name="is_active" {{"checked" if change_user.is_active == True else ""}}>
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">Useri Aktiv/Deaktiv et</label>
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="is_active">{{ language.status_active_or_deactive }}</label>
                             </div>
                             <br/>
                             <hr>
                             <p align="center">
-                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button class="btn btn-primary" type="submit">{{ language.update }}</button>
                             </p>
                             </div>
                             
