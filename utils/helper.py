@@ -32,6 +32,7 @@ def check_user(request: Request, db: Session = database.get_db()):
     }
     return us
 
+
 def check_user_in_site(request: Request, db: Session = database.get_db()):
     site_settings = db.query(models.SiteSettings).filter_by(id=1).first()
     if site_settings:
@@ -57,6 +58,7 @@ def check_user_in_site(request: Request, db: Session = database.get_db()):
         user = ""
         if guest_language:
             site_language = guest_language
+    print("lang>>>>>", site_language.id)
     us = {
         'site_settings':site_settings,
         'site_language':site_language,

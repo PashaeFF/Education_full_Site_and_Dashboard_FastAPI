@@ -17,12 +17,13 @@ async def user_set_language(request: Request, response: Response, db: Session = 
     form = await request.form()
     check_site_user = check_user_in_site(request)
     if check_site_user['user']:
-        print(check_site_user['user'].id)
+        print(check_site_user['user'].id, ">>>", check_site_user['user'].user_site_language)
         user_set_language = db.query(models.User).filter_by(id=check_site_user['user'].id)
         user_set_language.update({
             'user_site_language':form.get('id')
             })
         db.commit()
+        response.set_cookie(key="user_site_language", value=form.get('id'), httponly=True)
         return RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
     response = RedirectResponse(url=f"/",status_code=HTTP_303_SEE_OTHER)
     response.set_cookie(key="user_site_language", value=form.get('id'), httponly=True)
