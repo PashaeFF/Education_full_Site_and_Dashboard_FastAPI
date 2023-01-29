@@ -56,13 +56,8 @@
                                 <label for="about"><br/><b>{{ language.user_about }}:</b></label>
                                 <textarea name="about" class="form-label" rows="4" cols="50">{{ change_user.about }}</textarea>
                             </div>
-                            <div class="col-md-5">
-                                <label for="created_at"><br/><b>{{ language.registration_date }}:</b></label>
-                                <textarea name="created_at" class="form-label" rows="4" cols="50">{{ change_user.created_at }}</textarea>
-                            </div>
                             <div class="col-12">
                                 <label for="select_university_id"><br/><b>*{{ language.education_of_choice }}:</b></label>
-                                
                                 <select name="select_university_id" id="plan">
                                     {% if education %}
                                     {% for edu in education %}
@@ -99,5 +94,3 @@
 
 
       {% include 'dashboard/footer.html' %}
-
-      
