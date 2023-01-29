@@ -61,27 +61,27 @@
                         </tr>
                       </thead>
                       <tbody>
-                        {% for language in languages %}
+                        {% for lang in languages %}
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
                               <div>
                                 {{ loop.index }}.&nbsp;&nbsp;&nbsp;&nbsp;</div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{ language.lang_name }}</h6> id: {{ language.id }}
+                                <h6 class="mb-0 text-sm">{{ lang.lang_name }}</h6> id: {{ lang.id }}
                               </div>
                             </div>
                           </td>
                           <td>
-                            <span class="text-xs font-weight-bold">{{ language.short_lang_name }}</span>                        
+                            <span class="text-xs font-weight-bold">{{ lang.short_lang_name }}</span>                        
                           </td>
                           <td class="align-middle text-center text-sm">
                             
-                        <span class="text-xs font-weight-bold">{% if site_language == language.id %}<i class="fa fa-check" aria-hidden="true" style="color:rgb(78, 220, 78)"></i>{% endif %}</span>
+                        <span class="text-xs font-weight-bold">{% if site_language == lang.id %}<i class="fa fa-check" aria-hidden="true" style="color:rgb(78, 220, 78)"></i>{% endif %}</span>
                           </td>
             
                             <td class="align-center">
-                                <span class="text-xs font-weight-bold"><a href="/admin/languages/{{ language.id }}">{{ language.edit }}</a> {% if site_language != language.id %}/ <a href="/admin/language/{{ language.id }}/delete">{{ language.delete }}</a>{% endif %}</span>
+                                <span class="text-xs font-weight-bold"><a href="/admin/languages/{{ language.id }}">{{ language.edit }}</a> {% if site_language != lang.id %}/ <a href="/admin/language/{{ language.id }}/delete">{{ language.delete }}</a>{% endif %}</span>
                             </td>
                             
                         </div>
