@@ -18,6 +18,7 @@ ___
 * <b>Skript FastAPİ ilə qurulub.</b>
 * <b>Admin Paneldən saytın hər bir detalı rəhbərlik tərəfindən idarə olunur</b>
 * <b>Admin Paneldə 3 dil seçimi mövcuddur.(AZ,RU,EN)</b>
+
 ![alt text](/docs/languages.png)
 
 * <b> Admin Panelin 2 modu var(Dark/Light)</b>
