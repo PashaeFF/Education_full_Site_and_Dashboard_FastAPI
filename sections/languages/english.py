@@ -136,10 +136,10 @@ deleted = 'All deleted'
 files_uploaded = 'Files uploaded'
 file_upload = 'File upload'
 #auth.py
-deactive_user_message = 'Пользователь не активен'
+deactive_user_message = 'The user is not active'
 #profile.html
-student_files = 'Студенческие файлы'
-delete_all = 'Удалить все'
+student_files = 'Student files'
+delete_all = 'Delete all'
 add = 'Add'
 #upload_files.html
 add_max_4_file = 'Add file (Maximum 4 files)'

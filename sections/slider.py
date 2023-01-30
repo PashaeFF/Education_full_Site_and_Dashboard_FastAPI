@@ -175,8 +175,14 @@ def delete_slide(id:int, request: Request, db:Session = Depends(database.get_db)
             news_image = delete_option.first().news_photo
             delete_slide = pathlib.Path(FILEPATH+slide_image)
             delete_image = pathlib.Path(FILEPATH_2+news_image)
-            delete_slide.unlink()
-            delete_image.unlink()
+            try:
+                delete_image.unlink()
+            except:
+                pass
+            try:
+                delete_slide.unlink()
+            except:
+                pass
             delete_option.delete()
             db.commit()
             request.session["flash_messsage"] = []

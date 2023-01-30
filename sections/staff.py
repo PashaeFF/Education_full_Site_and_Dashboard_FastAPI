@@ -94,7 +94,10 @@ def delete_staff(id:int, request: Request, db:Session = Depends(database.get_db)
             db.commit()
             if image:
                 old = pathlib.Path(FILEPATH+image)
-                old.unlink()
+                try:
+                    old.unlink()
+                except:
+                    pass
             request.session["flash_messsage"] = []
             request.session["flash_messsage"].append({"message": check['dashboard_language'].deleted, "category": "success"})
             request = RedirectResponse(url=f"/admin/staff",status_code=HTTP_303_SEE_OTHER)

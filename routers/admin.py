@@ -32,12 +32,13 @@ async def index(request: Request, page: int = 1, page_size: int = 10):
 
 
 @dashboard.get("/login")
-def dashboard_login(request: Request):
+def dashboard_login(request: Request, db: Session = Depends(database.get_db)):
     check = check_user(request)
     variables = default_variables(request)
     if check['current_user']:
         return RedirectResponse(url="/admin", status_code=HTTP_303_SEE_OTHER)
     page_title = check['dashboard_language'].dashboard_title
+
     return templates.TemplateResponse("dashboard/sign-in.html",{"request":request, "user":check['user'], "current_user":check['current_user'],
                                                                 "page_title":page_title, "flash":variables['_flash_message'], "language":check['dashboard_language'],
                                                                 "dashboard_languages":check['dashboard_languages']})

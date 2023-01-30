@@ -23,6 +23,7 @@ def check_user(request: Request, db: Session = database.get_db()):
     else:
         user = ""
         dashboard_language = db.query(models.DashboardLanguages).filter_by(id=site_settings.set_dashboard_language).first()
+        dashboard_languages = db.query(models.DashboardLanguages).all()
     us = {
         'access_token':access_token,
         'current_user':current_user,
@@ -58,7 +59,6 @@ def check_user_in_site(request: Request, db: Session = database.get_db()):
         user = ""
         if guest_language:
             site_language = guest_language
-    print("lang>>>>>", site_language.id)
     us = {
         'site_settings':site_settings,
         'site_language':site_language,
