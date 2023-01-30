@@ -3,15 +3,7 @@
 - [Education site](#education-site)
 - [Project Title](#project-title)
 - [Description](#description)
-- [Installing](#installing)
-      - [First](#first)
-      - [Second](#second)
-      - [Third](#third)
-      - [First m](#first-m)
-      - [Second](#second-1)
-      - [Third](#third-1)
-- [Executing program](#executing-program)
-- [Environment variables](#environment-variables)
+- [Installing](#installation)
 - [Author](#author)
 - [Version](#version)
 ___
@@ -156,7 +148,7 @@ Rəhbərliyə məktub
 
 ____
 
-
+# Installation
 >### for <font color = "red">macOS / Linux</font>
 #### I - <font color = "blue"><b>VENV</b></font> yaradırıq
 ``` 
