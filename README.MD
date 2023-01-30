@@ -8,8 +8,7 @@
 <hr>
 
 - İnstallation/Quraşdırılma
-- [Azərbaycanca quraşdırılma](#azərbaycanca-quraşdırılma)
-- [İnstallation English](#installation-in-english)
+- [Azərbaycanca quraşdırılma](#azərbaycanca-quraşdırılma)  |  [İnstallation English](#installation-in-english)
 - [Author](#author)
 - [Version](#version)
 ___
